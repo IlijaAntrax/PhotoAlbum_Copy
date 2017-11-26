@@ -14,6 +14,27 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        if User.sharedInstance.isLoggedIn()
+        {
+            self.showHomeVC()
+        }
+        else
+        {
+            self.showLoginVC()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        super.prepare(for: segue, sender: sender)
+        
+        print("Prepare for next screen!")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -21,5 +42,14 @@ class ViewController: UIViewController {
     }
 
 
+    func showHomeVC()
+    {
+        performSegue(withIdentifier: "homeSegueIdentifier", sender: self)
+    }
+    
+    func showLoginVC()
+    {
+        performSegue(withIdentifier: "loginSegueIdentifier", sender: self.view)
+    }
 }
 
