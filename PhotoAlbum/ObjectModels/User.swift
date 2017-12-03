@@ -15,6 +15,9 @@ enum LogginStatus:String
     case wrongUserAndPassword = "wrong username and password"
     case wrongUsername = "wrong username"
     case wrongPassword = "wrong password"
+    case notRegistered = "not registered"
+    case signUpSuccess = "signUp success"
+    case signUpFailed = "signUp failed"
 }
 
 class User:NSObject
@@ -29,6 +32,9 @@ class User:NSObject
     
     private var username:String = ""
     private var password:String = ""
+    
+    var myAlbums = [PhotoAlbum]()
+    var sharedAlbums = [PhotoAlbum]()
     
     override init()
     {
@@ -48,6 +54,13 @@ class User:NSObject
     
     func loggIn(username: String, password:String) -> LogginStatus
     {
+        if self.username == "" && self.password == ""
+        {
+            self.register(username: username, password: password)
+            self.isLogged = true
+            return LogginStatus.signUpSuccess
+        }
+        
         if self.username != username && self.password != password
         {
             return LogginStatus.wrongUserAndPassword
@@ -62,6 +75,7 @@ class User:NSObject
         }
         else
         {
+            self.isLogged = true
             return LogginStatus.loginSuccess
         }
     }

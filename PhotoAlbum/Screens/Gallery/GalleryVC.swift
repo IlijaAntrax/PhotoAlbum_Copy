@@ -12,12 +12,15 @@ import Photos
 
 class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
+    private let cellsInRow:Int = 4
     private let insetOffset:CGFloat = 2.0
     
     var assetCollection: PHAssetCollection!
     var photosAsset: PHFetchResult<PHAsset>!
     var assetThumbnailSize: CGSize!
     var requestOptions: PHImageRequestOptions!
+    
+    var selectedImageIndexes: [Int] = [Int]()
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     
@@ -97,6 +100,7 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         PHImageManager.default().requestImage(for: asset, targetSize: self.assetThumbnailSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {(result, info)in
             if result != nil {
                 cell.photoView.image = result
+                cell.isPictureSelected = self.selectedImageIndexes.contains(indexPath.row)
             }
         })
         
@@ -106,11 +110,25 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
         print(indexPath)
+        if let cell = collectionView.cellForItem(at: indexPath) as? GalleryCell
+        {
+            cell.isPictureSelected = !cell.isPictureSelected
+            
+            if selectedImageIndexes.contains(indexPath.row)
+            {
+                selectedImageIndexes.remove(at: selectedImageIndexes.index(of: indexPath.row)!)
+            }
+            else
+            {
+                selectedImageIndexes.append(indexPath.row)
+            }
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        let width = (collectionView.frame.width - 5 * insetOffset) / 4
+        let width = (collectionView.frame.width - (CGFloat(cellsInRow) + 1) * insetOffset) / CGFloat(cellsInRow)
         let height = width
         
         return CGSize(width: width, height: height)
