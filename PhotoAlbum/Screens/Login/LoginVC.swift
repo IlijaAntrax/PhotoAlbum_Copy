@@ -22,6 +22,8 @@ class LoginVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
     @IBOutlet weak var usernameTxtField: UITextField!
     @IBOutlet weak var passwordTxtField: UITextField!
     
+    var profileImageURL: URL?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -31,6 +33,8 @@ class LoginVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(logginFinished(notification:)) , name: NSNotification.Name(NotificationLogginStatus), object: nil)
         
         setup()
     }
@@ -70,28 +74,53 @@ class LoginVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
         imageView.clipsToBounds = true
         self.profileImgView.superview?.insertSubview(imageView, belowSubview: profileImgView)
         profileImgView.setBackgroundImage(nil, for: .normal)
+        
+        self.saveProfilePicture(image: image)
+    }
+    
+    func getDocumentsDirectory() -> URL
+    {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    }
+    
+    func saveProfilePicture(image: UIImage?)
+    {
+        if let image = image
+        {
+            if let data = UIImageJPEGRepresentation(image, 0.75)
+            {
+                let filename = getDocumentsDirectory().appendingPathComponent("profile_image.jpg")
+                self.profileImageURL = filename
+                try? data.write(to: filename)
+                print(filename)
+            }
+        }
+    }
+    
+    @objc func logginFinished(notification : NSNotification)
+    {
+        if let userInfo = notification.userInfo
+        {
+            if let status = userInfo["loginStatus"] as? LogginStatus
+            {
+                if status == .loginSuccess
+                {
+                    self.hide()
+                }
+                else
+                {
+                    //handle error
+                    let alert = UIAlertController(title: "Login failed", message: "You cant loggin. \(status)", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction.init(title: "OK", style: .cancel, handler: nil))
+                    alert.present(self, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     func loggin()
     {
-        let loginStatus = User.sharedInstance.loggIn(username: self.username, password: self.password)
-        
-        if loginStatus == .loginSuccess
-        {
-            //login success, show home
-            self.hide()
-        }
-        else if loginStatus == .signUpSuccess
-        {
-            //signed success, show home
-            self.hide()
-        }
-        else
-        {
-            let alert = UIAlertController(title: "Login failed", message: "You cant loggin. \(loginStatus)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: "OK", style: .cancel, handler: nil))
-            alert.present(self, animated: true, completion: nil)
-        }
+        User.sharedInstance.loggIn(username: self.username, password: self.password, pictureUrl: profileImageURL)
     }
     
     //MARK: Keyboard notification
@@ -124,6 +153,20 @@ class LoginVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
     func textFieldDidEndEditing(_ textField: UITextField)
     {
         print("close keyboard")
+        var textString = ""
+        if let text = textField.text
+        {
+            textString = text
+        }
+        
+        if textField == usernameTxtField
+        {
+            self.username = textString
+        }
+        else
+        {
+            self.password = textString
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool

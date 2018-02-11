@@ -24,6 +24,7 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -63,6 +64,7 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         
         self.requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
+        requestOptions.resizeMode = .none
         requestOptions.deliveryMode = .highQualityFormat
 
         //fetch the photos from collection
@@ -74,11 +76,64 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         self.galleryCollectionView.reloadData()
     }
     
+    //MARK: fecth photos from gallery
+    private var galleryImageSize = CGSize()
+    private var imagesFromGallery = [UIImage]()
+    
+    func prepareOptionsForFecthing()
+    {
+        
+    }
+    
+    func photosLoadedFromGallery()
+    {
+        if imagesFromGallery.count > 0
+        {
+            for image in imagesFromGallery
+            {
+                let photo = Photo(image: image)
+                User.sharedInstance.myAlbums[0].photos.append(photo)
+            }
+        }
+    }
+    
     //IBActions
     @IBAction func backBtnAction()
     {
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func addPhotosBtnAction()
+    {
+        let dispacthGroup = DispatchGroup()
+        
+        for index in selectedImageIndexes
+        {
+            dispacthGroup.enter()
+            
+            let imageQueue = DispatchQueue(label: "assetAppendQueue_" + String(index))
+            imageQueue.async {
+                
+                let asset: PHAsset = self.photosAsset[index]
+                
+                let size = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
+                
+                PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: self.requestOptions, resultHandler: {(result, info)in
+                    if let image = result
+                    {
+                        self.imagesFromGallery.append(image)
+                    }
+                    dispacthGroup.leave()
+                })
+
+            }
+        }
+        
+        dispacthGroup.notify(queue: DispatchQueue.main) {
+            self.photosLoadedFromGallery()
+        }
+    }
+    
     
     //MARK: CollectionView delegate methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int

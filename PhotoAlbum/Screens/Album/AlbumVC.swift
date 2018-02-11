@@ -26,11 +26,16 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         photosCollection.delegate = self
         photosCollection.dataSource = self
+        
+        setup()
     }
     
     func setup()
     {
-        
+        if User.sharedInstance.myAlbums.count > 0
+        {
+            photoAlbum = User.sharedInstance.myAlbums[0]
+        }
     }
     
     override func viewDidAppear(_ animated: Bool)

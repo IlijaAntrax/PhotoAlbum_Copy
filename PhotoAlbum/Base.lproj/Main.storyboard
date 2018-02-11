@@ -629,14 +629,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KqZ-gs-Qc6" userLabel="HeaderView">
                                 <rect key="frame" x="0.0" y="20" width="375" height="66.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVP-wH-VzM">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVP-wH-VzM" userLabel="AddButton">
                                         <rect key="frame" x="292" y="10" width="73" height="36.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="BVP-wH-VzM" secondAttribute="height" multiplier="2:1" id="YDI-Qr-ijH"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="add_plus_btn.png"/>
+                                        <connections>
+                                            <action selector="addPhotosBtnAction" destination="dvy-UT-BxD" eventType="touchUpInside" id="5GA-le-EOH"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRb-d7-C5E">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRb-d7-C5E" userLabel="CloseButton">
                                         <rect key="frame" x="10" y="10" width="36.5" height="36.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="tRb-d7-C5E" secondAttribute="height" multiplier="1:1" id="ifl-wB-RCB"/>

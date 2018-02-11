@@ -23,6 +23,12 @@
 		5B0BDF231FCDEC9F0092500C /* plus_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0BDF161FCDEC9E0092500C /* plus_icon.png */; };
 		5B0BDF241FCDEC9F0092500C /* singin_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0BDF171FCDEC9E0092500C /* singin_btn.png */; };
 		5B0BDF251FCDEC9F0092500C /* check_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0BDF181FCDEC9F0092500C /* check_btn.png */; };
+		5B0D98261FE6937000E567EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B0D98251FE6937000E567EF /* GoogleService-Info.plist */; };
+		5B41404F1FE6C984008DDB67 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B41404E1FE6C775008DDB67 /* libz.tbd */; };
+		5B4140511FE6CD45008DDB67 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B4140501FE6CD45008DDB67 /* libz.1.2.5.tbd */; };
+		5B4140531FE6D2A0008DDB67 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B4140521FE6D29F008DDB67 /* libc++.tbd */; };
+		5B4140551FE6D2B2008DDB67 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B4140541FE6D2B2008DDB67 /* libsqlite3.tbd */; };
+		5B46292B203093AA001C6CBC /* FirebaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B46292A203093AA001C6CBC /* FirebaseListener.swift */; };
 		5B506B9B1FCB2754005A09CD /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B506B9A1FCB2754005A09CD /* LoginVC.swift */; };
 		5B506B9E1FCB2DE7005A09CD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B506B9D1FCB2DE7005A09CD /* User.swift */; };
 		5B54C2BD1FD44DF40003F3CD /* PhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54C2BC1FD44DF40003F3CD /* PhotoAlbum.swift */; };
@@ -30,6 +36,7 @@
 		5B54C2C11FD4573C0003F3CD /* empty_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B54C2C01FD4573C0003F3CD /* empty_image.png */; };
 		5B54C2C41FD477AA0003F3CD /* AlbumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54C2C31FD477AA0003F3CD /* AlbumVC.swift */; };
 		5B54C2C61FD4A28A0003F3CD /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54C2C51FD4A28A0003F3CD /* PhotoCell.swift */; };
+		5BB1627C20307F5D00C804FD /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1627B20307F5D00C804FD /* FirebaseController.swift */; };
 		5BE9D17F1FAE3A0500481384 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9D17E1FAE3A0500481384 /* AppDelegate.swift */; };
 		5BE9D1811FAE3A0500481384 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9D1801FAE3A0500481384 /* ViewController.swift */; };
 		5BE9D1841FAE3A0500481384 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BE9D1821FAE3A0500481384 /* Main.storyboard */; };
@@ -38,26 +45,11 @@
 		5BE9D1AE1FAE3F9300481384 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9D1AD1FAE3F9300481384 /* HomeVC.swift */; };
 		5BF531C11FC45D470012960E /* GalleryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF531C01FC45D470012960E /* GalleryVC.swift */; };
 		5BF531C31FC45F040012960E /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF531C21FC45F040012960E /* GalleryCell.swift */; };
+		9FED874050E09E0A9DE1D5EB /* Pods_PhotoAlbum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C7155B556C96A22C5514506 /* Pods_PhotoAlbum.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		5BE9D1901FAE3A0600481384 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5BE9D1731FAE3A0500481384 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5BE9D17A1FAE3A0500481384;
-			remoteInfo = PhotoAlbum;
-		};
-		5BE9D19B1FAE3A0600481384 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5BE9D1731FAE3A0500481384 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5BE9D17A1FAE3A0500481384;
-			remoteInfo = PhotoAlbum;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		1C7155B556C96A22C5514506 /* Pods_PhotoAlbum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoAlbum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B0A73F71FD2E2B2001B3CC2 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		5B0A73FA1FD312BF001B3CC2 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		5B0BDF0A1FCDEA5C0092500C /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Skin/logo.png; sourceTree = "<group>"; };
@@ -74,6 +66,12 @@
 		5B0BDF161FCDEC9E0092500C /* plus_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus_icon.png; path = Skin/plus_icon.png; sourceTree = "<group>"; };
 		5B0BDF171FCDEC9E0092500C /* singin_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = singin_btn.png; path = Skin/singin_btn.png; sourceTree = "<group>"; };
 		5B0BDF181FCDEC9F0092500C /* check_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check_btn.png; path = Skin/check_btn.png; sourceTree = "<group>"; };
+		5B0D98251FE6937000E567EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5B41404E1FE6C775008DDB67 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		5B4140501FE6CD45008DDB67 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		5B4140521FE6D29F008DDB67 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		5B4140541FE6D2B2008DDB67 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		5B46292A203093AA001C6CBC /* FirebaseListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseListener.swift; sourceTree = "<group>"; };
 		5B506B9A1FCB2754005A09CD /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		5B506B9D1FCB2DE7005A09CD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5B54C2BC1FD44DF40003F3CD /* PhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbum.swift; sourceTree = "<group>"; };
@@ -81,6 +79,7 @@
 		5B54C2C01FD4573C0003F3CD /* empty_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty_image.png; path = Skin/empty_image.png; sourceTree = "<group>"; };
 		5B54C2C31FD477AA0003F3CD /* AlbumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumVC.swift; sourceTree = "<group>"; };
 		5B54C2C51FD4A28A0003F3CD /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		5BB1627B20307F5D00C804FD /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		5BE9D17B1FAE3A0500481384 /* PhotoAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BE9D17E1FAE3A0500481384 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BE9D1801FAE3A0500481384 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,11 +87,11 @@
 		5BE9D1851FAE3A0500481384 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BE9D1881FAE3A0500481384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BE9D18A1FAE3A0500481384 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5BE9D18F1FAE3A0600481384 /* PhotoAlbumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoAlbumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5BE9D19A1FAE3A0600481384 /* PhotoAlbumUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoAlbumUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BE9D1AD1FAE3F9300481384 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		5BF531C01FC45D470012960E /* GalleryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryVC.swift; sourceTree = "<group>"; };
 		5BF531C21FC45F040012960E /* GalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
+		7DB0E5BF2879750256AA7F75 /* Pods-PhotoAlbum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoAlbum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoAlbum/Pods-PhotoAlbum.debug.xcconfig"; sourceTree = "<group>"; };
+		E0C019714C54638A7C0AD219 /* Pods-PhotoAlbum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoAlbum.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoAlbum/Pods-PhotoAlbum.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,20 +99,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5BE9D18C1FAE3A0600481384 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5BE9D1971FAE3A0600481384 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				5B4140531FE6D2A0008DDB67 /* libc++.tbd in Frameworks */,
+				5B41404F1FE6C984008DDB67 /* libz.tbd in Frameworks */,
+				5B4140551FE6D2B2008DDB67 /* libsqlite3.tbd in Frameworks */,
+				5B4140511FE6CD45008DDB67 /* libz.1.2.5.tbd in Frameworks */,
+				9FED874050E09E0A9DE1D5EB /* Pods_PhotoAlbum.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +149,18 @@
 			name = Skins;
 			sourceTree = "<group>";
 		};
+		5B41404D1FE6C775008DDB67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5B4140541FE6D2B2008DDB67 /* libsqlite3.tbd */,
+				5B4140521FE6D29F008DDB67 /* libc++.tbd */,
+				5B4140501FE6CD45008DDB67 /* libz.1.2.5.tbd */,
+				5B41404E1FE6C775008DDB67 /* libz.tbd */,
+				1C7155B556C96A22C5514506 /* Pods_PhotoAlbum.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5B506B991FCB2702005A09CD /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +172,7 @@
 		5B506B9C1FCB2DAF005A09CD /* ObjectModels */ = {
 			isa = PBXGroup;
 			children = (
+				5BB1627A20307F3500C804FD /* Firebase */,
 				5B506B9D1FCB2DE7005A09CD /* User.swift */,
 				5B54C2BC1FD44DF40003F3CD /* PhotoAlbum.swift */,
 				5B54C2BE1FD44E6F0003F3CD /* Photo.swift */,
@@ -186,11 +189,22 @@
 			path = Album;
 			sourceTree = "<group>";
 		};
+		5BB1627A20307F3500C804FD /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				5BB1627B20307F5D00C804FD /* FirebaseController.swift */,
+				5B46292A203093AA001C6CBC /* FirebaseListener.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		5BE9D1721FAE3A0500481384 = {
 			isa = PBXGroup;
 			children = (
 				5BE9D17D1FAE3A0500481384 /* PhotoAlbum */,
 				5BE9D17C1FAE3A0500481384 /* Products */,
+				5B41404D1FE6C775008DDB67 /* Frameworks */,
+				C2C4C8740D6AB70E8D5C4C91 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -198,8 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				5BE9D17B1FAE3A0500481384 /* PhotoAlbum.app */,
-				5BE9D18F1FAE3A0600481384 /* PhotoAlbumTests.xctest */,
-				5BE9D19A1FAE3A0600481384 /* PhotoAlbumUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,6 +228,7 @@
 				5BE9D1821FAE3A0500481384 /* Main.storyboard */,
 				5BE9D1851FAE3A0500481384 /* Assets.xcassets */,
 				5BE9D1871FAE3A0500481384 /* LaunchScreen.storyboard */,
+				5B0D98251FE6937000E567EF /* GoogleService-Info.plist */,
 				5BE9D18A1FAE3A0500481384 /* Info.plist */,
 			);
 			path = PhotoAlbum;
@@ -241,6 +254,15 @@
 			path = Gallery;
 			sourceTree = "<group>";
 		};
+		C2C4C8740D6AB70E8D5C4C91 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7DB0E5BF2879750256AA7F75 /* Pods-PhotoAlbum.debug.xcconfig */,
+				E0C019714C54638A7C0AD219 /* Pods-PhotoAlbum.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -248,9 +270,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BE9D1A31FAE3A0600481384 /* Build configuration list for PBXNativeTarget "PhotoAlbum" */;
 			buildPhases = (
+				4246341C33A5D780FE5C943F /* [CP] Check Pods Manifest.lock */,
 				5BE9D1771FAE3A0500481384 /* Sources */,
 				5BE9D1781FAE3A0500481384 /* Frameworks */,
 				5BE9D1791FAE3A0500481384 /* Resources */,
+				E1AEDCDBA242B2A2F2D15B28 /* [CP] Embed Pods Frameworks */,
+				FD7444B1BEDD8B46FDC35C80 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -260,42 +285,6 @@
 			productName = PhotoAlbum;
 			productReference = 5BE9D17B1FAE3A0500481384 /* PhotoAlbum.app */;
 			productType = "com.apple.product-type.application";
-		};
-		5BE9D18E1FAE3A0600481384 /* PhotoAlbumTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5BE9D1A61FAE3A0600481384 /* Build configuration list for PBXNativeTarget "PhotoAlbumTests" */;
-			buildPhases = (
-				5BE9D18B1FAE3A0600481384 /* Sources */,
-				5BE9D18C1FAE3A0600481384 /* Frameworks */,
-				5BE9D18D1FAE3A0600481384 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5BE9D1911FAE3A0600481384 /* PBXTargetDependency */,
-			);
-			name = PhotoAlbumTests;
-			productName = PhotoAlbumTests;
-			productReference = 5BE9D18F1FAE3A0600481384 /* PhotoAlbumTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		5BE9D1991FAE3A0600481384 /* PhotoAlbumUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5BE9D1A91FAE3A0600481384 /* Build configuration list for PBXNativeTarget "PhotoAlbumUITests" */;
-			buildPhases = (
-				5BE9D1961FAE3A0600481384 /* Sources */,
-				5BE9D1971FAE3A0600481384 /* Frameworks */,
-				5BE9D1981FAE3A0600481384 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5BE9D19C1FAE3A0600481384 /* PBXTargetDependency */,
-			);
-			name = PhotoAlbumUITests;
-			productName = PhotoAlbumUITests;
-			productReference = 5BE9D19A1FAE3A0600481384 /* PhotoAlbumUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -310,16 +299,6 @@
 					5BE9D17A1FAE3A0500481384 = {
 						CreatedOnToolsVersion = 9.0.1;
 						ProvisioningStyle = Automatic;
-					};
-					5BE9D18E1FAE3A0600481384 = {
-						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 5BE9D17A1FAE3A0500481384;
-					};
-					5BE9D1991FAE3A0600481384 = {
-						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 5BE9D17A1FAE3A0500481384;
 					};
 				};
 			};
@@ -337,8 +316,6 @@
 			projectRoot = "";
 			targets = (
 				5BE9D17A1FAE3A0500481384 /* PhotoAlbum */,
-				5BE9D18E1FAE3A0600481384 /* PhotoAlbumTests */,
-				5BE9D1991FAE3A0600481384 /* PhotoAlbumUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -359,6 +336,7 @@
 				5BE9D1891FAE3A0500481384 /* LaunchScreen.storyboard in Resources */,
 				5B0BDF231FCDEC9F0092500C /* plus_icon.png in Resources */,
 				5B0BDF1E1FCDEC9F0092500C /* account_icon.png in Resources */,
+				5B0D98261FE6937000E567EF /* GoogleService-Info.plist in Resources */,
 				5B54C2C11FD4573C0003F3CD /* empty_image.png in Resources */,
 				5BE9D1861FAE3A0500481384 /* Assets.xcassets in Resources */,
 				5B0BDF241FCDEC9F0092500C /* singin_btn.png in Resources */,
@@ -369,21 +347,67 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5BE9D18D1FAE3A0600481384 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5BE9D1981FAE3A0600481384 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4246341C33A5D780FE5C943F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhotoAlbum-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1AEDCDBA242B2A2F2D15B28 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PhotoAlbum/Pods-PhotoAlbum-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoAlbum/Pods-PhotoAlbum-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD7444B1BEDD8B46FDC35C80 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoAlbum/Pods-PhotoAlbum-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5BE9D1771FAE3A0500481384 /* Sources */ = {
@@ -398,7 +422,9 @@
 				5BE9D17F1FAE3A0500481384 /* AppDelegate.swift in Sources */,
 				5B54C2C61FD4A28A0003F3CD /* PhotoCell.swift in Sources */,
 				5B54C2C41FD477AA0003F3CD /* AlbumVC.swift in Sources */,
+				5BB1627C20307F5D00C804FD /* FirebaseController.swift in Sources */,
 				5B54C2BD1FD44DF40003F3CD /* PhotoAlbum.swift in Sources */,
+				5B46292B203093AA001C6CBC /* FirebaseListener.swift in Sources */,
 				5B54C2BF1FD44E6F0003F3CD /* Photo.swift in Sources */,
 				5BF531C11FC45D470012960E /* GalleryVC.swift in Sources */,
 				5B506B9E1FCB2DE7005A09CD /* User.swift in Sources */,
@@ -406,34 +432,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5BE9D18B1FAE3A0600481384 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5BE9D1961FAE3A0600481384 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5BE9D1911FAE3A0600481384 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5BE9D17A1FAE3A0500481384 /* PhotoAlbum */;
-			targetProxy = 5BE9D1901FAE3A0600481384 /* PBXContainerItemProxy */;
-		};
-		5BE9D19C1FAE3A0600481384 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5BE9D17A1FAE3A0500481384 /* PhotoAlbum */;
-			targetProxy = 5BE9D19B1FAE3A0600481384 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5BE9D1821FAE3A0500481384 /* Main.storyboard */ = {
@@ -459,6 +458,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -503,9 +503,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -516,6 +517,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -554,8 +556,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -564,97 +568,117 @@
 		};
 		5BE9D1A41FAE3A0600481384 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DB0E5BF2879750256AA7F75 /* Pods-PhotoAlbum.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5EFM4H5FA3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/FirebaseAnalytics/Frameworks",
+					"$(PROJECT_DIR)/Pods/Protobuf",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/ABTesting",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/AdMob",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Analytics",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Auth",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Crash",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Database",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/DynamicLinks",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Firestore",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Invites",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Messaging",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Performance",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/RemoteConfig",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Storage",
+					"$(PROJECT_DIR)/Firebase",
+					"$(PROJECT_DIR)/Firebase/ABTesting",
+					"$(PROJECT_DIR)/Firebase/Crash",
+					"$(PROJECT_DIR)/Firebase/Firestore",
+					"$(PROJECT_DIR)/Firebase/Database",
+					"$(PROJECT_DIR)/Firebase/RemoteConfig",
+					"$(PROJECT_DIR)/Firebase/Performance",
+					"$(PROJECT_DIR)/Firebase/Storage",
+					"$(PROJECT_DIR)/Firebase/Auth",
+					"$(PROJECT_DIR)/Firebase/DynamicLinks",
+					"$(PROJECT_DIR)/Firebase/AdMob",
+					"$(PROJECT_DIR)/Firebase/Invites",
+					"$(PROJECT_DIR)/Firebase/Messaging",
+					"$(PROJECT_DIR)/Firebase/Analytics",
+				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = PhotoAlbum/Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = AntraxTeam.PhotoAlbum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
 		5BE9D1A51FAE3A0600481384 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0C019714C54638A7C0AD219 /* Pods-PhotoAlbum.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5EFM4H5FA3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/FirebaseAnalytics/Frameworks",
+					"$(PROJECT_DIR)/Pods/Protobuf",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/ABTesting",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/AdMob",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Analytics",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Auth",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Crash",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Database",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/DynamicLinks",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Firestore",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Invites",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Messaging",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Performance",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/RemoteConfig",
+					"$(PROJECT_DIR)/PhotoAlbum/Firebase/Storage",
+					"$(PROJECT_DIR)/Firebase",
+					"$(PROJECT_DIR)/Firebase/ABTesting",
+					"$(PROJECT_DIR)/Firebase/Crash",
+					"$(PROJECT_DIR)/Firebase/Firestore",
+					"$(PROJECT_DIR)/Firebase/Database",
+					"$(PROJECT_DIR)/Firebase/RemoteConfig",
+					"$(PROJECT_DIR)/Firebase/Performance",
+					"$(PROJECT_DIR)/Firebase/Storage",
+					"$(PROJECT_DIR)/Firebase/Auth",
+					"$(PROJECT_DIR)/Firebase/DynamicLinks",
+					"$(PROJECT_DIR)/Firebase/AdMob",
+					"$(PROJECT_DIR)/Firebase/Invites",
+					"$(PROJECT_DIR)/Firebase/Messaging",
+					"$(PROJECT_DIR)/Firebase/Analytics",
+				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = PhotoAlbum/Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = AntraxTeam.PhotoAlbum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		5BE9D1A71FAE3A0600481384 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5EFM4H5FA3;
-				INFOPLIST_FILE = PhotoAlbumTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AntraxTeam.PhotoAlbumTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoAlbum.app/PhotoAlbum";
-			};
-			name = Debug;
-		};
-		5BE9D1A81FAE3A0600481384 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5EFM4H5FA3;
-				INFOPLIST_FILE = PhotoAlbumTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AntraxTeam.PhotoAlbumTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoAlbum.app/PhotoAlbum";
-			};
-			name = Release;
-		};
-		5BE9D1AA1FAE3A0600481384 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5EFM4H5FA3;
-				INFOPLIST_FILE = PhotoAlbumUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AntraxTeam.PhotoAlbumUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PhotoAlbum;
-			};
-			name = Debug;
-		};
-		5BE9D1AB1FAE3A0600481384 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5EFM4H5FA3;
-				INFOPLIST_FILE = PhotoAlbumUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AntraxTeam.PhotoAlbumUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PhotoAlbum;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
@@ -675,24 +699,6 @@
 			buildConfigurations = (
 				5BE9D1A41FAE3A0600481384 /* Debug */,
 				5BE9D1A51FAE3A0600481384 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5BE9D1A61FAE3A0600481384 /* Build configuration list for PBXNativeTarget "PhotoAlbumTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5BE9D1A71FAE3A0600481384 /* Debug */,
-				5BE9D1A81FAE3A0600481384 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5BE9D1A91FAE3A0600481384 /* Build configuration list for PBXNativeTarget "PhotoAlbumUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5BE9D1AA1FAE3A0600481384 /* Debug */,
-				5BE9D1AB1FAE3A0600481384 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -17,6 +17,8 @@ class PhotoAlbum
     
     var photos = [Photo]()
     
+    var privilegies:Privilegies = Privilegies(owner: true)
+    
     init() {
         
     }
@@ -27,4 +29,38 @@ class PhotoAlbum
         self.creationDate = date
     }
     
+    func setPrivilegies(read:Bool, write:Bool, update:Bool, delete:Bool)
+    {
+        self.privilegies.read = read
+        self.privilegies.write = write
+        self.privilegies.update = update
+        self.privilegies.delete = delete
+    }
+    
+}
+
+class Privilegies
+{
+    var read:Bool
+    var write:Bool
+    var update:Bool
+    var delete:Bool
+    
+    init(owner:Bool)
+    {
+        if owner
+        {
+            self.read = true
+            self.write = true
+            self.update = true
+            self.delete = true
+        }
+        else
+        {
+            self.read = true
+            self.write = false
+            self.update = false
+            self.delete = false
+        }
+    }
 }
