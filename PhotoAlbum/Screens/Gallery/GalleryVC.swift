@@ -9,11 +9,14 @@
 import Foundation
 import UIKit
 import Photos
+import FirebaseStorage
 
 class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     private let cellsInRow:Int = 4
     private let insetOffset:CGFloat = 2.0
+    
+    var photoAlbum:PhotoAlbum?
     
     var assetCollection: PHAssetCollection!
     var photosAsset: PHFetchResult<PHAsset>!
@@ -59,12 +62,12 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     {
         if let cellSize = (galleryCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize
         {
-            self.assetThumbnailSize = CGSize(width: cellSize.width, height: cellSize.height)
+            self.assetThumbnailSize = CGSize(width: cellSize.width * 2.0, height: cellSize.height * 2.0)
         }
         
         self.requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
-        requestOptions.resizeMode = .none
+        requestOptions.resizeMode = .fast
         requestOptions.deliveryMode = .highQualityFormat
 
         //fetch the photos from collection
@@ -92,9 +95,13 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
             for image in imagesFromGallery
             {
                 let photo = Photo(image: image)
-                User.sharedInstance.myAlbums[0].photos.append(photo)
+                photoAlbum?.add(photo)
             }
+            
+            NotificationCenter.default.post(name: Notification.Name.init(rawValue: NotificationPhotosAddedToAlbum), object: nil)
         }
+        
+        dismiss(animated: true, completion: nil)
     }
     
     //IBActions
@@ -109,6 +116,29 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         
         for index in selectedImageIndexes
         {
+            
+//            DispatchQueue.main.async {
+//                
+//                let asset: PHAsset = self.photosAsset[index]
+//                
+//                PHImageManager.default().requestImageData(for: asset, options: self.requestOptions, resultHandler: { (data, name, orientation, info) in
+//                    
+//                    if let imgData = data
+//                    {
+//                        let urlName = "photo1try"
+//                        let storage = Storage.storage().reference()
+//                        let imgRef = storage.child("albumsImages/\(urlName)")
+//                        imgRef.putData(imgData, metadata: nil, completion: { (metadata, error) in
+//                            if let downloadUrl = metadata?.downloadURL()
+//                            {
+//                                print(downloadUrl)
+//                            }
+//                            print(error)
+//                        })
+//                    }
+//                    
+//                })
+//            }
             dispacthGroup.enter()
             
             let imageQueue = DispatchQueue(label: "assetAppendQueue_" + String(index))
@@ -117,8 +147,9 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
                 let asset: PHAsset = self.photosAsset[index]
                 
                 let size = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
+                print(size)
                 
-                PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: self.requestOptions, resultHandler: {(result, info)in
+                PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: PHImageContentMode.aspectFit, options: self.requestOptions, resultHandler: {(result, info)in
                     if let image = result
                     {
                         self.imagesFromGallery.append(image)

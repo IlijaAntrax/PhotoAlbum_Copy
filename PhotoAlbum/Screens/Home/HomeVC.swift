@@ -14,6 +14,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     private let cellsInRow:Int = 2
     private let insetOffset:CGFloat = 10.0
 
+    var selectedAlbum:PhotoAlbum?
     
     @IBOutlet weak var myAlbumsHolder: UIView!
     @IBOutlet weak var sharedAlbumsHolder: UIView!
@@ -31,6 +32,10 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         sharedAlbumsCollection.delegate = self
         sharedAlbumsCollection.dataSource = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadMyAlbumsData), name: Notification.Name.init(rawValue: NotificationMyAlbumsLoaded), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSharedAlbumsData), name: Notification.Name.init(rawValue: NotificationSharedAlbumsLoaded), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSelectedAlbum), name: NSNotification.Name.init(rawValue: NotificationPhotosAddedToAlbum), object: nil)
+        
         setup()
     }
     
@@ -45,12 +50,42 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func setup()
     {
-        
+        User.sharedInstance.getMyAlbums()
+        User.sharedInstance.getSharedAlbums()
     }
     
     func showAlbumVC(forAlbum: PhotoAlbum)
     {
+        self.selectedAlbum = forAlbum
+        
         performSegue(withIdentifier: "albumSegueIdentifier", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "albumSegueIdentifier"
+        {
+            if let albumVC = segue.destination as? AlbumVC
+            {
+                albumVC.photoAlbum = selectedAlbum
+            }
+        }
+    }
+    
+    @objc func reloadMyAlbumsData()
+    {
+        myAlbumsCollection.reloadData()
+    }
+    
+    @objc func reloadSharedAlbumsData()
+    {
+        sharedAlbumsCollection.reloadData()
+    }
+    
+    @objc func reloadSelectedAlbum()
+    {
+        myAlbumsCollection.reloadData()
+        sharedAlbumsCollection.reloadData()
     }
     
     
@@ -81,6 +116,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         print("create new album: \(albumName)")
         
         let album = PhotoAlbum(name: albumName, date: Date())
+        album.save()
         User.sharedInstance.myAlbums.append(album)
         
         myAlbumsCollection.reloadData()

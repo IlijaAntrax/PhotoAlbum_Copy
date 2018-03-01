@@ -27,14 +27,16 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         photosCollection.delegate = self
         photosCollection.dataSource = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadAlbum), name: NSNotification.Name.init(rawValue: NotificationPhotosAddedToAlbum), object: nil)
+        
         setup()
     }
     
     func setup()
     {
-        if User.sharedInstance.myAlbums.count > 0
+        if let album = photoAlbum
         {
-            photoAlbum = User.sharedInstance.myAlbums[0]
+            print(album.name)
         }
     }
     
@@ -48,11 +50,28 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         contentView.layer.addBorder(edge: .right, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "gallerySegueIdentifier"
+        {
+            if let galleryVC = segue.destination as? GalleryVC
+            {
+                galleryVC.photoAlbum = self.photoAlbum
+            }
+        }
+    }
+    
+    @objc func reloadAlbum()
+    {
+        photosCollection.reloadData()
+    }
+    
     //MARK: IBActions
     @IBAction func backBtnAction()
     {
         dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func addPhotosBtnAction()
     {
         performSegue(withIdentifier: "gallerySegueIdentifier", sender: self)

@@ -10,26 +10,34 @@ import Foundation
 import FirebaseDatabase
 import FirebaseAuth
 
-class FirebaseController
+let usersKey = "userskey_"
+let user_nameKey = "name"
+let user_emailKey = "email"
+
+let album_nameKey = "name"
+let album_ownerKey = "owner"
+let album_creatioDateKey = "creationDate"
+let album_imagesKey = "images"
+
+let photo_urlKey = "url"
+
+let privilegiesKey = "privilegies"
+let privilegies_readKey = "read"
+let privilegies_writeKey = "write"
+let privilegies_updateKey = "update"
+let privilegies_deleteKey = "delete"
+
+protocol DatabaseDelegate:class
 {
-    private let usersKey = "userskey_"
-    private let user_nameKey = "name"
-    private let user_emailKey = "email"
-    
-    private let album_nameKey = "name"
-    private let album_ownerKey = "owner"
-    private let album_creatioDateKey = "creationDate"
-    private let album_imagesKey = "images"
-    
-    private let photo_urlKey = "url"
-    
-    private let privilegiesKey = "privilegies"
-    private let privilegies_readKey = "read"
-    private let privilegies_writeKey = "write"
-    private let privilegies_updateKey = "update"
-    private let privilegies_deleteKey = "delete"
-    
+    func myAlbumsLoaded(myAlbumsData: [Any])
+    func sharedAlbumsLoaded(sharedAlbumsData: [Any])
+}
+
+class FirebaseDatabaseController
+{
     private var dbRef: DatabaseReference
+    
+    weak var databaseDelegate: DatabaseDelegate?
     
     init()
     {
@@ -97,6 +105,7 @@ class FirebaseController
         privilegiesData[privilegies_deleteKey] = privilegies.delete
         
         sharedAlbum.setValue(privilegiesData)
+        //sharedAlbum.updateChildValues(privilegiesData)
     }
     
     //MARK: READ firebase methods
@@ -109,11 +118,11 @@ class FirebaseController
             selfUserRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let selfUserInfo = snapshot.value as? [String:Any]
                 {
-                    if let username = selfUserInfo[self.user_nameKey] as? String
+                    if let username = selfUserInfo[user_nameKey] as? String
                     {
                         print(username)
                     }
-                    if let email = selfUserInfo[self.user_emailKey] as? String
+                    if let email = selfUserInfo[user_emailKey] as? String
                     {
                         print(email)
                     }
@@ -143,7 +152,25 @@ class FirebaseController
     {
         if let currentUserName = Auth.auth().currentUser?.displayName
         {
-            self.getPhotoAlbums(byUser: currentUserName)
+            let albumRef = self.dbRef.child("photoalbums").queryOrdered(byChild: album_ownerKey).queryEqual(toValue: currentUserName)
+            
+            albumRef.observeSingleEvent(of: .value) { (snapshot) in
+                
+                var albums = [Any]()
+                
+                if let albumInfo = snapshot.value as? [String:Any]
+                {
+                    for album in albumInfo.enumerated()
+                    {
+                        print(album.element.key)
+                        albums.append(album.element)
+                        print(album.element)
+                        print(album.offset)
+                    }
+                }
+                
+                self.databaseDelegate?.myAlbumsLoaded(myAlbumsData: albums)
+            }
         }
     }
     
@@ -173,25 +200,56 @@ class FirebaseController
             sharedAlbumsRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let photoAlbums = snapshot.value as? [String:Any]
                 {
+                    var albums = [Any]()
+                    
+                    var albumsCnt = photoAlbums.count
+                    
                     for photoAlbum in photoAlbums.enumerated()
                     {
-                        print(photoAlbum.element)
-                        self.getPhotoAlbum(byId: photoAlbum.element.key)
+                        print(photoAlbum.element.value)
+                        self.getPhotoAlbum(byId: photoAlbum.element.key, completionHandler: { (data) in
+                            
+                            albumsCnt -= 1
+                            
+                            var albumData = [String:Any]()
+                            
+                            if let data = data as? [String:Any]
+                            {
+                                print(data)
+                                albumData = data
+                                if let privilegiesData = photoAlbum.element.value as? [String:Any]
+                                {
+                                    albumData[privilegiesKey] = privilegiesData[privilegiesKey]
+                                }
+                                
+                                albums.append(albumData)
+                            }
+                            
+                            if albumsCnt == 0
+                            {
+                                self.databaseDelegate?.sharedAlbumsLoaded(sharedAlbumsData: albums)
+                            }
+                        })
                     }
                 }
             })
         }
     }
     
-    func getPhotoAlbum(byId albumID:String)
+    func getPhotoAlbum(byId albumID:String, completionHandler:@escaping (Any?) -> ())
     {
         let albumRef = self.dbRef.child("photoalbums").child(albumID)
         
         albumRef.observeSingleEvent(of: .value) { (snapshot) in
+            
+            var data:Any?
             if let albumData = snapshot.value as? [String:Any]
             {
-                print(albumData)
+                //print(albumData)
+                data = albumData
             }
+            
+            completionHandler(data)
         }
     }
     

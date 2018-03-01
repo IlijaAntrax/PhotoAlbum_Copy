@@ -1,3 +1,4 @@
+
 //
 //  User.swift
 //  PhotoAlbum
@@ -22,9 +23,13 @@ enum LogginStatus:String
     case signUpFailed = "signUp failed"
 }
 
+//MARK: Notifications observers
 let NotificationLogginStatus = "NotificationLogginStatus"
+let NotificationMyAlbumsLoaded = "NotificationMyAlbumsLoaded"
+let NotificationSharedAlbumsLoaded = "NotificationSharedAlbumsLoaded"
+let NotificationPhotosAddedToAlbum = "NotificationPhotosAddedToAlbum"
 
-class User:NSObject
+class User:NSObject, DatabaseDelegate
 {
     static let sharedInstance: User = {
         let instance = User()
@@ -34,8 +39,13 @@ class User:NSObject
     
     private var isLogged = false
     
-    private var username:String = ""
-    private var password:String = ""
+    private var _username:String = ""
+    private var _password:String = ""
+    
+    var username:String
+    {
+        return self._username
+    }
     
     var profileImage: UIImage?
     
@@ -68,7 +78,7 @@ class User:NSObject
             
             if let username = user.displayName
             {
-                self.username = username
+                self._username = username
             }
             
             if !getProfileImageFromLocal()
@@ -111,8 +121,8 @@ class User:NSObject
     
     func register(username: String, password:String, pictureUrl: URL?)
     {
-        self.username = username
-        self.password = password
+        self._username = username
+        self._password = password
         
         let email = createEmail(fromUsername: username)
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
@@ -173,7 +183,7 @@ class User:NSObject
     func uploadPicture(fromURL localFile:URL)
     {
         // Create a reference to the file you want to upload
-        let pictureName = self.username + "_profileImg.jpg"
+        let pictureName = self._username + "_profileImg.jpg"
         let imageRef = getStorage().child("profileimages/\(pictureName)")
         
         // Upload the file to the path "images/rivers.jpg"
@@ -229,7 +239,7 @@ class User:NSObject
     
     func loggIn(username: String, password:String, pictureUrl:URL?)
     {
-        if self.username == ""
+        if self._username == ""
         {
             self.register(username: username, password: password, pictureUrl: pictureUrl)
             //self.isLogged = true
@@ -242,7 +252,7 @@ class User:NSObject
                 if let email = currentUser.email
                 {
                     print(username)
-                    self.username = self.getUsername(fromEmail: email)
+                    self._username = self.getUsername(fromEmail: email)
                 }
                 let status = LogginStatus.loginSuccess
                 NotificationCenter.default.post(name: NSNotification.Name(
@@ -260,9 +270,26 @@ class User:NSObject
     }
     
     //MARK: Firebase database methods
+    func getMyAlbums()
+    {
+        let firebase = FirebaseDatabaseController()
+        firebase.databaseDelegate = self
+        
+        firebase.getPhotoAlbumsBySelf()
+    }
+    
+    func getSharedAlbums()
+    {
+        let firebase = FirebaseDatabaseController()
+        firebase.databaseDelegate = self
+        
+        firebase.getSharedAlbumsBySelf()
+    }
+    
+    //MARK: Firebase Test
     func firebaseTest()
     {
-        let firebase = FirebaseController.init()
+        //let firebase = FirebaseController.init()
         
         //firebase.createUser()
         //firebase.getUser(byName: "st_antrax")
@@ -273,7 +300,57 @@ class User:NSObject
         //firebase.createPhotoAlbum(PhotoAlbum(name: "Amsterdam", date: Date()))
         //firebase.addImageToPhotoAlbum(albumID: "-L55JEp-c_caFUyT5bON", imageUrl: "firebase.google.com/photoalbum/resque_bobi_i_holanjanka.png")
         //firebase.createPhotoAlbum(PhotoAlbum(name: "ZakintosNight", date: Date()))
-        firebase.addUserOnAlbum(userID: "userskey_2g2iXujeV5MvXIcFolkxcB94gNu1", albumID: "-L55JEp-c_caFUyT5bON", withPrivilegies: Privilegies.init(owner: false))
+        //firebase.addUserOnAlbum(userID: "userskey_2g2iXujeV5MvXIcFolkxcB94gNu1", albumID: "-L55JEp-c_caFUyT5bON", withPrivilegies: Privilegies.init(owner: false))
+    }
+    
+    
+    //MARK: Database delegate methods
+    func myAlbumsLoaded(myAlbumsData: [Any])
+    {
+        var photoAlbums = [PhotoAlbum]()
+        
+        for data in myAlbumsData
+        {
+            if let albumElement = data as? (key: String, value: Any)
+            {
+                if let albumData = albumElement.value as? [String:Any]
+                {
+                    guard let name = albumData[album_nameKey] as? String, let date = albumData[album_creatioDateKey] else { continue }
+                    
+                    print(name)
+                    print(date)
+                    
+                    let photoAlbum = PhotoAlbum(name: name, date: Date())
+                    photoAlbum.setKey(albumElement.key)
+                    photoAlbums.append(photoAlbum)
+                }
+            }
+        }
+        
+        self.myAlbums = photoAlbums
+        NotificationCenter.default.post(name: Notification.Name.init(rawValue: NotificationMyAlbumsLoaded), object: nil)
+    }
+    
+    func sharedAlbumsLoaded(sharedAlbumsData: [Any])
+    {
+        var photoAlbums = [PhotoAlbum]()
+        
+        for data in sharedAlbumsData
+        {
+            if let albumData = data as? [String:Any]
+            {
+                guard let name = albumData[album_nameKey] as? String, let date = albumData[album_creatioDateKey] else { continue }
+                
+                print(name)
+                print(date)
+                
+                let photoAlbum = PhotoAlbum(name: name, date: Date())
+                photoAlbums.append(photoAlbum)
+            }
+        }
+        
+        self.sharedAlbums = photoAlbums
+        NotificationCenter.default.post(name: Notification.Name.init(rawValue: NotificationSharedAlbumsLoaded), object: nil)
     }
     
 }

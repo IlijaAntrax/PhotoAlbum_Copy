@@ -14,9 +14,9 @@ class FirebaseListener
     
     private var dbRef: DatabaseReference
     
-    
     init()
     {
         dbRef = Database.database().reference()
     }
+    
 }

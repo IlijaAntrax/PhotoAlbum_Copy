@@ -17,11 +17,13 @@ enum ImageQuality
     case high
 }
 
-class Photo
+class Photo: StorageDelegate
 {
     private var img: UIImage?
     
     private var asset: PHAsset?
+    
+    private var myAlbum: PhotoAlbum?
     
     var image: UIImage?
     {
@@ -48,6 +50,11 @@ class Photo
     init(asset: PHAsset)
     {
         self.asset = asset
+    }
+    
+    public func setMyAlbum(_ photoAlbum:PhotoAlbum?)
+    {
+        self.myAlbum = photoAlbum
     }
     
     public func getImage(quality: ImageQuality, completionHandler:@escaping (UIImage?) -> ())
@@ -123,4 +130,48 @@ class Photo
             completionHandler(image)
         })
     }
+    
+    //MARK: Firebase Storage Delegate
+    func getDocumentsDirectory() -> URL
+    {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    }
+    
+    func photoUploaded(withUrl url: URL)
+    {
+        print(url.path)
+        
+        if let albumKey = myAlbum?.databaseKey
+        {
+            let firebaseDatabase = FirebaseDatabaseController()
+            firebaseDatabase.addImageToPhotoAlbum(albumID: albumKey, imageUrl: url.path)
+        }
+    }
+    
+    func photoUploadFailed()
+    {
+        print("Photo upload failed")
+    }
+    
+    //MARK: Firebase upload/download
+    func uploadToFirebase()
+    {
+        // Data in memory
+        if let imageData = UIImageJPEGRepresentation(self.img!, 0.5)
+        {
+            if let myAlbum = self.myAlbum
+            {
+                let imageUrlName = User.sharedInstance.username + "_" + myAlbum.name + "_" + Date().description + ".jpg"
+                
+                let filename = getDocumentsDirectory().appendingPathComponent(imageUrlName)
+                try? imageData.write(to: filename)
+                print(filename)
+                
+                let firebaseStorage = FirebaseStorageController()
+                firebaseStorage.storageDelegate = self
+                firebaseStorage.uploadImage(withData: imageData, withUrlName: imageUrlName)
+            }
+        }
+    }
+    
 }

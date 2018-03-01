@@ -9,7 +9,8 @@
 import UIKit
 import FirebaseDatabase
 
-class ViewController: UIViewController {
+class ViewController: UIViewController
+{
     
     var databaseRef: DatabaseReference!
     

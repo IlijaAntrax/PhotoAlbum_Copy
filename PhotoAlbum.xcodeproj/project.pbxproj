@@ -36,7 +36,8 @@
 		5B54C2C11FD4573C0003F3CD /* empty_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B54C2C01FD4573C0003F3CD /* empty_image.png */; };
 		5B54C2C41FD477AA0003F3CD /* AlbumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54C2C31FD477AA0003F3CD /* AlbumVC.swift */; };
 		5B54C2C61FD4A28A0003F3CD /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54C2C51FD4A28A0003F3CD /* PhotoCell.swift */; };
-		5BB1627C20307F5D00C804FD /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1627B20307F5D00C804FD /* FirebaseController.swift */; };
+		5BB0157D203F70FE00FA89D7 /* FirebaseStorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0157C203F70FE00FA89D7 /* FirebaseStorageController.swift */; };
+		5BB1627C20307F5D00C804FD /* FirebaseDatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1627B20307F5D00C804FD /* FirebaseDatabaseController.swift */; };
 		5BE9D17F1FAE3A0500481384 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9D17E1FAE3A0500481384 /* AppDelegate.swift */; };
 		5BE9D1811FAE3A0500481384 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9D1801FAE3A0500481384 /* ViewController.swift */; };
 		5BE9D1841FAE3A0500481384 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BE9D1821FAE3A0500481384 /* Main.storyboard */; };
@@ -79,7 +80,8 @@
 		5B54C2C01FD4573C0003F3CD /* empty_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty_image.png; path = Skin/empty_image.png; sourceTree = "<group>"; };
 		5B54C2C31FD477AA0003F3CD /* AlbumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumVC.swift; sourceTree = "<group>"; };
 		5B54C2C51FD4A28A0003F3CD /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
-		5BB1627B20307F5D00C804FD /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
+		5BB0157C203F70FE00FA89D7 /* FirebaseStorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageController.swift; sourceTree = "<group>"; };
+		5BB1627B20307F5D00C804FD /* FirebaseDatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseController.swift; sourceTree = "<group>"; };
 		5BE9D17B1FAE3A0500481384 /* PhotoAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BE9D17E1FAE3A0500481384 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BE9D1801FAE3A0500481384 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -192,8 +194,9 @@
 		5BB1627A20307F3500C804FD /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				5BB1627B20307F5D00C804FD /* FirebaseController.swift */,
+				5BB1627B20307F5D00C804FD /* FirebaseDatabaseController.swift */,
 				5B46292A203093AA001C6CBC /* FirebaseListener.swift */,
+				5BB0157C203F70FE00FA89D7 /* FirebaseStorageController.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -293,7 +296,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Ilija Antonijevic";
 				TargetAttributes = {
 					5BE9D17A1FAE3A0500481384 = {
@@ -418,11 +421,12 @@
 				5BF531C31FC45F040012960E /* GalleryCell.swift in Sources */,
 				5B0A73F81FD2E2B2001B3CC2 /* Settings.swift in Sources */,
 				5B506B9B1FCB2754005A09CD /* LoginVC.swift in Sources */,
+				5BB0157D203F70FE00FA89D7 /* FirebaseStorageController.swift in Sources */,
 				5BE9D1811FAE3A0500481384 /* ViewController.swift in Sources */,
 				5BE9D17F1FAE3A0500481384 /* AppDelegate.swift in Sources */,
 				5B54C2C61FD4A28A0003F3CD /* PhotoCell.swift in Sources */,
 				5B54C2C41FD477AA0003F3CD /* AlbumVC.swift in Sources */,
-				5BB1627C20307F5D00C804FD /* FirebaseController.swift in Sources */,
+				5BB1627C20307F5D00C804FD /* FirebaseDatabaseController.swift in Sources */,
 				5B54C2BD1FD44DF40003F3CD /* PhotoAlbum.swift in Sources */,
 				5B46292B203093AA001C6CBC /* FirebaseListener.swift in Sources */,
 				5B54C2BF1FD44E6F0003F3CD /* Photo.swift in Sources */,
@@ -458,7 +462,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -517,7 +520,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -570,7 +572,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7DB0E5BF2879750256AA7F75 /* Pods-PhotoAlbum.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
@@ -628,7 +629,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E0C019714C54638A7C0AD219 /* Pods-PhotoAlbum.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
