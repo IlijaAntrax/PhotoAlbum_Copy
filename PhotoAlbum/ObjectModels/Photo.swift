@@ -25,6 +25,8 @@ class Photo: StorageDelegate
     
     private var myAlbum: PhotoAlbum?
     
+    private var imgUrl: URL?
+    
     var image: UIImage?
     {
         get
@@ -33,7 +35,19 @@ class Photo: StorageDelegate
         }
         set
         {
-            img = newValue
+            img = image
+        }
+    }
+    
+    var url: URL?
+    {
+        get
+        {
+            return imgUrl
+        }
+        set
+        {
+            imgUrl = url
         }
     }
     
@@ -50,6 +64,11 @@ class Photo: StorageDelegate
     init(asset: PHAsset)
     {
         self.asset = asset
+    }
+    
+    init(url: URL)
+    {
+        self.imgUrl = url
     }
     
     public func setMyAlbum(_ photoAlbum:PhotoAlbum?)
@@ -144,13 +163,24 @@ class Photo: StorageDelegate
         if let albumKey = myAlbum?.databaseKey
         {
             let firebaseDatabase = FirebaseDatabaseController()
-            firebaseDatabase.addImageToPhotoAlbum(albumID: albumKey, imageUrl: url.path)
+            firebaseDatabase.addImageToPhotoAlbum(albumID: albumKey, imageUrl: url.absoluteString)
         }
     }
     
     func photoUploadFailed()
     {
         print("Photo upload failed")
+    }
+    
+    func photoDownloaded(image: UIImage)
+    {
+        self.image = image
+        //send norification i download image
+    }
+    
+    func photoDonwloadFailed()
+    {
+        print("Photo download failed")
     }
     
     //MARK: Firebase upload/download
@@ -171,6 +201,16 @@ class Photo: StorageDelegate
                 firebaseStorage.storageDelegate = self
                 firebaseStorage.uploadImage(withData: imageData, withUrlName: imageUrlName)
             }
+        }
+    }
+    
+    func downloadFromFirebase()
+    {
+        if let url = self.imgUrl
+        {
+            let firebaseStorage = FirebaseStorageController()
+            firebaseStorage.storageDelegate = self
+            firebaseStorage.downloadImage(withUrlPath: url.absoluteString)
         }
     }
     

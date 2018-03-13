@@ -59,7 +59,16 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 galleryVC.photoAlbum = self.photoAlbum
             }
         }
+        else if segue.identifier == "searchUsersSegueIdentifier"
+        {
+            if let searchUsersVC = segue.destination as? SearchUsersVC
+            {
+                searchUsersVC.sharedAlbum = self.photoAlbum
+            }
+        }
     }
+    
+    
     
     @objc func reloadAlbum()
     {
@@ -84,6 +93,7 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         {
             return album.photos.count
         }
+        
         return 0
     }
     

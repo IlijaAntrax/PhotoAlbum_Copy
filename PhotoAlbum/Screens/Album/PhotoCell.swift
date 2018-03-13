@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PhotoCell: UICollectionViewCell
+class PhotoCell: UICollectionViewCell, StorageDelegate //add observer image downloaded for current photo
 {
     @IBOutlet weak var imgView: UIImageView!
     
@@ -24,7 +24,38 @@ class PhotoCell: UICollectionViewCell
     {
         didSet
         {
-            imgView.image = photo?.image
+            if let image = photo?.image
+            {
+                imgView.image = image
+            }
+            else if let url = photo?.url
+            {
+                //download image
+                //photo?.downloadFromFirebase()
+                
+                let firebaseStorage = FirebaseStorageController()
+                firebaseStorage.storageDelegate = self
+                firebaseStorage.downloadImage(withUrlPath: url.path.replacingOccurrences(of: "/https:/", with: "https://"))
+            }
         }
+    }
+    
+    //upload
+    func photoUploaded(withUrl url:URL)
+    {
+        
+    }
+    func photoUploadFailed()
+    {
+        
+    }
+    //download
+    func photoDownloaded(image: UIImage)
+    {
+        self.imgView.image = image
+    }
+    func photoDonwloadFailed()
+    {
+        
     }
 }

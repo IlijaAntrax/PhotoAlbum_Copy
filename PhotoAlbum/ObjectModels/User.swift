@@ -315,13 +315,28 @@ class User:NSObject, DatabaseDelegate
             {
                 if let albumData = albumElement.value as? [String:Any]
                 {
-                    guard let name = albumData[album_nameKey] as? String, let date = albumData[album_creatioDateKey] else { continue }
-                    
-                    print(name)
-                    print(date)
+                    guard let name = albumData[album_nameKey] as? String,
+                          let date = albumData[album_creatioDateKey]
+                    else { continue }
                     
                     let photoAlbum = PhotoAlbum(name: name, date: Date())
                     photoAlbum.setKey(albumElement.key)
+                    
+                    if let images = albumData[album_imagesKey] as? [String:Any]
+                    {
+                        for data in images.enumerated()
+                        {
+                            if let imageData = data.element.value as? [String:Any]
+                            {
+                                if let urlPath = imageData[photo_urlKey] as? String
+                                {
+                                    let url = URL(fileURLWithPath: urlPath)
+                                    photoAlbum.add(Photo(url: url))
+                                }
+                            }
+                        }
+                    }
+                    
                     photoAlbums.append(photoAlbum)
                 }
             }

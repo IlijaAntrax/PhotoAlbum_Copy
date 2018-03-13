@@ -8,11 +8,16 @@
 
 import Foundation
 import FirebaseStorage
+import UIKit
 
 protocol StorageDelegate:class
 {
+    //upload
     func photoUploaded(withUrl url:URL)
     func photoUploadFailed()
+    //download
+    func photoDownloaded(image: UIImage)
+    func photoDonwloadFailed()
 }
 
 class FirebaseStorageController
@@ -50,8 +55,31 @@ class FirebaseStorageController
             // Metadata contains file metadata such as size, content-type, and download URL.
             let downloadURL = metadata.downloadURL()
             print(metadata.size)
+            print(metadata.downloadURLs)
             print(downloadURL)
             self.storageDelegate?.photoUploaded(withUrl: downloadURL!)
+        }
+    }
+    
+    func downloadImage(withUrlPath url:String)
+    {
+        let reference = Storage.storage().reference(forURL: url)
+        
+        reference.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
+            if let imageData = data
+            {
+                if let image = UIImage(data: imageData)
+                {
+                    //set delegate for image
+                    self.storageDelegate?.photoDownloaded(image: image)
+                }
+            }
+            if let err = error
+            {
+                print(err)
+                
+                self.storageDelegate?.photoDonwloadFailed()
+            }
         }
     }
     

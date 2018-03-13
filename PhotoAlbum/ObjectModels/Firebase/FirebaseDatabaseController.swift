@@ -27,10 +27,11 @@ let privilegies_writeKey = "write"
 let privilegies_updateKey = "update"
 let privilegies_deleteKey = "delete"
 
-protocol DatabaseDelegate:class
+@objc protocol DatabaseDelegate:class
 {
-    func myAlbumsLoaded(myAlbumsData: [Any])
-    func sharedAlbumsLoaded(sharedAlbumsData: [Any])
+    @objc optional func myAlbumsLoaded(myAlbumsData: [Any])
+    @objc optional func sharedAlbumsLoaded(sharedAlbumsData: [Any])
+    @objc optional func userDataLoaded(usersData: [String:Any])
 }
 
 class FirebaseDatabaseController
@@ -169,7 +170,7 @@ class FirebaseDatabaseController
                     }
                 }
                 
-                self.databaseDelegate?.myAlbumsLoaded(myAlbumsData: albums)
+                self.databaseDelegate?.myAlbumsLoaded?(myAlbumsData: albums)
             }
         }
     }
@@ -227,7 +228,7 @@ class FirebaseDatabaseController
                             
                             if albumsCnt == 0
                             {
-                                self.databaseDelegate?.sharedAlbumsLoaded(sharedAlbumsData: albums)
+                                self.databaseDelegate?.sharedAlbumsLoaded?(sharedAlbumsData: albums)
                             }
                         })
                     }
@@ -253,15 +254,16 @@ class FirebaseDatabaseController
         }
     }
     
-    func searchForUsers(byPrefixName name:String)
+    func searchForUsers(byName name:String)
     {
-        let usersRef = self.dbRef.child("users").queryOrdered(byChild: user_nameKey).queryStarting(atValue: name)
+        let usersRef = self.dbRef.child("users").queryOrdered(byChild: user_nameKey).queryEqual(toValue: name)
         
         usersRef.observeSingleEvent(of: .value) { (snapshot) in
             print(snapshot)
-            if let users = snapshot.value as? [String:Any]
+            if let user = snapshot.value as? [String:Any]
             {
-                print(users)
+                print(user)
+                self.databaseDelegate?.userDataLoaded?(usersData: user)
             }
         }
     }
