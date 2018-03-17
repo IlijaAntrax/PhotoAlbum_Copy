@@ -17,7 +17,7 @@ class PhotoCell: UICollectionViewCell, StorageDelegate //add observer image down
     {
         super.awakeFromNib()
         
-        //self.imgView.contentMode = .scaleToFill
+        self.imgView.contentMode = .scaleAspectFill
     }
     
     var photo: Photo?
@@ -27,6 +27,7 @@ class PhotoCell: UICollectionViewCell, StorageDelegate //add observer image down
             if let image = photo?.image
             {
                 imgView.image = image
+                imgView.layer.transform = self.photo?.transform ?? CATransform3DIdentity
             }
             else if let url = photo?.url
             {
@@ -53,6 +54,9 @@ class PhotoCell: UICollectionViewCell, StorageDelegate //add observer image down
     func photoDownloaded(image: UIImage)
     {
         self.imgView.image = image
+        self.photo?.image = image
+        
+        self.imgView.layer.transform = self.photo?.transform ?? CATransform3DIdentity
     }
     func photoDonwloadFailed()
     {

@@ -46,7 +46,7 @@ class FirebaseStorageController
         //User.sharedInstance.uploadPicture(fromURL: localUrlImage)
         // Upload the file to the path "images/rivers.jpg"
         _ = imgRef.putData(data, metadata: nil) { (metadata, error) in
-            print(error)
+            
             guard let metadata = metadata else {
                 // Uh-oh, an error occurred!
                 self.storageDelegate?.photoUploadFailed()
@@ -54,9 +54,6 @@ class FirebaseStorageController
             }
             // Metadata contains file metadata such as size, content-type, and download URL.
             let downloadURL = metadata.downloadURL()
-            print(metadata.size)
-            print(metadata.downloadURLs)
-            print(downloadURL)
             self.storageDelegate?.photoUploaded(withUrl: downloadURL!)
         }
     }

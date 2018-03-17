@@ -328,11 +328,22 @@ class User:NSObject, DatabaseDelegate
                         {
                             if let imageData = data.element.value as? [String:Any]
                             {
+                                print(data.element.key)
+                                let photo = Photo(key: data.element.key)
+                                
                                 if let urlPath = imageData[photo_urlKey] as? String
                                 {
                                     let url = URL(fileURLWithPath: urlPath)
-                                    photoAlbum.add(Photo(url: url))
+                                    photo.url = url
                                 }
+                                
+                                if let transformData = imageData[photo_transformKey] as? [CGFloat]
+                                {
+                                    print(transformData)
+                                    photo.setTransform(fromData: transformData)
+                                }
+                                
+                                photoAlbum.add(photo)
                             }
                         }
                     }

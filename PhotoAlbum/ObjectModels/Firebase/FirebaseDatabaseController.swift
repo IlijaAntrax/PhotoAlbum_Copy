@@ -20,6 +20,7 @@ let album_creatioDateKey = "creationDate"
 let album_imagesKey = "images"
 
 let photo_urlKey = "url"
+let photo_transformKey = "transform"
 
 let privilegiesKey = "privilegies"
 let privilegies_readKey = "read"
@@ -93,6 +94,14 @@ class FirebaseDatabaseController
         let imageRef = self.dbRef.child("photoalbums").child(albumID).child(album_imagesKey).childByAutoId()
         
         imageRef.setValue([photo_urlKey:imageUrl])
+    }
+    
+    func addPhotoToAlbum(_ photo: Photo, albumID:String)
+    {
+        let imageRef = self.dbRef.child("photoalbums").child(albumID).child(album_imagesKey).childByAutoId()
+        
+        imageRef.setValue([photo_urlKey:photo.url?.absoluteString])
+        imageRef.setValue([photo_transformKey:photo.getTransformData()])
     }
     
     func addUserOnAlbum(userID:String, albumID:String, withPrivilegies privilegies:Privilegies)
@@ -269,7 +278,12 @@ class FirebaseDatabaseController
     }
     
     //MARK: UPDATE firebase methods
-    
+    func updatePhotoTransform(_ photoID: String, albumID: String, transformData: [CGFloat])
+    {
+        let imageRef = self.dbRef.child("photoalbums").child(albumID).child(album_imagesKey).child(photoID)
+        
+        imageRef.setValue([photo_transformKey:transformData])
+    }
     
     //MARK: DELETE firebase methods
 }

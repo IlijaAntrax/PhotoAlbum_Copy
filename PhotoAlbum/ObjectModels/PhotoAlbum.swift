@@ -74,10 +74,12 @@ class PhotoAlbum
     {
         self.photoImages.append(photo)
         photo.setMyAlbum(self)
+        
         if photo.image != nil
         {
             photo.uploadToFirebase()
         }
+        
         if photo.url != nil
         {
             //photo.downloadFromFirebase()

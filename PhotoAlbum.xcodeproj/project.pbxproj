@@ -41,6 +41,12 @@
 		5BABDA05204AFB7300654E5F /* FirebaseUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BABDA04204AFB7300654E5F /* FirebaseUserCell.swift */; };
 		5BB0157D203F70FE00FA89D7 /* FirebaseStorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0157C203F70FE00FA89D7 /* FirebaseStorageController.swift */; };
 		5BB1627C20307F5D00C804FD /* FirebaseDatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1627B20307F5D00C804FD /* FirebaseDatabaseController.swift */; };
+		5BC39F1420585117000E5CAF /* PhotoEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1320585117000E5CAF /* PhotoEditVC.swift */; };
+		5BC39F1720585B8F000E5CAF /* EditorImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1620585B8F000E5CAF /* EditorImageView.swift */; };
+		5BC39F1A20585BCE000E5CAF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1820585BCE000E5CAF /* UIColor+.swift */; };
+		5BC39F1B20585BCE000E5CAF /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1920585BCE000E5CAF /* UIImage+.swift */; };
+		5BD25A1B205D609300CD1BAA /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD25A1A205D609300CD1BAA /* FilterStore.swift */; };
+		5BD25A1D205D627700CD1BAA /* FilterImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD25A1C205D627700CD1BAA /* FilterImageCell.swift */; };
 		5BE9D17F1FAE3A0500481384 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9D17E1FAE3A0500481384 /* AppDelegate.swift */; };
 		5BE9D1811FAE3A0500481384 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9D1801FAE3A0500481384 /* ViewController.swift */; };
 		5BE9D1841FAE3A0500481384 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BE9D1821FAE3A0500481384 /* Main.storyboard */; };
@@ -88,6 +94,12 @@
 		5BABDA04204AFB7300654E5F /* FirebaseUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserCell.swift; sourceTree = "<group>"; };
 		5BB0157C203F70FE00FA89D7 /* FirebaseStorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageController.swift; sourceTree = "<group>"; };
 		5BB1627B20307F5D00C804FD /* FirebaseDatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseController.swift; sourceTree = "<group>"; };
+		5BC39F1320585117000E5CAF /* PhotoEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditVC.swift; sourceTree = "<group>"; };
+		5BC39F1620585B8F000E5CAF /* EditorImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorImageView.swift; sourceTree = "<group>"; };
+		5BC39F1820585BCE000E5CAF /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		5BC39F1920585BCE000E5CAF /* UIImage+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		5BD25A1A205D609300CD1BAA /* FilterStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterStore.swift; sourceTree = "<group>"; };
+		5BD25A1C205D627700CD1BAA /* FilterImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterImageCell.swift; sourceTree = "<group>"; };
 		5BE9D17B1FAE3A0500481384 /* PhotoAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BE9D17E1FAE3A0500481384 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BE9D1801FAE3A0500481384 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +192,7 @@
 		5B506B9C1FCB2DAF005A09CD /* ObjectModels */ = {
 			isa = PBXGroup;
 			children = (
+				5BC39F1520585B78000E5CAF /* ViewComponents */,
 				5BB1627A20307F3500C804FD /* Firebase */,
 				5B506B9D1FCB2DE7005A09CD /* User.swift */,
 				5B54C2BC1FD44DF40003F3CD /* PhotoAlbum.swift */,
@@ -215,6 +228,26 @@
 				5BB0157C203F70FE00FA89D7 /* FirebaseStorageController.swift */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		5BC39F12205850D4000E5CAF /* PhotoEditor */ = {
+			isa = PBXGroup;
+			children = (
+				5BC39F1320585117000E5CAF /* PhotoEditVC.swift */,
+				5BD25A1C205D627700CD1BAA /* FilterImageCell.swift */,
+			);
+			path = PhotoEditor;
+			sourceTree = "<group>";
+		};
+		5BC39F1520585B78000E5CAF /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				5BD25A1A205D609300CD1BAA /* FilterStore.swift */,
+				5BC39F1820585BCE000E5CAF /* UIColor+.swift */,
+				5BC39F1920585BCE000E5CAF /* UIImage+.swift */,
+				5BC39F1620585B8F000E5CAF /* EditorImageView.swift */,
+			);
+			path = ViewComponents;
 			sourceTree = "<group>";
 		};
 		5BE9D1721FAE3A0500481384 = {
@@ -256,6 +289,7 @@
 		5BE9D1AC1FAE3F7700481384 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				5BC39F12205850D4000E5CAF /* PhotoEditor */,
 				5BABD9FF204AF2EF00654E5F /* AddUsers */,
 				5B506B991FCB2702005A09CD /* Login */,
 				5B0A73F91FD30F74001B3CC2 /* Home */,
@@ -435,9 +469,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BE9D1AE1FAE3F9300481384 /* HomeVC.swift in Sources */,
+				5BC39F1420585117000E5CAF /* PhotoEditVC.swift in Sources */,
+				5BD25A1D205D627700CD1BAA /* FilterImageCell.swift in Sources */,
 				5BF531C31FC45F040012960E /* GalleryCell.swift in Sources */,
 				5B0A73F81FD2E2B2001B3CC2 /* Settings.swift in Sources */,
 				5B506B9B1FCB2754005A09CD /* LoginVC.swift in Sources */,
+				5BC39F1B20585BCE000E5CAF /* UIImage+.swift in Sources */,
 				5BB0157D203F70FE00FA89D7 /* FirebaseStorageController.swift in Sources */,
 				5BE9D1811FAE3A0500481384 /* ViewController.swift in Sources */,
 				5BE9D17F1FAE3A0500481384 /* AppDelegate.swift in Sources */,
@@ -446,7 +483,10 @@
 				5B54C2C41FD477AA0003F3CD /* AlbumVC.swift in Sources */,
 				5BB1627C20307F5D00C804FD /* FirebaseDatabaseController.swift in Sources */,
 				5B54C2BD1FD44DF40003F3CD /* PhotoAlbum.swift in Sources */,
+				5BC39F1720585B8F000E5CAF /* EditorImageView.swift in Sources */,
+				5BD25A1B205D609300CD1BAA /* FilterStore.swift in Sources */,
 				5B46292B203093AA001C6CBC /* FirebaseListener.swift in Sources */,
+				5BC39F1A20585BCE000E5CAF /* UIColor+.swift in Sources */,
 				5B54C2BF1FD44E6F0003F3CD /* Photo.swift in Sources */,
 				5BF531C11FC45D470012960E /* GalleryVC.swift in Sources */,
 				5BABDA01204AF31800654E5F /* SearchUsersVC.swift in Sources */,

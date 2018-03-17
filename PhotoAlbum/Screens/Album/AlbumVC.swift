@@ -16,6 +16,8 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     var photoAlbum: PhotoAlbum?
     
+    var selectedPhoto: Photo?
+    
     @IBOutlet weak var contentView:UIView!
     
     @IBOutlet weak var photosCollection: UICollectionView!
@@ -48,6 +50,8 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         contentView.layer.addBorder(edge: .bottom, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
         contentView.layer.addBorder(edge: .left, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
         contentView.layer.addBorder(edge: .right, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
+        
+        self.photosCollection.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -64,6 +68,13 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             if let searchUsersVC = segue.destination as? SearchUsersVC
             {
                 searchUsersVC.sharedAlbum = self.photoAlbum
+            }
+        }
+        else if segue.identifier == "photoEditorSegueIdentifier"
+        {
+            if let photoEditVC = segue.destination as? PhotoEditVC
+            {
+                photoEditVC.photo = self.selectedPhoto
             }
         }
     }
@@ -108,7 +119,9 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
+        self.selectedPhoto = photoAlbum?.photos[indexPath.item]
         
+        performSegue(withIdentifier: "photoEditorSegueIdentifier", sender: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize

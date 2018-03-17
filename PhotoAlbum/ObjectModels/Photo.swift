@@ -19,6 +19,8 @@ enum ImageQuality
 
 class Photo: StorageDelegate
 {
+    private var _id: String?
+    
     private var img: UIImage?
     
     private var asset: PHAsset?
@@ -26,6 +28,13 @@ class Photo: StorageDelegate
     private var myAlbum: PhotoAlbum?
     
     private var imgUrl: URL?
+    
+    private var _transform = CATransform3DIdentity
+    
+    var key: String?
+    {
+        return _id
+    }
     
     var image: UIImage?
     {
@@ -35,7 +44,7 @@ class Photo: StorageDelegate
         }
         set
         {
-            img = image
+            img = newValue
         }
     }
     
@@ -47,13 +56,30 @@ class Photo: StorageDelegate
         }
         set
         {
-            imgUrl = url
+            imgUrl = newValue
+        }
+    }
+    
+    var transform:CATransform3D
+    {
+        get
+        {
+            return _transform
+        }
+        set
+        {
+            _transform = newValue
         }
     }
     
     init()
     {
         
+    }
+    
+    init(key: String)
+    {
+        self._id = key
     }
     
     init(image: UIImage)
@@ -150,6 +176,32 @@ class Photo: StorageDelegate
         })
     }
     
+    //MARK: Firebase helper methods
+    func updateTransformData()
+    {
+        guard let photoKey = key, let albumKey = myAlbum?.databaseKey else {
+            return
+        }
+        let firebaseDatabase = FirebaseDatabaseController()
+        
+        firebaseDatabase.updatePhotoTransform(photoKey, albumID: albumKey, transformData: getTransformData())
+    }
+    
+    func getTransformData() -> [CGFloat]
+    {
+        let transformData = [transform.m11, transform.m12, transform.m13, transform.m14,
+                             transform.m21, transform.m22, transform.m23, transform.m24,
+                             transform.m31, transform.m32, transform.m33, transform.m34,
+                             transform.m41, transform.m42, transform.m43, transform.m44]
+        
+        return transformData
+    }
+    
+    func setTransform(fromData transformData:[CGFloat])
+    {
+        self.transform = CATransform3D.init(m11: transformData[0], m12: transformData[1], m13: transformData[2], m14: transformData[3], m21: transformData[4], m22: transformData[5], m23: transformData[6], m24: transformData[7], m31: transformData[8], m32: transformData[9], m33: transformData[10], m34: transformData[11], m41: transformData[12], m42: transformData[13], m43: transformData[14], m44: transformData[15])
+    }
+    
     //MARK: Firebase Storage Delegate
     func getDocumentsDirectory() -> URL
     {
@@ -158,12 +210,13 @@ class Photo: StorageDelegate
     
     func photoUploaded(withUrl url: URL)
     {
-        print(url.path)
+        self.url = url
         
         if let albumKey = myAlbum?.databaseKey
         {
             let firebaseDatabase = FirebaseDatabaseController()
-            firebaseDatabase.addImageToPhotoAlbum(albumID: albumKey, imageUrl: url.absoluteString)
+            //firebaseDatabase.addImageToPhotoAlbum(albumID: albumKey, imageUrl: url.absoluteString)
+            firebaseDatabase.addPhotoToAlbum(self, albumID: albumKey)
         }
     }
     

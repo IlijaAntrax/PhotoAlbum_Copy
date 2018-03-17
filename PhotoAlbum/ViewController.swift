@@ -11,7 +11,6 @@ import FirebaseDatabase
 
 class ViewController: UIViewController
 {
-    
     var databaseRef: DatabaseReference!
     
     override func viewDidLoad() {
