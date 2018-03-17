@@ -56,12 +56,6 @@ enum FilterType : Int
     case dotScreen//23
     case lineScreen//25
     
-    //iOS9 Filters
-    case vhsTracking//33 !
-    case starBurst//32 !
-    case chromaticAberration//28 !
-    //    case DifferenceOfGuassians//29 !
-    case eightBit//30 !
     case cmykHalfTone//34 !
     
     case BlackAndWhite
@@ -80,8 +74,7 @@ enum FilterType : Int
     static func getFiltersWithNoIntesity() -> [FilterType]
     {
         return [FilterType.NoFilter, FilterType.ComicEffect, FilterType.Instant, FilterType.Fade,
-                FilterType.cmykHalfTone, FilterType.eightBit, FilterType.chromaticAberration,
-                FilterType.starBurst, FilterType.vhsTracking, FilterType.lineScreen, FilterType.dotScreen,
+                FilterType.cmykHalfTone, FilterType.lineScreen, FilterType.dotScreen,
                 FilterType.circularScreen, FilterType.maximumComponent, FilterType.minimumComponent , FilterType.Mare21]
     }
 }
@@ -397,14 +390,6 @@ class FilterStore
             case .maximumComponent:
                 filters = maximumComponentFilter()
                 
-            case .chromaticAberration:
-                filters = chromaticAberrationFilter(image)
-            case .eightBit:
-                filters = eightBitFilter(image)
-            case .starBurst:
-                filters = starBurstFilter(image)
-            case .vhsTracking:
-                filters = VHSTrackingLinesFilter(image)
             case .cmykHalfTone:
                 filters = CMYKHalftoneFilter(image)
             case .circularScreen:

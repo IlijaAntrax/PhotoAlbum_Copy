@@ -22,7 +22,10 @@ class FilterImageCell:UICollectionViewCell
     
     func setup(withImage: UIImage, filter: FilterType)
     {
-        let filteredImage = FilterStore.filterImage(image: withImage, filterType: filter, intensity: 100.0)
+        let width:CGFloat = 150.0
+        let height = width * withImage.size.height / withImage.size.width
+        let scaledImage = withImage.scaledToSize(size: CGSize.init(width: width, height: height))
+        let filteredImage = FilterStore.filterImage(image: scaledImage, filterType: filter, intensity: 0.5)
         
         filterImgView.image = filteredImage
     }

@@ -48,6 +48,13 @@ class PhotoEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         NotificationCenter.default.addObserver(self, selector: #selector(photoTransformed(_:)), name: NSNotification.Name.init(imageEditingEndedNotificaiton), object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        self.filtersCollection.reloadData()
+    }
+    
     //MARK: Observer method
     @objc func photoTransformed(_ notification:NSNotification)
     {
@@ -68,7 +75,7 @@ class PhotoEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     //MARK: Collection view delegate, data source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return FilterType.BlackAndWhite.rawValue
+        return FilterType.filtersNumber()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
@@ -83,15 +90,14 @@ class PhotoEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
         self.selectedFilter = FilterType(rawValue: indexPath.item)!
-        editorImageView.image = FilterStore.filterImage(image: photo?.image, filterType: selectedFilter, intensity: 100.0)
+        editorImageView.image = FilterStore.filterImage(image: photo?.image, filterType: selectedFilter, intensity: 0.5)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        let width = collectionView.frame.width
-        let height = width * 0.2
-        
-        return CGSize(width: width, height: height)
+        let width = collectionView.frame.height
+
+        return CGSize(width: width, height: width)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
