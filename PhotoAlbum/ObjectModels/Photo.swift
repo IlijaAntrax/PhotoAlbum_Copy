@@ -17,7 +17,7 @@ enum ImageQuality
     case high
 }
 
-class Photo: StorageDelegate
+class Photo //: StorageDelegate
 {
     private var _id: String?
     
@@ -30,6 +30,8 @@ class Photo: StorageDelegate
     private var imgUrl: URL?
     
     private var _transform = CATransform3DIdentity
+    
+    private var _filter: FilterType = FilterType.NoFilter
     
     var key: String?
     {
@@ -69,6 +71,18 @@ class Photo: StorageDelegate
         set
         {
             _transform = newValue
+        }
+    }
+    
+    var filter:FilterType
+    {
+        get
+        {
+            return _filter
+        }
+        set
+        {
+            _filter = newValue
         }
     }
     
@@ -177,6 +191,13 @@ class Photo: StorageDelegate
     }
     
     //MARK: Firebase helper methods
+    //transform
+    func update()
+    {
+        updateTransformData()
+        updateFilterData()
+    }
+    
     func updateTransformData()
     {
         guard let photoKey = key, let albumKey = myAlbum?.databaseKey else {
@@ -201,14 +222,18 @@ class Photo: StorageDelegate
     {
         self.transform = CATransform3D.init(m11: transformData[0], m12: transformData[1], m13: transformData[2], m14: transformData[3], m21: transformData[4], m22: transformData[5], m23: transformData[6], m24: transformData[7], m31: transformData[8], m32: transformData[9], m33: transformData[10], m34: transformData[11], m41: transformData[12], m42: transformData[13], m43: transformData[14], m44: transformData[15])
     }
-    
-    //MARK: Firebase Storage Delegate
-    func getDocumentsDirectory() -> URL
+    //filters
+    func updateFilterData()
     {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        guard let photoKey = key, let albumKey = myAlbum?.databaseKey else {
+            return
+        }
+        let firebaseDatabase = FirebaseDatabaseController()
+        
+        firebaseDatabase.updatePhotoFilter(photoKey, albumID: albumKey, filterValue: _filter.rawValue)
     }
     
-    func photoUploaded(withUrl url: URL)
+    func photoUploaded(withUrl url: URL?)
     {
         self.url = url
         
@@ -218,22 +243,6 @@ class Photo: StorageDelegate
             //firebaseDatabase.addImageToPhotoAlbum(albumID: albumKey, imageUrl: url.absoluteString)
             firebaseDatabase.addPhotoToAlbum(self, albumID: albumKey)
         }
-    }
-    
-    func photoUploadFailed()
-    {
-        print("Photo upload failed")
-    }
-    
-    func photoDownloaded(image: UIImage)
-    {
-        self.image = image
-        //send norification i download image
-    }
-    
-    func photoDonwloadFailed()
-    {
-        print("Photo download failed")
     }
     
     //MARK: Firebase upload/download
@@ -246,13 +255,15 @@ class Photo: StorageDelegate
             {
                 let imageUrlName = User.sharedInstance.username + "_" + myAlbum.name + "_" + Date().description + ".jpg"
                 
-                let filename = getDocumentsDirectory().appendingPathComponent(imageUrlName)
+                let filename = User.sharedInstance.getDocumentsDirectory().appendingPathComponent(imageUrlName)
                 try? imageData.write(to: filename)
                 print(filename)
                 
                 let firebaseStorage = FirebaseStorageController()
-                firebaseStorage.storageDelegate = self
-                firebaseStorage.uploadImage(withData: imageData, withUrlName: imageUrlName)
+                
+                firebaseStorage.uploadImage(withData: imageData, withUrlName: imageUrlName, completionHandler: { (url) in
+                    self.photoUploaded(withUrl: url)
+                })
             }
         }
     }
@@ -262,8 +273,10 @@ class Photo: StorageDelegate
         if let url = self.imgUrl
         {
             let firebaseStorage = FirebaseStorageController()
-            firebaseStorage.storageDelegate = self
-            firebaseStorage.downloadImage(withUrlPath: url.absoluteString)
+            
+            firebaseStorage.downloadImage(withUrlPath: url.absoluteString, completionHandler: { (image) in
+                self.image = image
+            })
         }
     }
     

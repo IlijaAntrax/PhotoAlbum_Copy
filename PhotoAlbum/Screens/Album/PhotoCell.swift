@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PhotoCell: UICollectionViewCell, StorageDelegate //add observer image downloaded for current photo
+class PhotoCell: UICollectionViewCell
 {
     @IBOutlet weak var imgView: UIImageView!
     
@@ -24,42 +24,37 @@ class PhotoCell: UICollectionViewCell, StorageDelegate //add observer image down
     {
         didSet
         {
-            if let image = photo?.image
+            if let photo = self.photo
             {
-                imgView.image = image
-                imgView.layer.transform = self.photo?.transform ?? CATransform3DIdentity
-            }
-            else if let url = photo?.url
-            {
-                //download image
-                //photo?.downloadFromFirebase()
-                
-                let firebaseStorage = FirebaseStorageController()
-                firebaseStorage.storageDelegate = self
-                firebaseStorage.downloadImage(withUrlPath: url.path.replacingOccurrences(of: "/https:/", with: "https://"))
+                if let image = photo.image
+                {
+                    if photo.filter != .NoFilter
+                    {
+                        let img = FilterStore.filterImage(image: image, filterType: photo.filter, intensity: 0.5)
+                        imgView.image = img
+                    }
+                    else
+                    {
+                        imgView.image = image
+                    }
+                    imgView.layer.transform = self.photo?.transform ?? CATransform3DIdentity
+                }
+                else if let url = photo.url
+                {
+                    //download image
+                    //photo?.downloadFromFirebase()
+                    
+                    let firebaseStorage = FirebaseStorageController()
+                    
+                    firebaseStorage.downloadImage(withUrlPath: url.path.replacingOccurrences(of: "/https:/", with: "https://"), completionHandler: { (image) in
+                        self.imgView.image = image
+                        self.photo?.image = image
+                        
+                        self.imgView.layer.transform = self.photo?.transform ?? CATransform3DIdentity
+                    })
+                }
             }
         }
     }
     
-    //upload
-    func photoUploaded(withUrl url:URL)
-    {
-        
-    }
-    func photoUploadFailed()
-    {
-        
-    }
-    //download
-    func photoDownloaded(image: UIImage)
-    {
-        self.imgView.image = image
-        self.photo?.image = image
-        
-        self.imgView.layer.transform = self.photo?.transform ?? CATransform3DIdentity
-    }
-    func photoDonwloadFailed()
-    {
-        
-    }
 }

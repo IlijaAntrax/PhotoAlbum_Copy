@@ -22,17 +22,16 @@ protocol StorageDelegate:class
 
 class FirebaseStorageController
 {
-    
     private var storageRef:StorageReference
     
-    weak var storageDelegate:StorageDelegate?
+    //weak var storageDelegate:StorageDelegate?
     
     init()
     {
         storageRef = Storage.storage().reference()
     }
     
-    public func uploadImage(withData data:Data, withUrlName urlName:String)
+    public func uploadImage(withData data:Data, withUrlName urlName:String, completionHandler:@escaping (URL?) -> ())
     {
         let localUrlImage = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(urlName)
         if FileManager.default.fileExists(atPath: localUrlImage.path)
@@ -49,16 +48,18 @@ class FirebaseStorageController
             
             guard let metadata = metadata else {
                 // Uh-oh, an error occurred!
-                self.storageDelegate?.photoUploadFailed()
+                //self.storageDelegate?.photoUploadFailed()
+                completionHandler(nil)
                 return
             }
             // Metadata contains file metadata such as size, content-type, and download URL.
             let downloadURL = metadata.downloadURL()
-            self.storageDelegate?.photoUploaded(withUrl: downloadURL!)
+            //self.storageDelegate?.photoUploaded(withUrl: downloadURL!)
+            completionHandler(downloadURL)
         }
     }
     
-    func downloadImage(withUrlPath url:String)
+    func downloadImage(withUrlPath url:String, completionHandler:@escaping (UIImage?) -> ())
     {
         let reference = Storage.storage().reference(forURL: url)
         
@@ -68,14 +69,16 @@ class FirebaseStorageController
                 if let image = UIImage(data: imageData)
                 {
                     //set delegate for image
-                    self.storageDelegate?.photoDownloaded(image: image)
+                    //self.storageDelegate?.photoDownloaded(image: image)
+                    completionHandler(image)
                 }
             }
             if let err = error
             {
                 print(err)
                 
-                self.storageDelegate?.photoDonwloadFailed()
+                //self.storageDelegate?.photoDonwloadFailed()
+                completionHandler(nil)
             }
         }
     }

@@ -57,6 +57,62 @@ class PhotoAlbum
         self.key = key
     }
     
+    func addImages(fromData imagesData:[String : Any])
+    {
+        for data in imagesData.enumerated()
+        {
+            if let imageData = data.element.value as? [String:Any]
+            {
+                let photo = Photo(key: data.element.key)
+                
+                if let urlPath = imageData[photo_urlKey] as? String
+                {
+                    let url = URL(fileURLWithPath: urlPath)
+                    photo.url = url
+                }
+                
+                if let transformData = imageData[photo_transformKey] as? [CGFloat]
+                {
+                    photo.setTransform(fromData: transformData)
+                }
+                
+                if let filterValue = imageData[photo_filterKey] as? Int
+                {
+                    photo.filter = FilterType(rawValue: filterValue)!
+                }
+                
+                self.add(photo)
+            }
+        }
+    }
+    
+    func setPrivilegies(fromData privilegiesData: [String : Any])
+    {
+        let privilegies = Privilegies(owner: false)
+        
+        if let read = privilegiesData[privilegies_readKey] as? Bool
+        {
+            privilegies.read = read
+        }
+        
+        if let write = privilegiesData[privilegies_writeKey] as? Bool
+        {
+            privilegies.write = write
+        }
+        
+        if let update = privilegiesData[privilegies_updateKey] as? Bool
+        {
+            privilegies.update = update
+        }
+        
+        if let delete = privilegiesData[privilegies_deleteKey] as? Bool
+        {
+            privilegies.delete = delete
+        }
+        
+        self.privilegies = privilegies
+    }
+    
     //MARK: CRUD methods
     func save()
     {

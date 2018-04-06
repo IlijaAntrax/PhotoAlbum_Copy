@@ -39,14 +39,17 @@ class User:NSObject, DatabaseDelegate
     
     private var isLogged = false
     
+    private var _id:String?
     private var _username:String = ""
     private var _password:String = ""
+    private var email:String?
     
     var username:String
     {
         return self._username
     }
     
+    var profileImageURL:URL?
     var profileImage: UIImage?
     
     var myAlbums = [PhotoAlbum]()
@@ -74,30 +77,29 @@ class User:NSObject, DatabaseDelegate
         
         if let user = Auth.auth().currentUser
         {
-            print(user.uid)
+            self._id = user.uid
+            
+            if let email = user.email
+            {
+                self.email = email
+            }
             
             if let username = user.displayName
             {
                 self._username = username
             }
             
-            if !getProfileImageFromLocal()
+            if let url = getProfileImageFromLocal()
+            {
+                self.profileImageURL = url
+            }
+            else
             {
                 if let photoUrl = user.photoURL
                 {
-                    //download profile picture
-                    print(photoUrl)
                     self.downloadProfilePicture(fromUrl: photoUrl)
                 }
             }
-            
-            if let email = user.email
-            {
-                print(email)
-                //self.username = email
-            }
-            
-            self.firebaseTest()
             
             self.isLogged = true
         }
@@ -105,7 +107,41 @@ class User:NSObject, DatabaseDelegate
         return self.isLogged
     }
     
-    private func createEmail(fromUsername username: String) -> String
+    func loggIn(username: String, password:String)
+    {
+        if self._username == "" //check if user exists with username
+        {
+            self.register(username: username, password: password)
+        }
+        else
+        {
+            let email = self.getEmail(fromUsername: username)
+            
+            Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+                if let currentUser = user
+                {
+                    if let email = currentUser.email
+                    {
+                        print(username)
+                        self._username = self.getUsername(fromEmail: email)
+                    }
+                    let status = LogginStatus.loginSuccess
+                    NotificationCenter.default.post(name: NSNotification.Name(
+                        NotificationLogginStatus), object: nil, userInfo: ["loginStatus" : status])
+                }
+                
+                if let err = error
+                {
+                    print(err)
+                    let status = LogginStatus.loginFailed
+                    NotificationCenter.default.post(name: NSNotification.Name(
+                        NotificationLogginStatus), object: nil, userInfo: ["loginStatus" : status])
+                }
+            }
+        }
+    }
+    
+    private func getEmail(fromUsername username: String) -> String
     {
         let email = username + "_pa@gmail.com"
         
@@ -119,12 +155,13 @@ class User:NSObject, DatabaseDelegate
         return username
     }
     
-    func register(username: String, password:String, pictureUrl: URL?)
+    func register(username: String, password:String)
     {
         self._username = username
         self._password = password
         
-        let email = createEmail(fromUsername: username)
+        let email = getEmail(fromUsername: username)
+        
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if let currentUser = user
             {
@@ -133,12 +170,13 @@ class User:NSObject, DatabaseDelegate
                 
                 if let email = currentUser.email
                 {
+                    self.email = email
+                    
                     let name = self.getUsername(fromEmail: email)
-                    print(name)
                     self.updateUserInfo(pictureUrl: nil, displayName: name)
                 }
                 
-                if let url = pictureUrl
+                if let url = self.profileImageURL
                 {
                     if FileManager.default.fileExists(atPath: url.path)
                     {
@@ -215,6 +253,7 @@ class User:NSObject, DatabaseDelegate
                 {
                     self.profileImage = image
                     //send notification for image
+                    self.saveProfilePictureAtLocal(image: image)
                 }
             }
             if let err = error
@@ -224,49 +263,36 @@ class User:NSObject, DatabaseDelegate
         }
     }
     
-    func getProfileImageFromLocal() -> Bool
+    func getProfileImageFromLocal() -> URL?
     {
         let profileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("profile_image.jpg")
         
         if FileManager.default.fileExists(atPath: profileUrl.path)
         {
             //send notification profileimage
-            return true
+            return profileUrl
         }
         
-        return false
+        return nil
     }
     
-    func loggIn(username: String, password:String, pictureUrl:URL?)
+    func saveProfilePictureAtLocal(image: UIImage?)
     {
-        if self._username == ""
+        if let image = image
         {
-            self.register(username: username, password: password, pictureUrl: pictureUrl)
-            //self.isLogged = true
-            return
-        }
-        
-        Auth.auth().signIn(withEmail: username, password: password) { (user, error) in
-            if let currentUser = user
+            if let data = UIImageJPEGRepresentation(image, 0.75)
             {
-                if let email = currentUser.email
-                {
-                    print(username)
-                    self._username = self.getUsername(fromEmail: email)
-                }
-                let status = LogginStatus.loginSuccess
-                NotificationCenter.default.post(name: NSNotification.Name(
-                    NotificationLogginStatus), object: nil, userInfo: ["loginStatus" : status])
-            }
-            
-            if let err = error
-            {
-                print(err)
-                let status = LogginStatus.loginFailed
-                NotificationCenter.default.post(name: NSNotification.Name(
-                    NotificationLogginStatus), object: nil, userInfo: ["loginStatus" : status])
+                let filename = getDocumentsDirectory().appendingPathComponent("profile_image.jpg")
+                self.profileImageURL = filename
+                try? data.write(to: filename)
+                print(filename)
             }
         }
+    }
+    
+    func getDocumentsDirectory() -> URL
+    {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
     
     //MARK: Firebase database methods
@@ -286,97 +312,71 @@ class User:NSObject, DatabaseDelegate
         firebase.getSharedAlbumsBySelf()
     }
     
-    //MARK: Firebase Test
-    func firebaseTest()
-    {
-        //let firebase = FirebaseController.init()
-        
-        //firebase.createUser()
-        //firebase.getUser(byName: "st_antrax")
-        //firebase.getPhotoAlbums(byUser: "st_antrax")
-        //firebase.getSelfUserData()
-        //firebase.getSharedAlbumsBySelf()
-        //firebase.searchForUsers(byPrefixName: "st")
-        //firebase.createPhotoAlbum(PhotoAlbum(name: "Amsterdam", date: Date()))
-        //firebase.addImageToPhotoAlbum(albumID: "-L55JEp-c_caFUyT5bON", imageUrl: "firebase.google.com/photoalbum/resque_bobi_i_holanjanka.png")
-        //firebase.createPhotoAlbum(PhotoAlbum(name: "ZakintosNight", date: Date()))
-        //firebase.addUserOnAlbum(userID: "userskey_2g2iXujeV5MvXIcFolkxcB94gNu1", albumID: "-L55JEp-c_caFUyT5bON", withPrivilegies: Privilegies.init(owner: false))
-    }
-    
     
     //MARK: Database delegate methods
     func myAlbumsLoaded(myAlbumsData: [Any])
     {
-        var photoAlbums = [PhotoAlbum]()
+        self.myAlbums = getPhotoAlbums(from: myAlbumsData)
         
-        for data in myAlbumsData
-        {
-            if let albumElement = data as? (key: String, value: Any)
-            {
-                if let albumData = albumElement.value as? [String:Any]
-                {
-                    guard let name = albumData[album_nameKey] as? String,
-                          let date = albumData[album_creatioDateKey]
-                    else { continue }
-                    
-                    let photoAlbum = PhotoAlbum(name: name, date: Date())
-                    photoAlbum.setKey(albumElement.key)
-                    
-                    if let images = albumData[album_imagesKey] as? [String:Any]
-                    {
-                        for data in images.enumerated()
-                        {
-                            if let imageData = data.element.value as? [String:Any]
-                            {
-                                print(data.element.key)
-                                let photo = Photo(key: data.element.key)
-                                
-                                if let urlPath = imageData[photo_urlKey] as? String
-                                {
-                                    let url = URL(fileURLWithPath: urlPath)
-                                    photo.url = url
-                                }
-                                
-                                if let transformData = imageData[photo_transformKey] as? [CGFloat]
-                                {
-                                    print(transformData)
-                                    photo.setTransform(fromData: transformData)
-                                }
-                                
-                                photoAlbum.add(photo)
-                            }
-                        }
-                    }
-                    
-                    photoAlbums.append(photoAlbum)
-                }
-            }
-        }
-        
-        self.myAlbums = photoAlbums
         NotificationCenter.default.post(name: Notification.Name.init(rawValue: NotificationMyAlbumsLoaded), object: nil)
     }
     
     func sharedAlbumsLoaded(sharedAlbumsData: [Any])
     {
+        self.sharedAlbums = getPhotoAlbums(from: sharedAlbumsData)
+        
+        NotificationCenter.default.post(name: Notification.Name.init(rawValue: NotificationSharedAlbumsLoaded), object: nil)
+    }
+    
+    func getPhotoAlbums(from albumsData: [Any]) -> [PhotoAlbum]
+    {
         var photoAlbums = [PhotoAlbum]()
         
-        for data in sharedAlbumsData
+        for data in albumsData
         {
-            if let albumData = data as? [String:Any]
+            if let albumElement = data as? (key: String, value: Any)
             {
-                guard let name = albumData[album_nameKey] as? String, let date = albumData[album_creatioDateKey] else { continue }
-                
-                print(name)
-                print(date)
-                
-                let photoAlbum = PhotoAlbum(name: name, date: Date())
-                photoAlbums.append(photoAlbum)
+                if let albumData = albumElement.value as? [String:Any]
+                {
+                    if let photoAlbum = getAlbum(fromData: albumData)
+                    {
+                        photoAlbum.setKey(albumElement.key)
+                        
+                        photoAlbums.append(photoAlbum)
+                    }
+                }
             }
         }
         
-        self.sharedAlbums = photoAlbums
-        NotificationCenter.default.post(name: Notification.Name.init(rawValue: NotificationSharedAlbumsLoaded), object: nil)
+        return photoAlbums
+    }
+    
+    func getAlbum(fromData albumData: [String : Any]) -> PhotoAlbum?
+    {
+        guard let name = albumData[album_nameKey] as? String, let date = albumData[album_creatioDateKey] else { return nil }
+        
+        var albumDate = Date()
+        if let date = date as? String
+        {
+            if let albumdate = date.getDate()
+            {
+                albumDate = albumdate
+            }
+        }
+        
+        let photoAlbum = PhotoAlbum(name: name, date: albumDate)
+        
+        if let imagesData = albumData[album_imagesKey] as? [String:Any]
+        {
+            photoAlbum.addImages(fromData: imagesData)
+        }
+        
+        if let privilegiesData = albumData[privilegiesKey] as? [String:Any]
+        {
+            photoAlbum.setPrivilegies(fromData: privilegiesData)
+        }
+        
+        return photoAlbum
     }
     
 }

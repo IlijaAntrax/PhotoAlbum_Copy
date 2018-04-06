@@ -29,7 +29,9 @@ class PhotoEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         
         if let photo = self.photo
         {
-            let editorImgView = EditorImageView(image: photo.image)
+            let image = FilterStore.filterImage(image: photo.image, filterType: photo.filter, intensity: 0.5)
+            
+            let editorImgView = EditorImageView(image: image)
             editorImgView.initialPosition()
             editorImgView.hasScale = true
             editorImgView.hasRotate = true
@@ -63,12 +65,14 @@ class PhotoEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             //update transform matrix to server
             photo?.transform = transform
             
-            photo?.updateTransformData()
+            //photo?.updateTransformData()
         }
     }
     
     @IBAction func closeBtnPressed(_ sender: Any)
     {
+        photo?.update()
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -91,6 +95,7 @@ class PhotoEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     {
         self.selectedFilter = FilterType(rawValue: indexPath.item)!
         editorImageView.image = FilterStore.filterImage(image: photo?.image, filterType: selectedFilter, intensity: 0.5)
+        photo?.filter = self.selectedFilter
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize

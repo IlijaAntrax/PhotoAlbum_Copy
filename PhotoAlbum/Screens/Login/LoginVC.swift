@@ -22,8 +22,6 @@ class LoginVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
     @IBOutlet weak var usernameTxtField: UITextField!
     @IBOutlet weak var passwordTxtField: UITextField!
     
-    var profileImageURL: URL?
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -78,23 +76,9 @@ class LoginVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
         self.saveProfilePicture(image: image)
     }
     
-    func getDocumentsDirectory() -> URL
-    {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    }
-    
     func saveProfilePicture(image: UIImage?)
     {
-        if let image = image
-        {
-            if let data = UIImageJPEGRepresentation(image, 0.75)
-            {
-                let filename = getDocumentsDirectory().appendingPathComponent("profile_image.jpg")
-                self.profileImageURL = filename
-                try? data.write(to: filename)
-                print(filename)
-            }
-        }
+        User.sharedInstance.saveProfilePictureAtLocal(image: image)
     }
     
     @objc func logginFinished(notification : NSNotification)
@@ -120,7 +104,7 @@ class LoginVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
     
     func loggin()
     {
-        User.sharedInstance.loggIn(username: self.username, password: self.password, pictureUrl: profileImageURL)
+        User.sharedInstance.loggIn(username: self.username, password: self.password)
     }
     
     //MARK: Keyboard notification

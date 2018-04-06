@@ -36,10 +36,12 @@
 		5B54C2C11FD4573C0003F3CD /* empty_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B54C2C01FD4573C0003F3CD /* empty_image.png */; };
 		5B54C2C41FD477AA0003F3CD /* AlbumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54C2C31FD477AA0003F3CD /* AlbumVC.swift */; };
 		5B54C2C61FD4A28A0003F3CD /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54C2C51FD4A28A0003F3CD /* PhotoCell.swift */; };
+		5B647E1320780A8800584039 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B647E1220780A8800584039 /* CALayer+.swift */; };
 		5B7B39FF205D6EBD00F178CF /* YUCIRGBToHSL.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B39FC205D6EBD00F178CF /* YUCIRGBToHSL.cikernel */; };
 		5B7B3A00205D6EBD00F178CF /* YUCIRGBToneCurve.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B39FD205D6EBD00F178CF /* YUCIRGBToneCurve.cikernel */; };
 		5B7B3A01205D6EBD00F178CF /* YUCIRGBToneCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7B39FE205D6EBD00F178CF /* YUCIRGBToneCurve.m */; };
 		5B7B3A04205D6F0800F178CF /* YUCIFilterConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7B3A02205D6F0700F178CF /* YUCIFilterConstructor.m */; };
+		5BA2799C2077F37C002654CC /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA2799B2077F37C002654CC /* String+.swift */; };
 		5BABDA01204AF31800654E5F /* SearchUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BABDA00204AF31800654E5F /* SearchUsersVC.swift */; };
 		5BABDA03204AFA6100654E5F /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BABDA02204AFA6100654E5F /* FirebaseUser.swift */; };
 		5BABDA05204AFB7300654E5F /* FirebaseUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BABDA04204AFB7300654E5F /* FirebaseUserCell.swift */; };
@@ -93,12 +95,14 @@
 		5B54C2C01FD4573C0003F3CD /* empty_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty_image.png; path = Skin/empty_image.png; sourceTree = "<group>"; };
 		5B54C2C31FD477AA0003F3CD /* AlbumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumVC.swift; sourceTree = "<group>"; };
 		5B54C2C51FD4A28A0003F3CD /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		5B647E1220780A8800584039 /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		5B7B39FB205D6EBD00F178CF /* YUCIRGBToneCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUCIRGBToneCurve.h; sourceTree = "<group>"; };
 		5B7B39FC205D6EBD00F178CF /* YUCIRGBToHSL.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = YUCIRGBToHSL.cikernel; sourceTree = "<group>"; };
 		5B7B39FD205D6EBD00F178CF /* YUCIRGBToneCurve.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = YUCIRGBToneCurve.cikernel; sourceTree = "<group>"; };
 		5B7B39FE205D6EBD00F178CF /* YUCIRGBToneCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUCIRGBToneCurve.m; sourceTree = "<group>"; };
 		5B7B3A02205D6F0700F178CF /* YUCIFilterConstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUCIFilterConstructor.m; sourceTree = "<group>"; };
 		5B7B3A03205D6F0800F178CF /* YUCIFilterConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUCIFilterConstructor.h; sourceTree = "<group>"; };
+		5BA2799B2077F37C002654CC /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		5BABDA00204AF31800654E5F /* SearchUsersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersVC.swift; sourceTree = "<group>"; };
 		5BABDA02204AFA6100654E5F /* FirebaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
 		5BABDA04204AFB7300654E5F /* FirebaseUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserCell.swift; sourceTree = "<group>"; };
@@ -234,6 +238,17 @@
 			path = Filters;
 			sourceTree = "<group>";
 		};
+		5BA2799A2077F341002654CC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5BA2799B2077F37C002654CC /* String+.swift */,
+				5B647E1220780A8800584039 /* CALayer+.swift */,
+				5BC39F1820585BCE000E5CAF /* UIColor+.swift */,
+				5BC39F1920585BCE000E5CAF /* UIImage+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5BABD9FF204AF2EF00654E5F /* AddUsers */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,8 +281,6 @@
 			isa = PBXGroup;
 			children = (
 				5BD25A1A205D609300CD1BAA /* FilterStore.swift */,
-				5BC39F1820585BCE000E5CAF /* UIColor+.swift */,
-				5BC39F1920585BCE000E5CAF /* UIImage+.swift */,
 				5BC39F1620585B8F000E5CAF /* EditorImageView.swift */,
 			);
 			path = ViewComponents;
@@ -297,6 +310,7 @@
 				5B0A73F61FD2E282001B3CC2 /* Settings */,
 				5B0BDF091FCDEA340092500C /* Skins */,
 				5B7B39FA205D6EBD00F178CF /* Filters */,
+				5BA2799A2077F341002654CC /* Extensions */,
 				5B506B9C1FCB2DAF005A09CD /* ObjectModels */,
 				5BE9D1AC1FAE3F7700481384 /* Screens */,
 				5BE9D17E1FAE3A0500481384 /* AppDelegate.swift */,
@@ -499,8 +513,10 @@
 				5BD25A1D205D627700CD1BAA /* FilterImageCell.swift in Sources */,
 				5BF531C31FC45F040012960E /* GalleryCell.swift in Sources */,
 				5B0A73F81FD2E2B2001B3CC2 /* Settings.swift in Sources */,
+				5B647E1320780A8800584039 /* CALayer+.swift in Sources */,
 				5B506B9B1FCB2754005A09CD /* LoginVC.swift in Sources */,
 				5BC39F1B20585BCE000E5CAF /* UIImage+.swift in Sources */,
+				5BA2799C2077F37C002654CC /* String+.swift in Sources */,
 				5BB0157D203F70FE00FA89D7 /* FirebaseStorageController.swift in Sources */,
 				5BE9D1811FAE3A0500481384 /* ViewController.swift in Sources */,
 				5BE9D17F1FAE3A0500481384 /* AppDelegate.swift in Sources */,

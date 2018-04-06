@@ -51,7 +51,7 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         contentView.layer.addBorder(edge: .left, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
         contentView.layer.addBorder(edge: .right, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
         
-        self.photosCollection.reloadData()
+        //self.photosCollection.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

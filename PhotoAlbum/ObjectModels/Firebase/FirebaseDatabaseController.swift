@@ -21,6 +21,7 @@ let album_imagesKey = "images"
 
 let photo_urlKey = "url"
 let photo_transformKey = "transform"
+let photo_filterKey = "filter"
 
 let privilegiesKey = "privilegies"
 let privilegies_readKey = "read"
@@ -100,8 +101,13 @@ class FirebaseDatabaseController
     {
         let imageRef = self.dbRef.child("photoalbums").child(albumID).child(album_imagesKey).childByAutoId()
         
-        imageRef.setValue([photo_urlKey:photo.url?.absoluteString])
-        imageRef.setValue([photo_transformKey:photo.getTransformData()])
+        var photoData = [String:Any?]()
+        
+        photoData[photo_urlKey] = photo.url?.absoluteString
+        photoData[photo_transformKey] = photo.getTransformData()
+        photoData[photo_filterKey] = photo.filter.rawValue
+        
+        imageRef.setValue(photoData)
     }
     
     func addUserOnAlbum(userID:String, albumID:String, withPrivilegies privilegies:Privilegies)
@@ -172,10 +178,7 @@ class FirebaseDatabaseController
                 {
                     for album in albumInfo.enumerated()
                     {
-                        print(album.element.key)
                         albums.append(album.element)
-                        print(album.element)
-                        print(album.offset)
                     }
                 }
                 
@@ -216,7 +219,6 @@ class FirebaseDatabaseController
                     
                     for photoAlbum in photoAlbums.enumerated()
                     {
-                        print(photoAlbum.element.value)
                         self.getPhotoAlbum(byId: photoAlbum.element.key, completionHandler: { (data) in
                             
                             albumsCnt -= 1
@@ -225,14 +227,15 @@ class FirebaseDatabaseController
                             
                             if let data = data as? [String:Any]
                             {
-                                print(data)
                                 albumData = data
                                 if let privilegiesData = photoAlbum.element.value as? [String:Any]
                                 {
                                     albumData[privilegiesKey] = privilegiesData[privilegiesKey]
                                 }
                                 
-                                albums.append(albumData)
+                                let album:(key: String, value: Any) = (key: photoAlbum.element.key, value: albumData)
+                                
+                                albums.append(album)
                             }
                             
                             if albumsCnt == 0
@@ -282,7 +285,15 @@ class FirebaseDatabaseController
     {
         let imageRef = self.dbRef.child("photoalbums").child(albumID).child(album_imagesKey).child(photoID)
         
-        imageRef.setValue([photo_transformKey:transformData])
+        //imageRef.setValue([photo_transformKey:transformData])
+        imageRef.updateChildValues([photo_transformKey:transformData])
+    }
+    
+    func updatePhotoFilter(_ photoID: String, albumID: String, filterValue: Int)
+    {
+        let imageRef = self.dbRef.child("photoalbums").child(albumID).child(album_imagesKey).child(photoID)
+        
+        imageRef.updateChildValues([photo_filterKey:filterValue])
     }
     
     //MARK: DELETE firebase methods
