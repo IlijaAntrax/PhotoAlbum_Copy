@@ -66,7 +66,7 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         }
         
         self.requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
+        requestOptions.isNetworkAccessAllowed = true
         requestOptions.resizeMode = .fast
         requestOptions.deliveryMode = .highQualityFormat
 
@@ -104,6 +104,29 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         dismiss(animated: true, completion: nil)
     }
     
+    //MARK: Activity loader
+    var activityIndicatorView:NVActivityIndicatorView?
+    
+    func showLoader()
+    {
+        let frame = self.galleryCollectionView.frame
+        activityIndicatorView = NVActivityIndicatorView(frame: frame,
+                                                        type: NVActivityIndicatorType.ballPulseSync)
+        
+        activityIndicatorView?.padding = self.galleryCollectionView.frame.width / 4
+        activityIndicatorView?.color = Settings.sharedInstance.activityIndicatorColor()
+        activityIndicatorView?.backgroundColor = Settings.sharedInstance.activityIndicatorBgdColor()
+        
+        self.galleryCollectionView.superview?.addSubview(activityIndicatorView!)
+        activityIndicatorView?.startAnimating()
+    }
+    
+    func hideLoader()
+    {
+        activityIndicatorView?.stopAnimating()
+        activityIndicatorView?.removeFromSuperview()
+    }
+    
     //IBActions
     @IBAction func backBtnAction()
     {
@@ -114,31 +137,10 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     {
         let dispacthGroup = DispatchGroup()
         
+        self.showLoader()
+        
         for index in selectedImageIndexes
         {
-            
-//            DispatchQueue.main.async {
-//                
-//                let asset: PHAsset = self.photosAsset[index]
-//                
-//                PHImageManager.default().requestImageData(for: asset, options: self.requestOptions, resultHandler: { (data, name, orientation, info) in
-//                    
-//                    if let imgData = data
-//                    {
-//                        let urlName = "photo1try"
-//                        let storage = Storage.storage().reference()
-//                        let imgRef = storage.child("albumsImages/\(urlName)")
-//                        imgRef.putData(imgData, metadata: nil, completion: { (metadata, error) in
-//                            if let downloadUrl = metadata?.downloadURL()
-//                            {
-//                                print(downloadUrl)
-//                            }
-//                            print(error)
-//                        })
-//                    }
-//                    
-//                })
-//            }
             dispacthGroup.enter()
             
             let imageQueue = DispatchQueue(label: "assetAppendQueue_" + String(index))
@@ -149,7 +151,7 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
                 let size = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
                 print(size)
                 
-                PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: PHImageContentMode.aspectFit, options: self.requestOptions, resultHandler: {(result, info)in
+                PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: PHImageContentMode.default, options: self.requestOptions, resultHandler: {(result, info)in
                     if let image = result
                     {
                         self.imagesFromGallery.append(image)
@@ -161,6 +163,7 @@ class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         }
         
         dispacthGroup.notify(queue: DispatchQueue.main) {
+            self.hideLoader()
             self.photosLoadedFromGallery()
         }
     }

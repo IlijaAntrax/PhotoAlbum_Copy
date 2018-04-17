@@ -295,6 +295,11 @@ class User:NSObject, DatabaseDelegate
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
     
+    func getCacheDirectory() -> URL
+    {
+        return FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask).first!
+    }
+    
     //MARK: Firebase database methods
     func getMyAlbums()
     {

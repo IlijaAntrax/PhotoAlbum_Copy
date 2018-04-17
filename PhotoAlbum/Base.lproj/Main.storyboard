@@ -713,6 +713,9 @@
                                                 <state key="normal" title="Filters">
                                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="editorOptionsBtnPressed:" destination="Ged-LE-gNm" eventType="touchUpInside" id="NP4-3Z-ET7"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -843,15 +846,29 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rDh-PF-gxz">
                                                             <rect key="frame" x="0.0" y="0.0" width="151" height="137"/>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVb-Au-cDD">
+                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="tVb-Au-cDD" secondAttribute="height" multiplier="512:411" id="Ler-Ms-IrO"/>
+                                                            </constraints>
+                                                            <state key="normal" title="Button" backgroundImage="delete_icon.png"/>
+                                                            <connections>
+                                                                <action selector="deleteBtnPressed:" destination="KVv-oA-KVS" eventType="touchUpInside" id="8g2-oq-dbt"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                 </view>
                                                 <constraints>
+                                                    <constraint firstItem="tVb-Au-cDD" firstAttribute="leading" secondItem="KVv-oA-KVS" secondAttribute="leading" id="7Dj-P9-UCn"/>
+                                                    <constraint firstItem="tVb-Au-cDD" firstAttribute="top" secondItem="KVv-oA-KVS" secondAttribute="top" id="F5K-hV-66y"/>
+                                                    <constraint firstItem="tVb-Au-cDD" firstAttribute="width" secondItem="rDh-PF-gxz" secondAttribute="width" multiplier="0.2" id="LES-3I-azF"/>
                                                     <constraint firstAttribute="bottom" secondItem="rDh-PF-gxz" secondAttribute="bottom" id="bic-r8-KVL"/>
                                                     <constraint firstAttribute="trailing" secondItem="rDh-PF-gxz" secondAttribute="trailing" id="kgg-ni-kZk"/>
                                                     <constraint firstItem="rDh-PF-gxz" firstAttribute="leading" secondItem="KVv-oA-KVS" secondAttribute="leading" id="o3c-ut-hFB"/>
                                                     <constraint firstItem="rDh-PF-gxz" firstAttribute="top" secondItem="KVv-oA-KVS" secondAttribute="top" id="tkU-S7-8cG"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="deleteBtn" destination="tVb-Au-cDD" id="nh1-7t-vVH"/>
                                                     <outlet property="imgView" destination="rDh-PF-gxz" id="8Fa-KB-7pP"/>
                                                 </connections>
                                             </collectionViewCell>
@@ -1031,6 +1048,7 @@
         <image name="back_btn.png" width="108" height="108"/>
         <image name="check_btn.png" width="108" height="108"/>
         <image name="close_btn.png" width="108" height="108"/>
+        <image name="delete_icon.png" width="512" height="411"/>
         <image name="edit_btn.png" width="216" height="108"/>
         <image name="empty_image.png" width="512" height="411"/>
         <image name="invite_btn.png" width="216" height="108"/>

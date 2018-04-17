@@ -4,10 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access to photo library</string>
-	<key>NSCameraUsageDescription</key>
-	<string>PhotoAlbum want to access to your camera</string>
 	<key>CFBundleDisplayName</key>
 	<string>PhotoAlbum</string>
 	<key>CFBundleExecutable</key>
@@ -26,6 +22,14 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>PhotoAlbum want to access to your camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access to photo library</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

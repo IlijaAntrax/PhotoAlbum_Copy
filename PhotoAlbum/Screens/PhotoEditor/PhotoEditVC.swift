@@ -68,6 +68,10 @@ class PhotoEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             //photo?.updateTransformData()
         }
     }
+    @IBAction func editorOptionsBtnPressed(_ sender: Any)
+    {
+        
+    }
     
     @IBAction func closeBtnPressed(_ sender: Any)
     {

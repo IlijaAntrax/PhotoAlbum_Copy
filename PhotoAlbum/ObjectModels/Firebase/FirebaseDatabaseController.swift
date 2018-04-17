@@ -297,4 +297,10 @@ class FirebaseDatabaseController
     }
     
     //MARK: DELETE firebase methods
+    func deletePhoto(_ photoID: String, albumID: String)
+    {
+        let imageRef = self.dbRef.child("photoalbums").child(albumID).child(album_imagesKey).child(photoID)
+        
+        imageRef.removeValue()
+    }
 }

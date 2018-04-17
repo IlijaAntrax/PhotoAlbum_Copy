@@ -73,4 +73,14 @@ class Settings
     {
         return UIImage(named: "empty_image.png")!
     }
+    
+    func activityIndicatorColor() -> UIColor
+    {
+        return UIColor.init(red: 95/255, green: 144/255, blue: 236/255, alpha: 1.0)
+    }
+    
+    func activityIndicatorBgdColor() -> UIColor
+    {
+        return UIColor.init(red: 120/255, green: 116/255, blue: 115/255, alpha: 1.0)
+    }
 }

@@ -46,6 +46,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         myAlbumsHolder.layer.addBorder(edge: .top, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
         
         sharedAlbumsHolder.layer.addBorder(edge: .top, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
+        
+        self.myAlbumsCollection.reloadData()
+        self.sharedAlbumsCollection.reloadData()
     }
     
     func setup()

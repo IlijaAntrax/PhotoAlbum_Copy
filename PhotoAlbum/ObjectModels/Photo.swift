@@ -280,4 +280,31 @@ class Photo //: StorageDelegate
         }
     }
     
+    //MARK: Delete image
+    func deleteImageFromStorage(completionHandler:@escaping (Bool) -> ())
+    {
+        if let url = self.url
+        {
+            let firebaseStorage = FirebaseStorageController()
+            firebaseStorage.deleteImage(withUrlPath: url.path.replaceUrl(url), completionHandler: { (success) in
+                if success
+                {
+                    guard let photoKey = self.key, let albumKey = self.myAlbum?.databaseKey else {
+                        completionHandler(false)
+                        return
+                    }
+                    let firebaseDatabase = FirebaseDatabaseController()
+                    firebaseDatabase.deletePhoto(photoKey, albumID: albumKey)
+                    self.myAlbum?.remove(self)
+                    completionHandler(true)
+                }
+                else
+                {
+                    completionHandler(false)
+                }
+            })
+        }
+        completionHandler(false)
+    }
+    
 }

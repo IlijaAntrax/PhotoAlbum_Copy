@@ -21,4 +21,9 @@ extension String
         }
         return nil
     }
+    
+    func replaceUrl(_ url:URL) -> String
+    {
+        return url.path.replacingOccurrences(of: "/https:/", with: "https://")
+    }
 }

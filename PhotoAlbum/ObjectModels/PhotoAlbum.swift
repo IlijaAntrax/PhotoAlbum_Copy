@@ -142,6 +142,20 @@ class PhotoAlbum
         }
     }
     
+    func remove(_ photo: Photo)
+    {
+        if let index = self.photoImages.index(where: { (photoImg) -> Bool in
+            if photo.key == photoImg.key
+            {
+                return true
+            }
+            return false
+        })
+        {
+            self.photoImages.remove(at: index)
+        }
+    }
+    
     
 }
 
@@ -164,7 +178,7 @@ class Privilegies
         else
         {
             self.read = true
-            self.write = false
+            self.write = true
             self.update = false
             self.delete = false
         }

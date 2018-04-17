@@ -148,6 +148,10 @@ class SearchUsersVC:UIViewController, UITextFieldDelegate, UICollectionViewDeleg
         {
             usersList[indexPath.item].addSharedAlbum(album: album)
             print("User added on album")
+            
+            let alert = UIAlertController(title: "Info", message: "User \(usersList[indexPath.item].username) have access on album \(album.name) now.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

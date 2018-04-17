@@ -83,4 +83,21 @@ class FirebaseStorageController
         }
     }
     
+    func deleteImage(withUrlPath url:String, completionHandler:@escaping (Bool) -> ())
+    {
+        let reference = Storage.storage().reference(forURL: url)
+        
+        reference.delete { (err) in
+            if let error = err
+            {
+                print(error)
+                completionHandler(false)
+            }
+            else
+            {
+                completionHandler(true)
+            }
+        }
+    }
+    
 }
