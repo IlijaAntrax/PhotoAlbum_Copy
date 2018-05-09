@@ -30,6 +30,7 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         photosCollection.dataSource = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadAlbum), name: NSNotification.Name.init(rawValue: NotificationPhotosAddedToAlbum), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showDeleteAlert(_:)), name: NSNotification.Name.init(rawValue: NotificationDeletePhotoFromAlbum), object: nil)
         
         setup()
     }
@@ -77,6 +78,41 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 photoEditVC.photo = self.selectedPhoto
             }
         }
+    }
+    
+    @objc func showDeleteAlert(_ notification: NSNotification)
+    {
+        if let photo = notification.object as? Photo
+        {
+            let deleteAlert = UIAlertController(title: "Delete photo!", message: "Are you sure, you want to delete this photo?", preferredStyle: .actionSheet)
+            let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+                //delete photo
+                self.deletePhoto(photo: photo)
+                deleteAlert.dismiss(animated: true, completion: nil)
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            deleteAlert.addAction(yesAction)
+            deleteAlert.addAction(cancelAction)
+            self.present(deleteAlert, animated: true, completion: nil)
+        }
+    }
+    
+    func deletePhoto(photo: Photo?)
+    {
+        //self.showLoader()
+        photo?.deleteImageFromStorage(completionHandler: { (success) in
+            if success
+            {
+                //remove from album, and reload collection
+                self.photosCollection.reloadData()
+            }
+            else
+            {
+                //print alert
+            }
+            //self.hideLoader()
+        })
     }
     
     

@@ -33,22 +33,27 @@ class PhotoCell: UICollectionViewCell
         }
     }
     
+    func addHandleGesture()
+    {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
+        
+        self.addGestureRecognizer(gesture)
+    }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer)
+    {
+        if sender.state == .began
+        {
+            //show delete button
+        }
+    }
+    
+    
     
     @IBAction func deleteBtnPressed(_ sender: Any)
     {
-        //delete image
-       self.showLoader()
-        self.photo?.deleteImageFromStorage(completionHandler: { (success) in
-            if success
-            {
-                //remove from album, and reload collection
-            }
-            else
-            {
-                //print alert
-            }
-            self.hideLoader()
-        })
+        //self.showDeleteAlert()
+        NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: NotificationDeletePhotoFromAlbum), object: photo, userInfo: nil)
     }
     
     var isDownloading = false

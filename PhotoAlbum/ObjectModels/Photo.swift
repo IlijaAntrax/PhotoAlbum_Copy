@@ -255,9 +255,9 @@ class Photo //: StorageDelegate
             {
                 let imageUrlName = User.sharedInstance.username + "_" + myAlbum.name + "_" + Date().description + ".jpg"
                 
-                let filename = User.sharedInstance.getDocumentsDirectory().appendingPathComponent(imageUrlName)
-                try? imageData.write(to: filename)
-                print(filename)
+//                let filename = User.sharedInstance.getDocumentsDirectory().appendingPathComponent(imageUrlName)
+//                try? imageData.write(to: filename)
+//                print(filename)
                 
                 let firebaseStorage = FirebaseStorageController()
                 

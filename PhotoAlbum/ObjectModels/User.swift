@@ -28,6 +28,7 @@ let NotificationLogginStatus = "NotificationLogginStatus"
 let NotificationMyAlbumsLoaded = "NotificationMyAlbumsLoaded"
 let NotificationSharedAlbumsLoaded = "NotificationSharedAlbumsLoaded"
 let NotificationPhotosAddedToAlbum = "NotificationPhotosAddedToAlbum"
+let NotificationDeletePhotoFromAlbum = "NotificationDeletePhotoFromAlbum"
 
 class User:NSObject, DatabaseDelegate
 {
