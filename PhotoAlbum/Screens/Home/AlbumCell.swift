@@ -2,92 +2,41 @@
 //  AlbumCell.swift
 //  PhotoAlbum
 //
-//  Created by Ilija Antonijevic on 12/2/17.
-//  Copyright © 2017 Ilija Antonijevic. All rights reserved.
+//  Created by Ilija Antonijevic on 5/9/18.
+//  Copyright © 2018 Ilija Antonijevic. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class AlbumCell: UICollectionViewCell
+class AlbumCell:UICollectionViewCell
 {
+    
     @IBOutlet weak var albumImgView: UIImageView!
-    
-    @IBOutlet weak var albumNameLbl: UILabel!
-    
-    @IBOutlet weak var photosCntLbl: UILabel!
+    @IBOutlet weak var albumNameLbl:UILabel!
+    @IBOutlet weak var photosCountLbl:UILabel!
     
     override func awakeFromNib()
     {
         super.awakeFromNib()
         
-        customInit()
     }
     
-    func customInit()
-    {
-        albumNameLbl.font = UIFont(name: Settings.sharedInstance.appFont(), size: Settings.sharedInstance.fontSizeNormal())
-        albumNameLbl.textColor = Settings.sharedInstance.fontColorGray()
-        albumNameLbl.adjustsFontSizeToFitWidth = true
-        
-        photosCntLbl.font = UIFont(name: Settings.sharedInstance.appFont(), size: Settings.sharedInstance.fontSizeNormal())
-        photosCntLbl.textColor = Settings.sharedInstance.fontColorGray()
-        photosCntLbl.adjustsFontSizeToFitWidth = true
-        
-        albumImgView.contentMode = .scaleAspectFill
-    }
-    
-    func setup(withImage image: UIImage?, albumName: String, imgCnt: Int)
-    {
-        if let albumImage = image
-        {
-            albumImgView.image = albumImage
-        }
-        else
-        {
-            albumImgView.image = Settings.sharedInstance.emptyAlbumImage()
-        }
-        
-        albumNameLbl.text = albumName
-        
-        photosCntLbl.text = String(imgCnt)
-    }
-    
-}
-
-class AlbumsInfoCell: UICollectionViewCell
-{
-    
-    @IBOutlet weak var infoLbl: UILabel!
-    
-    @IBOutlet weak var cntLbl: UILabel!
-    
-    override func awakeFromNib()
-    {
-        super.awakeFromNib()
-        
-        infoLbl.font = UIFont(name: Settings.sharedInstance.appFont(), size: Settings.sharedInstance.fontSizeLarge())
-        infoLbl.textColor = Settings.sharedInstance.fontColorGray()
-        
-        cntLbl.font = UIFont(name: Settings.sharedInstance.appFont(), size: Settings.sharedInstance.fontSizeLarge())
-        cntLbl.textColor = Settings.sharedInstance.fontColorGray()
-        
-        self.contentView.layer.addBorder(edge: .bottom, color: Settings.sharedInstance.albumsBorderColor(), thickness: 1.0)
-    }
-    
-    var info: String = ""
+    var album:PhotoAlbum?
     {
         didSet
         {
-            infoLbl.text = info
+            if let album = album
+            {
+                setup(album: album)
+            }
         }
     }
     
-    var count: Int = 0
+    func setup(album: PhotoAlbum)
     {
-        didSet
-        {
-            cntLbl.text = String(count)
-        }
+        albumImgView.image = album.albumImage
+        albumNameLbl.text = album.name
+        photosCountLbl.text = String(album.photos.count) + " photos"
     }
 }

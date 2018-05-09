@@ -179,7 +179,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 album = User.sharedInstance.sharedAlbums[indexPath.row - 1]
             }
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlbumCell", for: indexPath) as! AlbumCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlbumCell", for: indexPath) as! PhotoAlbumCell
             
             cell.setup(withImage: album.albumImage, albumName: album.name, imgCnt: album.photos.count)
             

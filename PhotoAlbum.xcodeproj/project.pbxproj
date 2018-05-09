@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B0A73F81FD2E2B2001B3CC2 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0A73F71FD2E2B2001B3CC2 /* Settings.swift */; };
-		5B0A73FB1FD312BF001B3CC2 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0A73FA1FD312BF001B3CC2 /* AlbumCell.swift */; };
+		5B0A73FB1FD312BF001B3CC2 /* PhotoAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0A73FA1FD312BF001B3CC2 /* PhotoAlbumCell.swift */; };
 		5B0BDF0B1FCDEA5C0092500C /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0BDF0A1FCDEA5C0092500C /* logo.png */; };
 		5B0BDF191FCDEC9F0092500C /* add_plus_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0BDF0C1FCDEC9E0092500C /* add_plus_btn.png */; };
 		5B0BDF1A1FCDEC9F0092500C /* search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0BDF0D1FCDEC9E0092500C /* search_icon.png */; };
@@ -80,6 +80,12 @@
 		5B7B3A00205D6EBD00F178CF /* YUCIRGBToneCurve.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B39FD205D6EBD00F178CF /* YUCIRGBToneCurve.cikernel */; };
 		5B7B3A01205D6EBD00F178CF /* YUCIRGBToneCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7B39FE205D6EBD00F178CF /* YUCIRGBToneCurve.m */; };
 		5B7B3A04205D6F0800F178CF /* YUCIFilterConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7B3A02205D6F0700F178CF /* YUCIFilterConstructor.m */; };
+		5B91F0BF20A37D640013A36C /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0BE20A37D640013A36C /* AlbumCell.swift */; };
+		5B91F0C120A37D8B0013A36C /* SharedAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0C020A37D8B0013A36C /* SharedAlbumCell.swift */; };
+		5B91F0C320A381A00013A36C /* MyAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0C220A381A00013A36C /* MyAlbumCell.swift */; };
+		5B91F0C520A38BB10013A36C /* NewAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0C420A38BB10013A36C /* NewAlbumCell.swift */; };
+		5B91F0C920A39CA50013A36C /* MyPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0C820A39CA50013A36C /* MyPhotoAlbum.swift */; };
+		5B91F0CB20A39CC10013A36C /* SharedPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0CA20A39CC10013A36C /* SharedPhotoAlbum.swift */; };
 		5BA2799C2077F37C002654CC /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA2799B2077F37C002654CC /* String+.swift */; };
 		5BABDA01204AF31800654E5F /* SearchUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BABDA00204AF31800654E5F /* SearchUsersVC.swift */; };
 		5BABDA03204AFA6100654E5F /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BABDA02204AFA6100654E5F /* FirebaseUser.swift */; };
@@ -106,7 +112,7 @@
 /* Begin PBXFileReference section */
 		1C7155B556C96A22C5514506 /* Pods_PhotoAlbum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoAlbum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B0A73F71FD2E2B2001B3CC2 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		5B0A73FA1FD312BF001B3CC2 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
+		5B0A73FA1FD312BF001B3CC2 /* PhotoAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCell.swift; sourceTree = "<group>"; };
 		5B0BDF0A1FCDEA5C0092500C /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Skin/logo.png; sourceTree = "<group>"; };
 		5B0BDF0C1FCDEC9E0092500C /* add_plus_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_plus_btn.png; path = Skin/add_plus_btn.png; sourceTree = "<group>"; };
 		5B0BDF0D1FCDEC9E0092500C /* search_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search_icon.png; path = Skin/search_icon.png; sourceTree = "<group>"; };
@@ -181,6 +187,12 @@
 		5B7B39FE205D6EBD00F178CF /* YUCIRGBToneCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUCIRGBToneCurve.m; sourceTree = "<group>"; };
 		5B7B3A02205D6F0700F178CF /* YUCIFilterConstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUCIFilterConstructor.m; sourceTree = "<group>"; };
 		5B7B3A03205D6F0800F178CF /* YUCIFilterConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUCIFilterConstructor.h; sourceTree = "<group>"; };
+		5B91F0BE20A37D640013A36C /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
+		5B91F0C020A37D8B0013A36C /* SharedAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedAlbumCell.swift; sourceTree = "<group>"; };
+		5B91F0C220A381A00013A36C /* MyAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlbumCell.swift; sourceTree = "<group>"; };
+		5B91F0C420A38BB10013A36C /* NewAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAlbumCell.swift; sourceTree = "<group>"; };
+		5B91F0C820A39CA50013A36C /* MyPhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPhotoAlbum.swift; sourceTree = "<group>"; };
+		5B91F0CA20A39CC10013A36C /* SharedPhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPhotoAlbum.swift; sourceTree = "<group>"; };
 		5BA2799B2077F37C002654CC /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		5BABDA00204AF31800654E5F /* SearchUsersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersVC.swift; sourceTree = "<group>"; };
 		5BABDA02204AFA6100654E5F /* FirebaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
@@ -235,7 +247,11 @@
 			isa = PBXGroup;
 			children = (
 				5BE9D1AD1FAE3F9300481384 /* HomeVC.swift */,
-				5B0A73FA1FD312BF001B3CC2 /* AlbumCell.swift */,
+				5B0A73FA1FD312BF001B3CC2 /* PhotoAlbumCell.swift */,
+				5B91F0BE20A37D640013A36C /* AlbumCell.swift */,
+				5B91F0C020A37D8B0013A36C /* SharedAlbumCell.swift */,
+				5B91F0C220A381A00013A36C /* MyAlbumCell.swift */,
+				5B91F0C420A38BB10013A36C /* NewAlbumCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -292,6 +308,8 @@
 				5B54C2BC1FD44DF40003F3CD /* PhotoAlbum.swift */,
 				5B54C2BE1FD44E6F0003F3CD /* Photo.swift */,
 				5BABDA02204AFA6100654E5F /* FirebaseUser.swift */,
+				5B91F0C820A39CA50013A36C /* MyPhotoAlbum.swift */,
+				5B91F0CA20A39CC10013A36C /* SharedPhotoAlbum.swift */,
 			);
 			path = ObjectModels;
 			sourceTree = "<group>";
@@ -670,6 +688,7 @@
 				5BE9D1AE1FAE3F9300481384 /* HomeVC.swift in Sources */,
 				5BC39F1420585117000E5CAF /* PhotoEditVC.swift in Sources */,
 				5BD25A1D205D627700CD1BAA /* FilterImageCell.swift in Sources */,
+				5B91F0CB20A39CC10013A36C /* SharedPhotoAlbum.swift in Sources */,
 				5B70F0A62078E5060028F1AB /* NVActivityIndicatorAnimationBallScale.swift in Sources */,
 				5B70F0B22078E5060028F1AB /* NVActivityIndicatorAnimationTriangleSkewSpin.swift in Sources */,
 				5BF531C31FC45F040012960E /* GalleryCell.swift in Sources */,
@@ -687,6 +706,7 @@
 				5B70F09A2078E5060028F1AB /* NVActivityIndicatorViewable.swift in Sources */,
 				5BE9D17F1FAE3A0500481384 /* AppDelegate.swift in Sources */,
 				5B70F0A12078E5060028F1AB /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift in Sources */,
+				5B91F0C520A38BB10013A36C /* NewAlbumCell.swift in Sources */,
 				5BABDA05204AFB7300654E5F /* FirebaseUserCell.swift in Sources */,
 				5B54C2C61FD4A28A0003F3CD /* PhotoCell.swift in Sources */,
 				5B70F0B92078E5060028F1AB /* NVActivityIndicatorAnimationCubeTransition.swift in Sources */,
@@ -696,6 +716,8 @@
 				5BB1627C20307F5D00C804FD /* FirebaseDatabaseController.swift in Sources */,
 				5B70F09C2078E5060028F1AB /* NVActivityIndicatorView.swift in Sources */,
 				5B70F0B52078E5060028F1AB /* NVActivityIndicatorAnimationLineScale.swift in Sources */,
+				5B91F0C920A39CA50013A36C /* MyPhotoAlbum.swift in Sources */,
+				5B91F0C320A381A00013A36C /* MyAlbumCell.swift in Sources */,
 				5B70F09F2078E5060028F1AB /* NVActivityIndicatorAnimationBallGridPulse.swift in Sources */,
 				5B54C2BD1FD44DF40003F3CD /* PhotoAlbum.swift in Sources */,
 				5B70F0A02078E5060028F1AB /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */,
@@ -722,9 +744,10 @@
 				5B70F0A82078E5060028F1AB /* NVActivityIndicatorAnimationBallBeat.swift in Sources */,
 				5B70F0AB2078E5060028F1AB /* NVActivityIndicatorAnimationBallClipRotatePulse.swift in Sources */,
 				5B70F0AD2078E5060028F1AB /* NVActivityIndicatorAnimationBallRotateChase.swift in Sources */,
+				5B91F0BF20A37D640013A36C /* AlbumCell.swift in Sources */,
 				5B506B9E1FCB2DE7005A09CD /* User.swift in Sources */,
 				5B70F0B42078E5060028F1AB /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */,
-				5B0A73FB1FD312BF001B3CC2 /* AlbumCell.swift in Sources */,
+				5B0A73FB1FD312BF001B3CC2 /* PhotoAlbumCell.swift in Sources */,
 				5B70F0A32078E5060028F1AB /* NVActivityIndicatorAnimationLineScalePulseOut.swift in Sources */,
 				5B70F0BB2078E5060028F1AB /* NVActivityIndicatorAnimationLineScaleParty.swift in Sources */,
 				5B7B3A04205D6F0800F178CF /* YUCIFilterConstructor.m in Sources */,
@@ -732,6 +755,7 @@
 				5B70F0B02078E5060028F1AB /* NVActivityIndicatorAnimationCircleStrokeSpin.swift in Sources */,
 				5B70F0AA2078E5060028F1AB /* NVActivityIndicatorAnimationBallScaleRipple.swift in Sources */,
 				5B70F0AC2078E5060028F1AB /* NVActivityIndicatorAnimationSquareSpin.swift in Sources */,
+				5B91F0C120A37D8B0013A36C /* SharedAlbumCell.swift in Sources */,
 				5BABDA03204AFA6100654E5F /* FirebaseUser.swift in Sources */,
 				5B70F0BD2078E5060028F1AB /* NVActivityIndicatorAnimationBallPulseRise.swift in Sources */,
 			);
