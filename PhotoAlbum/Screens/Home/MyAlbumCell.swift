@@ -20,7 +20,8 @@ class MyAlbumCell:NewAlbumCell
         
     }
     
-    override func setup(album: PhotoAlbum) {
+    override func setup(album: PhotoAlbum)
+    {
         super.setup(album: album)
         
         if let myAlbum = album as? MyPhotoAlbum

@@ -86,6 +86,7 @@
 		5B91F0C520A38BB10013A36C /* NewAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0C420A38BB10013A36C /* NewAlbumCell.swift */; };
 		5B91F0C920A39CA50013A36C /* MyPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0C820A39CA50013A36C /* MyPhotoAlbum.swift */; };
 		5B91F0CB20A39CC10013A36C /* SharedPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0CA20A39CC10013A36C /* SharedPhotoAlbum.swift */; };
+		5B99FAEA20A4CD93004376FC /* notification_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B99FAE920A4CD92004376FC /* notification_icon.png */; };
 		5BA2799C2077F37C002654CC /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA2799B2077F37C002654CC /* String+.swift */; };
 		5BABDA01204AF31800654E5F /* SearchUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BABDA00204AF31800654E5F /* SearchUsersVC.swift */; };
 		5BABDA03204AFA6100654E5F /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BABDA02204AFA6100654E5F /* FirebaseUser.swift */; };
@@ -193,6 +194,7 @@
 		5B91F0C420A38BB10013A36C /* NewAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAlbumCell.swift; sourceTree = "<group>"; };
 		5B91F0C820A39CA50013A36C /* MyPhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPhotoAlbum.swift; sourceTree = "<group>"; };
 		5B91F0CA20A39CC10013A36C /* SharedPhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPhotoAlbum.swift; sourceTree = "<group>"; };
+		5B99FAE920A4CD92004376FC /* notification_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = notification_icon.png; path = Skin/notification_icon.png; sourceTree = "<group>"; };
 		5BA2799B2077F37C002654CC /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		5BABDA00204AF31800654E5F /* SearchUsersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersVC.swift; sourceTree = "<group>"; };
 		5BABDA02204AFA6100654E5F /* FirebaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		5B0BDF091FCDEA340092500C /* Skins */ = {
 			isa = PBXGroup;
 			children = (
+				5B99FAE920A4CD92004376FC /* notification_icon.png */,
 				5B6A93A3207FDC19005C6A20 /* delete_icon.png */,
 				5B54C2C01FD4573C0003F3CD /* empty_image.png */,
 				5B0BDF111FCDEC9E0092500C /* account_icon.png */,
@@ -596,6 +599,7 @@
 				5B0BDF211FCDEC9F0092500C /* invite_btn.png in Resources */,
 				5B0BDF1B1FCDEC9F0092500C /* register_btn.png in Resources */,
 				5B0BDF0B1FCDEA5C0092500C /* logo.png in Resources */,
+				5B99FAEA20A4CD93004376FC /* notification_icon.png in Resources */,
 				5B0BDF1F1FCDEC9F0092500C /* add_photo.png in Resources */,
 				5B0BDF201FCDEC9F0092500C /* close_btn.png in Resources */,
 				5B7B39FF205D6EBD00F178CF /* YUCIRGBToHSL.cikernel in Resources */,

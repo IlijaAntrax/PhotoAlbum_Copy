@@ -20,6 +20,7 @@ class AlbumCell:UICollectionViewCell
     {
         super.awakeFromNib()
         
+        albumImgView.contentMode = .scaleAspectFill
     }
     
     var album:PhotoAlbum?
@@ -35,7 +36,7 @@ class AlbumCell:UICollectionViewCell
     
     func setup(album: PhotoAlbum)
     {
-        albumImgView.image = album.albumImage
+        albumImgView.image = album.albumImage ?? album.photos.first?.image
         albumNameLbl.text = album.name
         photosCountLbl.text = String(album.photos.count) + " photos"
     }
