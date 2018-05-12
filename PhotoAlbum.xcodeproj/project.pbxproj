@@ -80,6 +80,7 @@
 		5B7B3A00205D6EBD00F178CF /* YUCIRGBToneCurve.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = 5B7B39FD205D6EBD00F178CF /* YUCIRGBToneCurve.cikernel */; };
 		5B7B3A01205D6EBD00F178CF /* YUCIRGBToneCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7B39FE205D6EBD00F178CF /* YUCIRGBToneCurve.m */; };
 		5B7B3A04205D6F0800F178CF /* YUCIFilterConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7B3A02205D6F0700F178CF /* YUCIFilterConstructor.m */; };
+		5B8C775B20A705480084DD0D /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8C775A20A705480084DD0D /* UserData.swift */; };
 		5B91F0BF20A37D640013A36C /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0BE20A37D640013A36C /* AlbumCell.swift */; };
 		5B91F0C120A37D8B0013A36C /* SharedAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0C020A37D8B0013A36C /* SharedAlbumCell.swift */; };
 		5B91F0C320A381A00013A36C /* MyAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B91F0C220A381A00013A36C /* MyAlbumCell.swift */; };
@@ -188,6 +189,7 @@
 		5B7B39FE205D6EBD00F178CF /* YUCIRGBToneCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUCIRGBToneCurve.m; sourceTree = "<group>"; };
 		5B7B3A02205D6F0700F178CF /* YUCIFilterConstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUCIFilterConstructor.m; sourceTree = "<group>"; };
 		5B7B3A03205D6F0800F178CF /* YUCIFilterConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUCIFilterConstructor.h; sourceTree = "<group>"; };
+		5B8C775A20A705480084DD0D /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		5B91F0BE20A37D640013A36C /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		5B91F0C020A37D8B0013A36C /* SharedAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedAlbumCell.swift; sourceTree = "<group>"; };
 		5B91F0C220A381A00013A36C /* MyAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlbumCell.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				5BC39F1520585B78000E5CAF /* ViewComponents */,
 				5BB1627A20307F3500C804FD /* Firebase */,
 				5B506B9D1FCB2DE7005A09CD /* User.swift */,
+				5B8C775A20A705480084DD0D /* UserData.swift */,
 				5B54C2BC1FD44DF40003F3CD /* PhotoAlbum.swift */,
 				5B54C2BE1FD44E6F0003F3CD /* Photo.swift */,
 				5BABDA02204AFA6100654E5F /* FirebaseUser.swift */,
@@ -733,6 +736,7 @@
 				5B70F09B2078E5060028F1AB /* NVActivityIndicatorShape.swift in Sources */,
 				5B70F0B62078E5060028F1AB /* NVActivityIndicatorAnimationBallScaleRippleMultiple.swift in Sources */,
 				5B70F0992078E5060028F1AB /* NVActivityIndicatorPresenter.swift in Sources */,
+				5B8C775B20A705480084DD0D /* UserData.swift in Sources */,
 				5B46292B203093AA001C6CBC /* FirebaseListener.swift in Sources */,
 				5BC39F1A20585BCE000E5CAF /* UIColor+.swift in Sources */,
 				5B70F0982078E5060028F1AB /* NVActivityIndicatorAnimationDelegate.swift in Sources */,

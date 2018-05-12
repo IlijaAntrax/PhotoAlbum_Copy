@@ -331,6 +331,10 @@ class User:NSObject, DatabaseDelegate
     {
         self.sharedAlbums = getPhotoAlbums(from: sharedAlbumsData)
         
+        //self.userData.updateData(albums: self.sharedAlbums)
+        self.loadUserData()
+        self.userData.searchForAlbumsUpdates()
+        
         NotificationCenter.default.post(name: Notification.Name.init(rawValue: NotificationSharedAlbumsLoaded), object: nil)
     }
     
@@ -385,4 +389,29 @@ class User:NSObject, DatabaseDelegate
         return photoAlbum
     }
     
+    
+    //MARK: User local data
+    var userData = UserData()
+    
+    func saveUserData()
+    {
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: self.userData)
+        //save to userDefaults
+        
+        let userDefaults: UserDefaults = UserDefaults.standard
+        userDefaults.set(encodedData, forKey: "UserData")
+        userDefaults.synchronize()
+    }
+    
+    func loadUserData()
+    {
+        let userDefaults: UserDefaults = UserDefaults.standard
+        if let data = userDefaults.object(forKey: "UserData")
+        {
+            if let data = NSKeyedUnarchiver.unarchiveObject(with: data as! Data) as? UserData
+            {
+                self.userData = data
+            }
+        }
+    }
 }

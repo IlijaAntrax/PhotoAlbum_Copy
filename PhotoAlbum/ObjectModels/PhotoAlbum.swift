@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PhotoAlbum
+class PhotoAlbum:NSObject
 {
     var name: String = ""
     var albumImage: UIImage?
@@ -34,8 +34,8 @@ class PhotoAlbum
     
     var privilegies:Privilegies = Privilegies(owner: true)
     
-    init() {
-        
+    override init() {
+        super.init()
     }
     
     init(name: String, date: Date)
