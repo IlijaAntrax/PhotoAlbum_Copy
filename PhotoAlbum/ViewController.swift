@@ -18,6 +18,8 @@ class ViewController: UIViewController
         // Do any additional setup after loading the view, typically from a nib.
         
         databaseRef = Database.database().reference()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -55,6 +57,16 @@ class ViewController: UIViewController
     func showLoginVC()
     {
         performSegue(withIdentifier: "loginSegueIdentifier", sender: self.view)
+    }
+    
+    //MARK: Observer methods
+    @objc func appDidBecomeActive()
+    {
+        if UIApplication.shared.applicationIconBadgeNumber != 0
+        {
+            //send notification to show notifications collection
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        }
     }
 }
 

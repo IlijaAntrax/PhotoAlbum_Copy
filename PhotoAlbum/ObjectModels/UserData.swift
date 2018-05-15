@@ -13,6 +13,8 @@ class UserData:NSObject, NSCoding, DatabaseDelegate
 {
     var sharedAlbums = [SharedPhotoAlbum]()
     
+    var notificationData = [NotificationData]()
+    
     override init()
     {
         super.init()
@@ -21,21 +23,25 @@ class UserData:NSObject, NSCoding, DatabaseDelegate
     required init?(coder aDecoder: NSCoder)
     {
         sharedAlbums = aDecoder.decodeObject(forKey: "SharedAlbums") as! [SharedPhotoAlbum]
+        notificationData = aDecoder.decodeObject(forKey: "NotificationsData") as! [NotificationData]
     }
     
     func encode(with aCoder: NSCoder)
     {
         aCoder.encode(sharedAlbums, forKey: "SharedAlbums")
+        aCoder.encode(notificationData, forKey: "NotificationsData")
     }
     
     func updateData(albums: [SharedPhotoAlbum])
     {
         self.sharedAlbums = albums
-        //User.sharedInstance.saveUserData()
+        User.sharedInstance.saveUserData()
     }
     
     func searchForAlbumsUpdates()
     {
+        //User.sharedInstance.loadUserData()
+        
         let firebase = FirebaseDatabaseController()
         firebase.databaseDelegate = self
         
@@ -46,19 +52,6 @@ class UserData:NSObject, NSCoding, DatabaseDelegate
     {
         for remoteAlbum in remoteAlbums
         {
-            //            if self.sharedAlbums.contains(where: { (album) -> Bool in
-            //                guard let albumKey = album.databaseKey, let remoteAlbumKey = remoteAlbum.databaseKey else { return false }
-            //                if albumKey == remoteAlbumKey
-            //                {
-            //                    return true
-            //                }
-            //                return false
-            //            })
-            //            {
-            //                //check for new photos in album
-            //
-            //            }
-            
             if let key = remoteAlbum.databaseKey
             {
                 if let sharedAlbumIndex = self.sharedAlbums.index(where: { (album) -> Bool in
@@ -76,15 +69,26 @@ class UserData:NSObject, NSCoding, DatabaseDelegate
                     let differenceOfPhotos = self.sharedAlbums[sharedAlbumIndex].photosCount - remoteAlbum.photosCount
                     if differenceOfPhotos < 0
                     {
-                        //new photos, send notification
+                        //self.sharedAlbums[sharedAlbumIndex].photosCount += abs(differenceOfPhotos)
+                        //new photos, send notification, add photos too
                         let notificationBody = "\(remoteAlbum.owner) added \(abs(differenceOfPhotos)) new photos to \(remoteAlbum.name) album"
+                        
+                        self.addAlbumNotification(key: key, body: notificationBody)
+                        
                         self.sendNotification(body: notificationBody)
+                    }
+                    else if differenceOfPhotos > 0
+                    {
+                        //deleted some photos
+                        print("Photos deleted")
                     }
                 }
                 else
                 {
+                    //self.sharedAlbums.append(remoteAlbum)
                     //new album
                     let notificationBody = "\(remoteAlbum.owner) has added you to new album \(remoteAlbum.name)"
+                    self.addAlbumNotification(key: key, body: notificationBody)
                     self.sendNotification(body: notificationBody)
                 }
             }
@@ -143,28 +147,16 @@ class UserData:NSObject, NSCoding, DatabaseDelegate
             numberOfPhotos = imagesData.count
         }
         
-//        if let imagesData = albumData[album_imagesKey] as? [String:Any]
-//        {
-//            for data in imagesData.enumerated()
-//            {
-//                if let imageData = data.element.value as? [String:Any]
-//                {
-//                    numberOfPhotos += 1
-//                    let photo = Photo(key: data.element.key)
-//
-//                    photoAlbum.add(photo)
-//                }
-//            }
-//        }
-        
         photoAlbum.photosCount = numberOfPhotos
-        
-//        if let privilegiesData = albumData[privilegiesKey] as? [String:Any]
-//        {
-//            photoAlbum.setPrivilegies(fromData: privilegiesData)
-//        }
-        
+
         return photoAlbum
+    }
+    
+    func addAlbumNotification(key: String, body: String)
+    {
+        let notificationData = NotificationData(body: body, date: Date())
+        notificationData.setAction(.showAlbum, key: key)
+        self.notificationData.append(notificationData)
     }
     
     func sendNotification(body: String)

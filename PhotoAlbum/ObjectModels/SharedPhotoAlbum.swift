@@ -27,6 +27,11 @@ class SharedPhotoAlbum:PhotoAlbum, NSCoding
         super.name = aDecoder.decodeObject(forKey: "SharedAlbumName") as! String
         owner = aDecoder.decodeObject(forKey: "SharedAlbumOwner") as! String
         photosCount = aDecoder.decodeInteger(forKey: "SharedAlbumPhotosCnt")
+        
+        if let key = aDecoder.decodeObject(forKey: "SharedAlbumKey") as? String
+        {
+            super.setKey(key)
+        }
     }
     
     func encode(with aCoder: NSCoder)
@@ -34,6 +39,11 @@ class SharedPhotoAlbum:PhotoAlbum, NSCoding
         aCoder.encode(super.name, forKey: "SharedAlbumName")
         aCoder.encode(owner, forKey: "SharedAlbumOwner")
         aCoder.encode(photosCount, forKey: "SharedAlbumPhotosCnt")
+        
+        if let key = super.databaseKey
+        {
+            aCoder.encode(key, forKey: "SharedAlbumKey")
+        }
     }
     
 }

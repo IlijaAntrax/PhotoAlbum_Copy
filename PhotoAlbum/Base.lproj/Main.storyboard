@@ -196,7 +196,62 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ai7-rU-n4f" userLabel="NotificationHolder">
                                 <rect key="frame" x="0.0" y="74" width="375" height="593"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w4q-em-K2n">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="593"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HLa-cE-bdI">
+                                            <size key="itemSize" width="357" height="68"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NotificationCell" id="NXQ-8e-3Bl" customClass="NotificationCell" customModule="PhotoAlbum" customModuleProvider="target">
+                                                <rect key="frame" x="9" y="0.0" width="357" height="68"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="357" height="68"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vw6-95-iqW" userLabel="icon">
+                                                            <rect key="frame" x="0.0" y="3.5" width="61" height="61"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Vw6-95-iqW" secondAttribute="height" multiplier="1:1" id="yo1-yd-LKr"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n13-uF-SIG" userLabel="text">
+                                                            <rect key="frame" x="66" y="3" width="286" height="61"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstItem="n13-uF-SIG" firstAttribute="leading" secondItem="Vw6-95-iqW" secondAttribute="trailing" constant="5" id="1sc-tH-4Lk"/>
+                                                    <constraint firstItem="Vw6-95-iqW" firstAttribute="leading" secondItem="NXQ-8e-3Bl" secondAttribute="leading" id="2G2-qs-57a"/>
+                                                    <constraint firstItem="Vw6-95-iqW" firstAttribute="height" secondItem="NXQ-8e-3Bl" secondAttribute="height" multiplier="0.9" id="UY3-8z-55Y"/>
+                                                    <constraint firstItem="n13-uF-SIG" firstAttribute="height" secondItem="Vw6-95-iqW" secondAttribute="height" id="gIZ-Un-GHn"/>
+                                                    <constraint firstItem="Vw6-95-iqW" firstAttribute="centerY" secondItem="NXQ-8e-3Bl" secondAttribute="centerY" id="qdh-GX-Elz"/>
+                                                    <constraint firstItem="n13-uF-SIG" firstAttribute="centerY" secondItem="NXQ-8e-3Bl" secondAttribute="centerY" id="qkv-gj-Q1V"/>
+                                                    <constraint firstAttribute="trailing" secondItem="n13-uF-SIG" secondAttribute="trailing" constant="5" id="xdR-34-bmR"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="iconImgView" destination="Vw6-95-iqW" id="0aj-Eh-EbZ"/>
+                                                    <outlet property="textLbl" destination="n13-uF-SIG" id="MPx-KS-Zuh"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="w4q-em-K2n" secondAttribute="bottom" id="3aA-ib-dYj"/>
+                                    <constraint firstItem="w4q-em-K2n" firstAttribute="leading" secondItem="ai7-rU-n4f" secondAttribute="leading" id="7BZ-EK-Ld9"/>
+                                    <constraint firstItem="w4q-em-K2n" firstAttribute="top" secondItem="ai7-rU-n4f" secondAttribute="top" id="L07-39-c1P"/>
+                                    <constraint firstAttribute="trailing" secondItem="w4q-em-K2n" secondAttribute="trailing" id="YLC-4g-pdj"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2va-Yc-CNf" userLabel="SearchHolder">
                                 <rect key="frame" x="0.0" y="74" width="375" height="593"/>
@@ -660,6 +715,7 @@
                         <outlet property="albumsCollection" destination="t58-AE-O6b" id="Rai-7y-utz"/>
                         <outlet property="myAlbumsBtn" destination="Ng7-CX-vIE" id="ATm-kT-Qdr"/>
                         <outlet property="notificationBtn" destination="qn5-qL-5fb" id="8rn-9W-y43"/>
+                        <outlet property="notificationsCollection" destination="w4q-em-K2n" id="xEW-em-YhZ"/>
                         <outlet property="notificationsHolder" destination="ai7-rU-n4f" id="hVt-jv-vrN"/>
                         <outlet property="searchBtn" destination="GBw-ap-SER" id="HjD-Si-II0"/>
                         <outlet property="searchHolder" destination="2va-Yc-CNf" id="ChJ-gS-ZyX"/>

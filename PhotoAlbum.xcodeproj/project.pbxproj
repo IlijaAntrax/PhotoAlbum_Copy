@@ -94,6 +94,8 @@
 		5BABDA05204AFB7300654E5F /* FirebaseUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BABDA04204AFB7300654E5F /* FirebaseUserCell.swift */; };
 		5BB0157D203F70FE00FA89D7 /* FirebaseStorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0157C203F70FE00FA89D7 /* FirebaseStorageController.swift */; };
 		5BB1627C20307F5D00C804FD /* FirebaseDatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1627B20307F5D00C804FD /* FirebaseDatabaseController.swift */; };
+		5BB4440C20AB6FCE003036EC /* NotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4440B20AB6FCE003036EC /* NotificationData.swift */; };
+		5BB4440E20AB7E0E003036EC /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4440D20AB7E0E003036EC /* NotificationCell.swift */; };
 		5BC39F1420585117000E5CAF /* PhotoEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1320585117000E5CAF /* PhotoEditVC.swift */; };
 		5BC39F1720585B8F000E5CAF /* EditorImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1620585B8F000E5CAF /* EditorImageView.swift */; };
 		5BC39F1A20585BCE000E5CAF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1820585BCE000E5CAF /* UIColor+.swift */; };
@@ -203,6 +205,8 @@
 		5BABDA04204AFB7300654E5F /* FirebaseUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserCell.swift; sourceTree = "<group>"; };
 		5BB0157C203F70FE00FA89D7 /* FirebaseStorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageController.swift; sourceTree = "<group>"; };
 		5BB1627B20307F5D00C804FD /* FirebaseDatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseController.swift; sourceTree = "<group>"; };
+		5BB4440B20AB6FCE003036EC /* NotificationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationData.swift; sourceTree = "<group>"; };
+		5BB4440D20AB7E0E003036EC /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		5BC39F1320585117000E5CAF /* PhotoEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditVC.swift; sourceTree = "<group>"; };
 		5BC39F1620585B8F000E5CAF /* EditorImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorImageView.swift; sourceTree = "<group>"; };
 		5BC39F1820585BCE000E5CAF /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 				5B91F0C020A37D8B0013A36C /* SharedAlbumCell.swift */,
 				5B91F0C220A381A00013A36C /* MyAlbumCell.swift */,
 				5B91F0C420A38BB10013A36C /* NewAlbumCell.swift */,
+				5BB4440D20AB7E0E003036EC /* NotificationCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 				5BB1627A20307F3500C804FD /* Firebase */,
 				5B506B9D1FCB2DE7005A09CD /* User.swift */,
 				5B8C775A20A705480084DD0D /* UserData.swift */,
+				5BB4440B20AB6FCE003036EC /* NotificationData.swift */,
 				5B54C2BC1FD44DF40003F3CD /* PhotoAlbum.swift */,
 				5B54C2BE1FD44E6F0003F3CD /* Photo.swift */,
 				5BABDA02204AFA6100654E5F /* FirebaseUser.swift */,
@@ -750,11 +756,13 @@
 				5B70F0A42078E5060028F1AB /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift in Sources */,
 				5B70F0B32078E5060028F1AB /* NVActivityIndicatorAnimationBallGridBeat.swift in Sources */,
 				5B70F0A82078E5060028F1AB /* NVActivityIndicatorAnimationBallBeat.swift in Sources */,
+				5BB4440C20AB6FCE003036EC /* NotificationData.swift in Sources */,
 				5B70F0AB2078E5060028F1AB /* NVActivityIndicatorAnimationBallClipRotatePulse.swift in Sources */,
 				5B70F0AD2078E5060028F1AB /* NVActivityIndicatorAnimationBallRotateChase.swift in Sources */,
 				5B91F0BF20A37D640013A36C /* AlbumCell.swift in Sources */,
 				5B506B9E1FCB2DE7005A09CD /* User.swift in Sources */,
 				5B70F0B42078E5060028F1AB /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */,
+				5BB4440E20AB7E0E003036EC /* NotificationCell.swift in Sources */,
 				5B0A73FB1FD312BF001B3CC2 /* PhotoAlbumCell.swift in Sources */,
 				5B70F0A32078E5060028F1AB /* NVActivityIndicatorAnimationLineScalePulseOut.swift in Sources */,
 				5B70F0BB2078E5060028F1AB /* NVActivityIndicatorAnimationLineScaleParty.swift in Sources */,

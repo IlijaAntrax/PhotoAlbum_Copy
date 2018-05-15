@@ -31,6 +31,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBOutlet weak var searchHolder: UIView!
     @IBOutlet weak var notificationsHolder: UIView!
+    @IBOutlet weak var notificationsCollection: UICollectionView!
     @IBOutlet weak var accountHolder: UIView!
     
     @IBOutlet weak var sharedAlbumsBtn: UIButton!
@@ -44,6 +45,8 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         albumsCollection.delegate = self
         albumsCollection.dataSource = self
         
+        notificationsCollection.delegate = self
+        notificationsCollection.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadMyAlbumsData), name: Notification.Name.init(rawValue: NotificationMyAlbumsLoaded), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSharedAlbumsData), name: Notification.Name.init(rawValue: NotificationSharedAlbumsLoaded), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSelectedAlbum), name: NSNotification.Name.init(rawValue: NotificationPhotosAddedToAlbum), object: nil)
@@ -235,104 +238,158 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     //MARK: CollectionView delegate, data source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        if selectedAlbumType == .myAlbums
+        if collectionView == notificationsCollection
         {
-            return User.sharedInstance.myAlbums.count + 1
+            return User.sharedInstance.userData.notificationData.count
         }
         else
         {
-            return User.sharedInstance.sharedAlbums.count
+            if selectedAlbumType == .myAlbums
+            {
+                return User.sharedInstance.myAlbums.count + 1
+            }
+            else
+            {
+                return User.sharedInstance.sharedAlbums.count
+            }
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        if selectedAlbumType == .myAlbums
+        if collectionView == notificationsCollection
         {
-            if indexPath.item == 0
-            {
-                //TODO: show add new album cell
-                let newAlbumCell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewAlbumCell", for: indexPath) as? NewAlbumCell
-                
-                newAlbumCell?.setupDefault()
-                
-                return newAlbumCell!
-            }
-            else
-            {
-                //TODO: show albums
-                let myAlbumCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyAlbumCell", for: indexPath) as? MyAlbumCell
-                
-                myAlbumCell?.album = User.sharedInstance.myAlbums[indexPath.item - 1]
-                
-                return myAlbumCell!
-            }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NotificationCell", for: indexPath) as? NotificationCell
+            
+            cell?.notificationData = User.sharedInstance.userData.notificationData[indexPath.item]
+            
+            return cell!
         }
         else
         {
-            //show shared albums
-            let sharedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SharedAlbumCell", for: indexPath) as? SharedAlbumCell
-            
-            sharedCell?.album = User.sharedInstance.sharedAlbums[indexPath.item]
-            
-            return sharedCell!
+            if selectedAlbumType == .myAlbums
+            {
+                if indexPath.item == 0
+                {
+                    //TODO: show add new album cell
+                    let newAlbumCell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewAlbumCell", for: indexPath) as? NewAlbumCell
+                    
+                    newAlbumCell?.setupDefault()
+                    
+                    return newAlbumCell!
+                }
+                else
+                {
+                    //TODO: show albums
+                    let myAlbumCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyAlbumCell", for: indexPath) as? MyAlbumCell
+                    
+                    myAlbumCell?.album = User.sharedInstance.myAlbums[indexPath.item - 1]
+                    
+                    return myAlbumCell!
+                }
+            }
+            else
+            {
+                //show shared albums
+                let sharedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SharedAlbumCell", for: indexPath) as? SharedAlbumCell
+                
+                sharedCell?.album = User.sharedInstance.sharedAlbums[indexPath.item]
+                
+                return sharedCell!
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        if selectedAlbumType == .myAlbums
+        if collectionView == notificationsCollection
         {
-            if indexPath.item == 0
+            let notification = User.sharedInstance.userData.notificationData[indexPath.item]
+            
+            //TODO: show on notification action
+            if notification.actionType == .showAlbum
             {
-                self.addNewAlbum()
+                let albumKey = notification.actionKey
+                print("Show album with key: \(albumKey)")
             }
             else
             {
-                showAlbumVC(forAlbum: User.sharedInstance.myAlbums[indexPath.row - 1])
+                
             }
         }
         else
         {
-            showAlbumVC(forAlbum: User.sharedInstance.sharedAlbums[indexPath.row])
+            if selectedAlbumType == .myAlbums
+            {
+                if indexPath.item == 0
+                {
+                    self.addNewAlbum()
+                }
+                else
+                {
+                    showAlbumVC(forAlbum: User.sharedInstance.myAlbums[indexPath.row - 1])
+                }
+            }
+            else
+            {
+                showAlbumVC(forAlbum: User.sharedInstance.sharedAlbums[indexPath.row])
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        if selectedAlbumType == .myAlbums
+        if collectionView == notificationsCollection
         {
-            if indexPath.item == 0
-            {
-                let width = collectionView.frame.width
-                let height = width * 270 / 1240
-                
-                return CGSize(width: width, height: height)
-            }
-            else
-            {
-                let width = collectionView.frame.width
-                let height = width * 445 / 1240
-                
-                return CGSize(width: width, height: height)
-            }
+            let width = collectionView.frame.width
+            let height = width * 200 / 1242
+            
+            return CGSize(width: width, height: height)
         }
         else
         {
-            let width = collectionView.frame.width * 0.3
-            let height = width * 400 / 450
-            
-            return CGSize(width: width, height: height)
+            if selectedAlbumType == .myAlbums
+            {
+                if indexPath.item == 0
+                {
+                    let width = collectionView.frame.width
+                    let height = width * 270 / 1242
+                    
+                    return CGSize(width: width, height: height)
+                }
+                else
+                {
+                    let width = collectionView.frame.width
+                    let height = width * 445 / 1242
+                    
+                    return CGSize(width: width, height: height)
+                }
+            }
+            else
+            {
+                let insset = collectionView.frame.width * 0.02
+                let offsets = 2.0 * insset + 2.0 * insset
+                let width = (collectionView.frame.width - offsets) * 0.33
+                let height = width * 400 / 450
+                
+                return CGSize(width: width, height: height)
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
     {
         var insset:CGFloat = 0.0
-        if selectedAlbumType == .sharedAlbums
+        if collectionView == notificationsCollection
         {
-            insset = collectionView.frame.width * 0.1
+            
+        }
+        else
+        {
+            if selectedAlbumType == .sharedAlbums
+            {
+                insset = collectionView.frame.width * 0.02
+            }
         }
         return insset
     }
@@ -340,9 +397,16 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
     {
         var insset:CGFloat = 0.0
-        if selectedAlbumType == .sharedAlbums
+        if collectionView == notificationsCollection
         {
-            insset = collectionView.frame.width * 0.1
+            
+        }
+        else
+        {
+            if selectedAlbumType == .sharedAlbums
+            {
+                insset = collectionView.frame.width * 0.02
+            }
         }
         return insset
     }
@@ -350,9 +414,16 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
     {
         var insset:CGFloat = 0.0
-        if selectedAlbumType == .sharedAlbums
+        if collectionView == notificationsCollection
         {
-            insset = collectionView.frame.width * 0.1
+            
+        }
+        else
+        {
+            if selectedAlbumType == .sharedAlbums
+            {
+                insset = collectionView.frame.width * 0.02
+            }
         }
         return UIEdgeInsets.init(top: 0.0, left: insset, bottom: 0.0, right: insset)
     }

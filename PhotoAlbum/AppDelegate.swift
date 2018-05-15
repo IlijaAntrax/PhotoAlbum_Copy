@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id"
     
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -70,24 +69,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     //Background refresh
-    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         var fetchResult: UIBackgroundFetchResult!
         
-        let test = true
-        let error = true
-        if test
-        {
-            fetchResult = UIBackgroundFetchResult.newData
-        }
-        else if error
-        {
-            fetchResult = UIBackgroundFetchResult.failed
-        }
-        else
-        {
-            fetchResult = UIBackgroundFetchResult.noData
-        }
+        //User.sharedInstance.userData.sendNotification(body: "App background refreshing started!")
+        
+        User.sharedInstance.userData.searchForAlbumsUpdates()
+        //add code to check for new notifications
+//        let test = true
+//        let error = true
+//        if test
+//        {
+//            fetchResult = UIBackgroundFetchResult.newData
+//        }
+//        else if error
+//        {
+//            fetchResult = UIBackgroundFetchResult.failed
+//        }
+//        else
+//        {
+//            fetchResult = UIBackgroundFetchResult.noData
+//        }
+        fetchResult = UIBackgroundFetchResult.newData
+        
         completionHandler( fetchResult )
         
         return

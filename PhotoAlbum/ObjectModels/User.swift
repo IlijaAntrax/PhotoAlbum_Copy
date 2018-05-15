@@ -59,6 +59,8 @@ class User:NSObject, DatabaseDelegate
     override init()
     {
         super.init()
+        
+        self.loadUserData()
     }
     
     func getStorage() -> StorageReference
@@ -332,8 +334,9 @@ class User:NSObject, DatabaseDelegate
         self.sharedAlbums = getPhotoAlbums(from: sharedAlbumsData)
         
         //self.userData.updateData(albums: self.sharedAlbums)
-        self.loadUserData()
-        self.userData.searchForAlbumsUpdates()
+        //self.userData.searchForAlbumsUpdates()
+        //self.loadUserData()
+        self.userData.sharedAlbumsLoaded(sharedAlbumsData: sharedAlbumsData)
         
         NotificationCenter.default.post(name: Notification.Name.init(rawValue: NotificationSharedAlbumsLoaded), object: nil)
     }
