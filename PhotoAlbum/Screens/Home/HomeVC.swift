@@ -246,7 +246,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         {
             if selectedAlbumType == .myAlbums
             {
-                return User.sharedInstance.myAlbums.count + 1
+                return User.sharedInstance.myAlbums.count + 2
             }
             else
             {
@@ -269,7 +269,13 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         {
             if selectedAlbumType == .myAlbums
             {
-                if indexPath.item == 0
+                if indexPath.item == 0 // profile cell
+                {
+                    let profileCell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserProfileCell", for: indexPath) as? UserProfileCell
+                    
+                    return profileCell!
+                }
+                else if indexPath.item == 1
                 {
                     //TODO: show add new album cell
                     let newAlbumCell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewAlbumCell", for: indexPath) as? NewAlbumCell
@@ -283,7 +289,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                     //TODO: show albums
                     let myAlbumCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyAlbumCell", for: indexPath) as? MyAlbumCell
                     
-                    myAlbumCell?.album = User.sharedInstance.myAlbums[indexPath.item - 1]
+                    myAlbumCell?.album = User.sharedInstance.myAlbums[indexPath.item - 2]
                     
                     return myAlbumCell!
                 }
@@ -323,6 +329,10 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             {
                 if indexPath.item == 0
                 {
+                    //TODO: show profile, or do nothing
+                }
+                else if indexPath.item == 1
+                {
                     self.addNewAlbum()
                 }
                 else
@@ -351,6 +361,13 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             if selectedAlbumType == .myAlbums
             {
                 if indexPath.item == 0
+                {
+                    let width = collectionView.frame.width
+                    let height = width * 420 / 1242
+                    
+                    return CGSize(width: width, height: height)
+                }
+                else if indexPath.item == 1
                 {
                     let width = collectionView.frame.width
                     let height = width * 270 / 1242

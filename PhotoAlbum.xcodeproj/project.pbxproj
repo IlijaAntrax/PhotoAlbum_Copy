@@ -37,6 +37,7 @@
 		5B54C2C41FD477AA0003F3CD /* AlbumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54C2C31FD477AA0003F3CD /* AlbumVC.swift */; };
 		5B54C2C61FD4A28A0003F3CD /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54C2C51FD4A28A0003F3CD /* PhotoCell.swift */; };
 		5B647E1320780A8800584039 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B647E1220780A8800584039 /* CALayer+.swift */; };
+		5B68602320ACBD8B00BB9003 /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B68602220ACBD8B00BB9003 /* UserProfileCell.swift */; };
 		5B6A93A4207FDC19005C6A20 /* delete_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B6A93A3207FDC19005C6A20 /* delete_icon.png */; };
 		5B70F0982078E5060028F1AB /* NVActivityIndicatorAnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B70F06D2078E5060028F1AB /* NVActivityIndicatorAnimationDelegate.swift */; };
 		5B70F0992078E5060028F1AB /* NVActivityIndicatorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B70F06F2078E5060028F1AB /* NVActivityIndicatorPresenter.swift */; };
@@ -145,6 +146,7 @@
 		5B54C2C31FD477AA0003F3CD /* AlbumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumVC.swift; sourceTree = "<group>"; };
 		5B54C2C51FD4A28A0003F3CD /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		5B647E1220780A8800584039 /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
+		5B68602220ACBD8B00BB9003 /* UserProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
 		5B6A93A3207FDC19005C6A20 /* delete_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = delete_icon.png; path = Skin/delete_icon.png; sourceTree = "<group>"; };
 		5B70F06D2078E5060028F1AB /* NVActivityIndicatorAnimationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationDelegate.swift; sourceTree = "<group>"; };
 		5B70F06F2078E5060028F1AB /* NVActivityIndicatorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorPresenter.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				5B91F0C220A381A00013A36C /* MyAlbumCell.swift */,
 				5B91F0C420A38BB10013A36C /* NewAlbumCell.swift */,
 				5BB4440D20AB7E0E003036EC /* NotificationCell.swift */,
+				5B68602220ACBD8B00BB9003 /* UserProfileCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -756,6 +759,7 @@
 				5B70F0A42078E5060028F1AB /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift in Sources */,
 				5B70F0B32078E5060028F1AB /* NVActivityIndicatorAnimationBallGridBeat.swift in Sources */,
 				5B70F0A82078E5060028F1AB /* NVActivityIndicatorAnimationBallBeat.swift in Sources */,
+				5B68602320ACBD8B00BB9003 /* UserProfileCell.swift in Sources */,
 				5BB4440C20AB6FCE003036EC /* NotificationData.swift in Sources */,
 				5B70F0AB2078E5060028F1AB /* NVActivityIndicatorAnimationBallClipRotatePulse.swift in Sources */,
 				5B70F0AD2078E5060028F1AB /* NVActivityIndicatorAnimationBallRotateChase.swift in Sources */,
