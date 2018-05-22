@@ -64,6 +64,8 @@ class PhotoCell: UICollectionViewCell
         {
             if let photo = self.photo
             {
+                self.addMask()
+                
                 if let image = photo.image
                 {
                     if photo.filter != .NoFilter
@@ -129,5 +131,22 @@ class PhotoCell: UICollectionViewCell
     {
         activityIndicatorView?.stopAnimating()
         activityIndicatorView?.removeFromSuperview()
+    }
+    
+    func addMask()
+    {
+        if imgView.layer.mask == nil
+        {
+            let maskImg = UIImage(named: "photo_mask.png")!
+            let mask = CALayer()
+            mask.contents = maskImg.cgImage
+            mask.frame = CGRect.init(x: 0.0, y: 0.0, width: imgView.frame.width, height: imgView.frame.height)
+            imgView.layer.mask = mask
+            imgView.layer.masksToBounds = true
+        }
+        else
+        {
+            imgView.layer.mask?.frame = CGRect.init(x: 0.0, y: 0.0, width: imgView.frame.width, height: imgView.frame.height)
+        }
     }
 }

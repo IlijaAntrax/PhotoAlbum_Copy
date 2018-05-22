@@ -47,11 +47,6 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     {
         super.viewDidAppear(animated)
         
-        contentView.layer.addBorder(edge: .top, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
-        contentView.layer.addBorder(edge: .bottom, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
-        contentView.layer.addBorder(edge: .left, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
-        contentView.layer.addBorder(edge: .right, color: Settings.sharedInstance.albumsBorderColor(), thickness: Settings.sharedInstance.albumsBorderWidth())
-        
         self.photosCollection.reloadData()
     }
     

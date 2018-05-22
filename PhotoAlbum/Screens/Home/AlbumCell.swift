@@ -40,4 +40,21 @@ class AlbumCell:UICollectionViewCell
         albumNameLbl.text = album.name
         photosCountLbl.text = String(album.photos.count) + " photos"
     }
+    
+    func addMask()
+    {
+        if albumImgView.layer.mask == nil
+        {
+            let maskImg = UIImage(named: "photo_mask.png")!
+            let mask = CALayer()
+            mask.contents = maskImg.cgImage
+            mask.frame = CGRect.init(x: 0.0, y: 0.0, width: albumImgView.frame.width, height: albumImgView.frame.height)
+            albumImgView.layer.mask = mask
+            albumImgView.layer.masksToBounds = true
+        }
+        else
+        {
+            albumImgView.layer.mask?.frame = CGRect.init(x: 0.0, y: 0.0, width: albumImgView.frame.width, height: albumImgView.frame.height)
+        }
+    }
 }

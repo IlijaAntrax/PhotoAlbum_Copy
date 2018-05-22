@@ -45,6 +45,11 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         albumsCollection.delegate = self
         albumsCollection.dataSource = self
         
+        notificationBtn.setBackgroundImage(UIImage(named: "notification_inactive.png"), for: .normal)
+        notificationBtn.setBackgroundImage(UIImage(named: "notification_active.png"), for: .selected)
+        accountBtn.setBackgroundImage(UIImage(named: "profie_inactive.png"), for: .normal)
+        accountBtn.setBackgroundImage(UIImage(named: "profie_active.png"), for: .selected)
+        
         notificationsCollection.delegate = self
         notificationsCollection.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadMyAlbumsData), name: Notification.Name.init(rawValue: NotificationMyAlbumsLoaded), object: nil)
@@ -151,9 +156,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func showSearchView()
     {
-        searchBtn.alpha = 1.0
-        notificationBtn.alpha = 0.5
-        accountBtn.alpha = 0.5
+        searchBtn.isSelected = true
+        notificationBtn.isSelected = false
+        accountBtn.isSelected = false
         
         accountHolder.isHidden = true
         notificationsHolder.isHidden = true
@@ -162,9 +167,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func showNotificationsView()
     {
-        searchBtn.alpha = 0.5
-        notificationBtn.alpha = 1.0
-        accountBtn.alpha = 0.5
+        searchBtn.isSelected = false
+        notificationBtn.isSelected = true
+        accountBtn.isSelected = false
         
         accountHolder.isHidden = true
         notificationsHolder.isHidden = false
@@ -173,9 +178,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func showAccountView()
     {
-        searchBtn.alpha = 0.5
-        notificationBtn.alpha = 0.5
-        accountBtn.alpha = 1.0
+        searchBtn.isSelected = false
+        notificationBtn.isSelected = false
+        accountBtn.isSelected = true
         
         accountHolder.isHidden = false
         notificationsHolder.isHidden = true
@@ -337,7 +342,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 }
                 else
                 {
-                    showAlbumVC(forAlbum: User.sharedInstance.myAlbums[indexPath.row - 1])
+                    showAlbumVC(forAlbum: User.sharedInstance.myAlbums[indexPath.row - 2])
                 }
             }
             else
@@ -387,7 +392,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 let insset = collectionView.frame.width * 0.02
                 let offsets = 2.0 * insset + 2.0 * insset
                 let width = (collectionView.frame.width - offsets) * 0.33
-                let height = width * 400 / 450
+                let height = width * 500 / 400
                 
                 return CGSize(width: width, height: height)
             }

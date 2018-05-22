@@ -24,6 +24,8 @@ class MyAlbumCell:NewAlbumCell
     {
         super.setup(album: album)
         
+        super.addMask()
+        
         if let myAlbum = album as? MyPhotoAlbum
         {
             super.peopleCountLbl.text = "shared with \(myAlbum.albumUsers.count) people" //TODO: add album users on album and setup cells
