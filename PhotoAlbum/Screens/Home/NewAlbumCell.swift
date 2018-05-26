@@ -9,22 +9,23 @@
 import Foundation
 import UIKit
 
-class NewAlbumCell:AlbumCell
+class NewAlbumCell:UICollectionViewCell
 {
-    
-    @IBOutlet weak var peopleCountLbl: UILabel!
+    @IBOutlet weak var albumImgView: UIImageView!
+    @IBOutlet weak var albumNameLbl:UILabel!
     
     override func awakeFromNib()
     {
         super.awakeFromNib()
+        
+        albumNameLbl.font = Settings.sharedInstance.fontBoldSizeLarge()
+        albumNameLbl.textColor = Settings.sharedInstance.fontColorGrayDark()
     }
     
     func setupDefault()
     {
-        super.albumImgView.image = Settings.sharedInstance.emptyAlbumImage()
-        super.albumNameLbl.text = "Create album"
-        super.photosCountLbl.text = "0 photos"
-        self.peopleCountLbl.text = "Not shared"
+        //self.albumImgView.image = Settings.sharedInstance.emptyAlbumImage()
+        self.albumNameLbl.text = "Create album"
     }
     
     @IBAction func add(_ sender: Any)

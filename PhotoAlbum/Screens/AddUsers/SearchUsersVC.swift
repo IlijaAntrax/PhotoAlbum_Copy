@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SearchUsersVC:UIViewController, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, DatabaseDelegate
+class SearchUsersVC:NavigationViewController, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, DatabaseDelegate
 {
     @IBOutlet weak var searchTxtField: UITextField!
     

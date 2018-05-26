@@ -19,6 +19,13 @@ class Settings
         return instance
     }()
     
+    //class func
+    func isPhone() -> Bool
+    {
+        return UIDevice.current.userInterfaceIdiom == .phone
+    }
+    
+    //
     func appFont() -> String
     {
         return font
@@ -34,6 +41,31 @@ class Settings
         return UIColor.blue
     }
     
+    func fontColorDefault() -> UIColor
+    {
+        return UIColor.init(red: 80/255, green: 109/255, blue: 238/255, alpha: 1.0)
+    }
+    
+    func fontColorWhite() -> UIColor
+    {
+        return UIColor.white
+    }
+    
+    func fontColorGrayLight() -> UIColor
+    {
+        return UIColor.init(red: 153/255, green: 153/255, blue: 153/255, alpha: 1.0)
+    }
+    
+    func fontColorGrayNormal() -> UIColor
+    {
+        return UIColor.init(red: 102/255, green: 102/255, blue: 102/255, alpha: 1.0)
+    }
+    
+    func fontColorGrayDark() -> UIColor
+    {
+        return UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 1.0)
+    }
+    
     func fontSizeSmall() -> CGFloat
     {
         return UIScreen.main.bounds.size.width * 0.035
@@ -47,6 +79,33 @@ class Settings
     func fontSizeLarge() -> CGFloat
     {
         return UIScreen.main.bounds.size.width * 0.07
+    }
+    
+    func fontRegularSizeSmall() -> UIFont
+    {
+        return UIFont(name: "SFProDisplay-Regular", size: isPhone() ? (UIScreen.main.bounds.size.width * 0.035) : (UIScreen.main.bounds.size.width * 0.0275))!
+    }
+    func fontBoldSizeSmall() -> UIFont
+    {
+        return UIFont(name: "SFProDisplay-Bold", size: isPhone() ? (UIScreen.main.bounds.size.width * 0.035) : (UIScreen.main.bounds.size.width * 0.0275))!
+    }
+    
+    func fontRegularSizeMedium() -> UIFont
+    {
+        return UIFont(name: "SFProDisplay-Regular", size: isPhone() ? (UIScreen.main.bounds.size.width * 0.05) : (UIScreen.main.bounds.size.width * 0.04))!
+    }
+    func fontBoldSizeMedium() -> UIFont
+    {
+        return UIFont(name: "SFProDisplay-Bold", size: isPhone() ? (UIScreen.main.bounds.size.width * 0.05) : (UIScreen.main.bounds.size.width * 0.04))!
+    }
+
+    func fontRegularSizeLarge() -> UIFont
+    {
+        return UIFont(name: "SFProDisplay-Regular", size: isPhone() ? (UIScreen.main.bounds.size.width * 0.07) : (UIScreen.main.bounds.size.width * 0.0575))!
+    }
+    func fontBoldSizeLarge() -> UIFont
+    {
+        return UIFont(name: "SFProDisplay-Bold", size: isPhone() ? (UIScreen.main.bounds.size.width * 0.07) : (UIScreen.main.bounds.size.width * 0.0575))!
     }
     
     func albumsBorderWidth() -> CGFloat
@@ -76,11 +135,11 @@ class Settings
     
     func activityIndicatorColor() -> UIColor
     {
-        return UIColor.init(red: 95/255, green: 144/255, blue: 236/255, alpha: 1.0)
+        return UIColor.init(red: 80/255, green: 109/255, blue: 238/255, alpha: 1.0)
     }
     
     func activityIndicatorBgdColor() -> UIColor
     {
-        return UIColor.init(red: 120/255, green: 116/255, blue: 115/255, alpha: 1.0)
+        return UIColor.init(red: 241/255, green: 241/255, blue: 241/255, alpha: 1.0)
     }
 }

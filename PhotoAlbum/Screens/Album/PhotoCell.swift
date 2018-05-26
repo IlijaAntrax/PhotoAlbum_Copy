@@ -11,6 +11,7 @@ import UIKit
 
 class PhotoCell: UICollectionViewCell
 {
+    @IBOutlet weak var loaderView: NVActivityIndicatorView!
     @IBOutlet weak var imgView: UIImageView!
     
     @IBOutlet weak var deleteBtn: UIButton!
@@ -19,17 +20,37 @@ class PhotoCell: UICollectionViewCell
     {
         super.awakeFromNib()
         
+        setupLoader()
+        
+        deleteBtn.isHidden = true
+        
         self.imgView.contentMode = .scaleAspectFill
+        
+        self.loaderView.addObserver(self, forKeyPath: "bounds", options: .new, context: nil)
+        self.imgView.addObserver(self, forKeyPath: "bounds", options: .new, context: nil)
     }
     
-    override func layoutSubviews()
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
     {
-        super.layoutSubviews()
-        
-        if self.activityIndicatorView != nil
+        if let key = keyPath
         {
-            activityIndicatorView?.frame = contentView.frame
-            activityIndicatorView?.startAnimating()
+            if key == "bounds"
+            {
+                if let imgView = object as? UIImageView
+                {
+                    if imgView == self.imgView
+                    {
+                        addMask()
+                    }
+                }
+                else if let loader = object as? NVActivityIndicatorView
+                {
+                    if loader == loaderView
+                    {
+                        addLoaderMask()
+                    }
+                }
+            }
         }
     }
     
@@ -77,7 +98,7 @@ class PhotoCell: UICollectionViewCell
                     {
                         imgView.image = image
                     }
-                    imgView.layer.transform = self.photo?.transform ?? CATransform3DIdentity
+                    //imgView.layer.transform = self.photo?.transform ?? CATransform3DIdentity
                 }
                 else if !isDownloading
                 {
@@ -88,7 +109,7 @@ class PhotoCell: UICollectionViewCell
                         
                         let firebaseStorage = FirebaseStorageController()
                         
-                        self.showLoader()
+                        self.loaderView.startAnimating()
                         
                         self.isDownloading = true
                         
@@ -99,9 +120,9 @@ class PhotoCell: UICollectionViewCell
                             
                             self.photo?.image = image
                             
-                            self.imgView.layer.transform = self.photo?.transform ?? CATransform3DIdentity
+                            //self.imgView.layer.transform = self.photo?.transform ?? CATransform3DIdentity
                             
-                            self.hideLoader()
+                            self.loaderView.stopAnimating()
                             
                             self.isDownloading = false
                         })
@@ -111,27 +132,29 @@ class PhotoCell: UICollectionViewCell
         }
     }
     
-    var activityIndicatorView:NVActivityIndicatorView?
-    
-    func showLoader()
+    func setupLoader()
     {
-        let frame = self.contentView.frame
-        activityIndicatorView = NVActivityIndicatorView(frame: frame,
-                                                            type: NVActivityIndicatorType.ballPulseSync)
-        
-        activityIndicatorView?.padding = self.contentView.frame.width / 4
-        activityIndicatorView?.color = Settings.sharedInstance.activityIndicatorColor()
-        activityIndicatorView?.backgroundColor = Settings.sharedInstance.activityIndicatorBgdColor()
-        
-        self.contentView.addSubview(activityIndicatorView!)
-        activityIndicatorView?.startAnimating()
+        loaderView.padding = self.imgView.frame.width / 5
+        loaderView.color = Settings.sharedInstance.activityIndicatorColor()
+        loaderView.backgroundColor = Settings.sharedInstance.activityIndicatorBgdColor()
     }
     
-    func hideLoader()
+    func addLoaderMask()
     {
-        activityIndicatorView?.stopAnimating()
-        activityIndicatorView?.removeFromSuperview()
+        if loaderView.layer.mask == nil
+        {
+            let maskImg = UIImage(named: "photo_mask.png")!
+            let mask = CALayer()
+            mask.contents = maskImg.cgImage
+            mask.frame = CGRect.init(x: 0.0, y: 0.0, width: imgView.frame.width, height: imgView.frame.height)
+            loaderView.layer.mask = mask
+        }
+        else
+        {
+            loaderView.layer.mask?.frame = CGRect.init(x: 0.0, y: 0.0, width: imgView.frame.width, height: imgView.frame.height)
+        }
     }
+
     
     func addMask()
     {
@@ -149,4 +172,9 @@ class PhotoCell: UICollectionViewCell
             imgView.layer.mask?.frame = CGRect.init(x: 0.0, y: 0.0, width: imgView.frame.width, height: imgView.frame.height)
         }
     }
+}
+
+class AddPhotosCell:UICollectionViewCell
+{
+    @IBOutlet weak var imgView: UIImageView!
 }

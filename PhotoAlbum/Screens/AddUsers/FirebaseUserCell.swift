@@ -15,6 +15,13 @@ class FirebaseUserCell:UICollectionViewCell
     
     @IBOutlet weak var usernameLbl: UILabel!
     
+    override func awakeFromNib()
+    {
+        super.awakeFromNib()
+        
+        usernameLbl.font = Settings.sharedInstance.fontRegularSizeMedium()
+        usernameLbl.textColor = Settings.sharedInstance.fontColorGrayNormal()
+    }
     
     var user:FirebaseUser?
     {
@@ -22,7 +29,7 @@ class FirebaseUserCell:UICollectionViewCell
         {
             if let user = user
             {
-                profileImgView.image = user.profileImg ?? UIImage(named: "empty_image.png")
+                profileImgView.image = user.profileImg ?? UIImage(named: "profie_icon.png")
                 usernameLbl.text = user.username
             }
         }

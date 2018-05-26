@@ -118,12 +118,17 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     //MARK: IBActions
+    @IBAction func deleteBtnPressed(_ sender: Any)
+    {
+        //TODO add deleting enable.
+    }
+    
     @IBAction func backBtnAction()
     {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func addPhotosBtnAction()
+    func addPhotos()
     {
         performSegue(withIdentifier: "gallerySegueIdentifier", sender: self)
     }
@@ -131,34 +136,47 @@ class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     //MARK: Collection view delegate, data source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
+        let extraCells = 1
         if let album = photoAlbum
         {
-            return album.photos.count
+            return album.photos.count + extraCells
         }
         
-        return 0
+        return extraCells
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
+        if indexPath.item == 0
+        {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "AddPhotosCell", for: indexPath) as! AddPhotosCell
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
         
-        cell.photo = photoAlbum?.photos[indexPath.row]
+        cell.photo = photoAlbum?.photos[indexPath.row - 1]
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        self.selectedPhoto = photoAlbum?.photos[indexPath.item]
-        
-        performSegue(withIdentifier: "photoEditorSegueIdentifier", sender: self)
+        if indexPath.item == 0
+        {
+            addPhotos()
+        }
+        else
+        {
+            self.selectedPhoto = photoAlbum?.photos[indexPath.item - 1]
+            
+            performSegue(withIdentifier: "photoEditorSegueIdentifier", sender: self)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         let width = (collectionView.frame.width - (CGFloat(cellsInRow) + 1) * insetOffset) / CGFloat(cellsInRow)
-        let height = width * 1.1
+        let height = width
         
         return CGSize(width: width, height: height)
     }

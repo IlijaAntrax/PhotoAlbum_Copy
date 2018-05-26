@@ -22,6 +22,11 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SF-Pro-Display-Bold.otf</string>
+		<string>SF-Pro-Display-Regular.otf</string>
+	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>PhotoAlbum want to access to your camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>

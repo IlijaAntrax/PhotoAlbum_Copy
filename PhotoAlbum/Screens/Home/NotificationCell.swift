@@ -22,6 +22,8 @@ class NotificationCell:UICollectionViewCell
         super.awakeFromNib()
         
         //TODO: setup
+        textLbl.font = Settings.sharedInstance.fontRegularSizeMedium()
+        textLbl.textColor = Settings.sharedInstance.fontColorGrayNormal()
         textLbl.numberOfLines = 2
         textLbl.adjustsFontSizeToFitWidth = true
     }

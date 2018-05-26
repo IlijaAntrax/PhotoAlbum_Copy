@@ -14,7 +14,7 @@ enum AlbumType
     case sharedAlbums
 }
 
-class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+class HomeVC: NavigationViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     
     private let cellsInRow:Int = 3
@@ -55,6 +55,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         NotificationCenter.default.addObserver(self, selector: #selector(reloadMyAlbumsData), name: Notification.Name.init(rawValue: NotificationMyAlbumsLoaded), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSharedAlbumsData), name: Notification.Name.init(rawValue: NotificationSharedAlbumsLoaded), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSelectedAlbum), name: NSNotification.Name.init(rawValue: NotificationPhotosAddedToAlbum), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addUsersOnAlbum(_:)), name: NSNotification.Name.init(rawValue: NotificationPhotosAddedToAlbum), object: nil)
         
         setup()
         
@@ -73,6 +74,16 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         User.sharedInstance.getSharedAlbums()
         
         setupView()
+        setupLblsBtns()
+    }
+    
+    func setupLblsBtns()
+    {
+        myAlbumsBtn.titleLabel?.font = Settings.sharedInstance.fontBoldSizeMedium()
+        myAlbumsBtn.setTitleColor(Settings.sharedInstance.fontColorDefault(), for: .normal)
+        
+        sharedAlbumsBtn.titleLabel?.font = Settings.sharedInstance.fontBoldSizeMedium()
+        sharedAlbumsBtn.setTitleColor(Settings.sharedInstance.fontColorDefault(), for: .normal)
     }
     
     func setupView()
@@ -87,6 +98,14 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         performSegue(withIdentifier: "albumSegueIdentifier", sender: self)
     }
     
+    @objc func addUsersOnAlbum(_ notification: NSNotification)
+    {
+        if let album = notification.object as? PhotoAlbum
+        {
+            performSegue(withIdentifier: "searchUsersSegueIdentifier", sender: album)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "albumSegueIdentifier"
@@ -94,6 +113,16 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             if let albumVC = segue.destination as? AlbumVC
             {
                 albumVC.photoAlbum = selectedAlbum
+            }
+        }
+        else if segue.identifier == "searchUsersSegueIdentifier"
+        {
+            if let searchUsersVC = segue.destination as? SearchUsersVC
+            {
+                if let album = sender as? PhotoAlbum
+                {
+                    searchUsersVC.sharedAlbum = album
+                }
             }
         }
     }
@@ -278,6 +307,8 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 {
                     let profileCell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserProfileCell", for: indexPath) as? UserProfileCell
                     
+                    profileCell?.setup()
+                    
                     return profileCell!
                 }
                 else if indexPath.item == 1
@@ -447,7 +478,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 insset = collectionView.frame.width * 0.02
             }
         }
-        return UIEdgeInsets.init(top: 0.0, left: insset, bottom: 0.0, right: insset)
+        return UIEdgeInsets.init(top: insset, left: insset, bottom: 0.0, right: insset)
     }
     
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5B0A73F81FD2E2B2001B3CC2 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0A73F71FD2E2B2001B3CC2 /* Settings.swift */; };
 		5B0A73FB1FD312BF001B3CC2 /* PhotoAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0A73FA1FD312BF001B3CC2 /* PhotoAlbumCell.swift */; };
+		5B0B496520B5F86F00A1C828 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5B0B496320B5F86E00A1C828 /* SF-Pro-Display-Regular.otf */; };
+		5B0B496620B5F86F00A1C828 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5B0B496420B5F86E00A1C828 /* SF-Pro-Display-Bold.otf */; };
 		5B0BDF0B1FCDEA5C0092500C /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0BDF0A1FCDEA5C0092500C /* logo.png */; };
 		5B0BDF201FCDEC9F0092500C /* close_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0BDF131FCDEC9E0092500C /* close_btn.png */; };
 		5B0BDF211FCDEC9F0092500C /* invite_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0BDF141FCDEC9E0092500C /* invite_btn.png */; };
@@ -113,12 +115,17 @@
 		5BB1627C20307F5D00C804FD /* FirebaseDatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1627B20307F5D00C804FD /* FirebaseDatabaseController.swift */; };
 		5BB4440C20AB6FCE003036EC /* NotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4440B20AB6FCE003036EC /* NotificationData.swift */; };
 		5BB4440E20AB7E0E003036EC /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4440D20AB7E0E003036EC /* NotificationCell.swift */; };
+		5BC23A6F20B97E0C00BAA7BF /* add_new_album.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BC23A6E20B97E0C00BAA7BF /* add_new_album.png */; };
+		5BC23A7120B98C4000BAA7BF /* add_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BC23A7020B98C4000BAA7BF /* add_user.png */; };
+		5BC23A7420B99A1E00BAA7BF /* NavigationCustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC23A7320B99A1E00BAA7BF /* NavigationCustomSegue.swift */; };
+		5BC23A7620B99D8700BAA7BF /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC23A7520B99D8700BAA7BF /* NavigationViewController.swift */; };
 		5BC39F1420585117000E5CAF /* PhotoEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1320585117000E5CAF /* PhotoEditVC.swift */; };
 		5BC39F1720585B8F000E5CAF /* EditorImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1620585B8F000E5CAF /* EditorImageView.swift */; };
 		5BC39F1A20585BCE000E5CAF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1820585BCE000E5CAF /* UIColor+.swift */; };
 		5BC39F1B20585BCE000E5CAF /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1920585BCE000E5CAF /* UIImage+.swift */; };
 		5BD25A1B205D609300CD1BAA /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD25A1A205D609300CD1BAA /* FilterStore.swift */; };
 		5BD25A1D205D627700CD1BAA /* FilterImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD25A1C205D627700CD1BAA /* FilterImageCell.swift */; };
+		5BE6B51320B60A1100422DFD /* profile_default_cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BE6B51220B60A1000422DFD /* profile_default_cover.jpg */; };
 		5BE9D17F1FAE3A0500481384 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9D17E1FAE3A0500481384 /* AppDelegate.swift */; };
 		5BE9D1811FAE3A0500481384 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9D1801FAE3A0500481384 /* ViewController.swift */; };
 		5BE9D1841FAE3A0500481384 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BE9D1821FAE3A0500481384 /* Main.storyboard */; };
@@ -134,6 +141,8 @@
 		1C7155B556C96A22C5514506 /* Pods_PhotoAlbum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoAlbum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B0A73F71FD2E2B2001B3CC2 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		5B0A73FA1FD312BF001B3CC2 /* PhotoAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCell.swift; sourceTree = "<group>"; };
+		5B0B496320B5F86E00A1C828 /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
+		5B0B496420B5F86E00A1C828 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		5B0BDF0A1FCDEA5C0092500C /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Skin/logo.png; sourceTree = "<group>"; };
 		5B0BDF131FCDEC9E0092500C /* close_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close_btn.png; path = Skin/close_btn.png; sourceTree = "<group>"; };
 		5B0BDF141FCDEC9E0092500C /* invite_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = invite_btn.png; path = Skin/invite_btn.png; sourceTree = "<group>"; };
@@ -241,12 +250,17 @@
 		5BB1627B20307F5D00C804FD /* FirebaseDatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseController.swift; sourceTree = "<group>"; };
 		5BB4440B20AB6FCE003036EC /* NotificationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationData.swift; sourceTree = "<group>"; };
 		5BB4440D20AB7E0E003036EC /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		5BC23A6E20B97E0C00BAA7BF /* add_new_album.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_new_album.png; path = Skin/add_new_album.png; sourceTree = "<group>"; };
+		5BC23A7020B98C4000BAA7BF /* add_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_user.png; path = Skin/add_user.png; sourceTree = "<group>"; };
+		5BC23A7320B99A1E00BAA7BF /* NavigationCustomSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCustomSegue.swift; sourceTree = "<group>"; };
+		5BC23A7520B99D8700BAA7BF /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		5BC39F1320585117000E5CAF /* PhotoEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditVC.swift; sourceTree = "<group>"; };
 		5BC39F1620585B8F000E5CAF /* EditorImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorImageView.swift; sourceTree = "<group>"; };
 		5BC39F1820585BCE000E5CAF /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		5BC39F1920585BCE000E5CAF /* UIImage+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		5BD25A1A205D609300CD1BAA /* FilterStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterStore.swift; sourceTree = "<group>"; };
 		5BD25A1C205D627700CD1BAA /* FilterImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterImageCell.swift; sourceTree = "<group>"; };
+		5BE6B51220B60A1000422DFD /* profile_default_cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = profile_default_cover.jpg; path = Skin/profile_default_cover.jpg; sourceTree = "<group>"; };
 		5BE9D17B1FAE3A0500481384 /* PhotoAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BE9D17E1FAE3A0500481384 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BE9D1801FAE3A0500481384 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -300,9 +314,21 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		5B0B496220B5F85400A1C828 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				5B0B496420B5F86E00A1C828 /* SF-Pro-Display-Bold.otf */,
+				5B0B496320B5F86E00A1C828 /* SF-Pro-Display-Regular.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		5B0BDF091FCDEA340092500C /* Skins */ = {
 			isa = PBXGroup;
 			children = (
+				5BC23A7020B98C4000BAA7BF /* add_user.png */,
+				5BC23A6E20B97E0C00BAA7BF /* add_new_album.png */,
+				5BE6B51220B60A1000422DFD /* profile_default_cover.jpg */,
 				5B8AA11520B4B0B6009DC6CF /* photo_mask.png */,
 				5B8AA0DE20B4A248009DC6CF /* back.png */,
 				5B8AA0EB20B4A249009DC6CF /* bg.jpg */,
@@ -499,6 +525,15 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
+		5BC23A7220B9990900BAA7BF /* TransitionSegues */ = {
+			isa = PBXGroup;
+			children = (
+				5BC23A7320B99A1E00BAA7BF /* NavigationCustomSegue.swift */,
+				5BC23A7520B99D8700BAA7BF /* NavigationViewController.swift */,
+			);
+			path = TransitionSegues;
+			sourceTree = "<group>";
+		};
 		5BC39F12205850D4000E5CAF /* PhotoEditor */ = {
 			isa = PBXGroup;
 			children = (
@@ -538,6 +573,7 @@
 		5BE9D17D1FAE3A0500481384 /* PhotoAlbum */ = {
 			isa = PBXGroup;
 			children = (
+				5B0B496220B5F85400A1C828 /* Fonts */,
 				5B0A73F61FD2E282001B3CC2 /* Settings */,
 				5B0BDF091FCDEA340092500C /* Skins */,
 				5B7B39FA205D6EBD00F178CF /* Filters */,
@@ -559,6 +595,7 @@
 		5BE9D1AC1FAE3F7700481384 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				5BC23A7220B9990900BAA7BF /* TransitionSegues */,
 				5BC39F12205850D4000E5CAF /* PhotoEditor */,
 				5BABD9FF204AF2EF00654E5F /* AddUsers */,
 				5B506B991FCB2702005A09CD /* Login */,
@@ -664,6 +701,7 @@
 				5B0BDF0B1FCDEA5C0092500C /* logo.png in Resources */,
 				5B8AA10320B4A24B009DC6CF /* notification_active.png in Resources */,
 				5B8AA0F920B4A24B009DC6CF /* profie_active.png in Resources */,
+				5BC23A7120B98C4000BAA7BF /* add_user.png in Resources */,
 				5B8AA10620B4A24B009DC6CF /* search_results.png in Resources */,
 				5B0BDF201FCDEC9F0092500C /* close_btn.png in Resources */,
 				5B8AA10820B4A24B009DC6CF /* bg.jpg in Resources */,
@@ -671,9 +709,12 @@
 				5B8AA0FD20B4A24B009DC6CF /* notification_inactive.png in Resources */,
 				5B7B39FF205D6EBD00F178CF /* YUCIRGBToHSL.cikernel in Resources */,
 				5B8AA10220B4A24B009DC6CF /* text_holder_unselected.png in Resources */,
+				5BE6B51320B60A1100422DFD /* profile_default_cover.jpg in Resources */,
 				5B8AA0FA20B4A24B009DC6CF /* log_out.png in Resources */,
+				5B0B496520B5F86F00A1C828 /* SF-Pro-Display-Regular.otf in Resources */,
 				5B8AA10F20B4A24B009DC6CF /* mail_icon.png in Resources */,
 				5B8AA10720B4A24B009DC6CF /* upload_icon.png in Resources */,
+				5BC23A6F20B97E0C00BAA7BF /* add_new_album.png in Resources */,
 				5B8AA10420B4A24B009DC6CF /* profie_inactive.png in Resources */,
 				5BE9D1891FAE3A0500481384 /* LaunchScreen.storyboard in Resources */,
 				5B8AA10D20B4A24B009DC6CF /* username_icon.png in Resources */,
@@ -688,6 +729,7 @@
 				5B8AA0FF20B4A24B009DC6CF /* sign_in_btn.png in Resources */,
 				5B8AA0F520B4A24B009DC6CF /* header.png in Resources */,
 				5B54C2C11FD4573C0003F3CD /* empty_image.png in Resources */,
+				5B0B496620B5F86F00A1C828 /* SF-Pro-Display-Bold.otf in Resources */,
 				5B8AA0FE20B4A24B009DC6CF /* search_text_holder.png in Resources */,
 				5BE9D1861FAE3A0500481384 /* Assets.xcassets in Resources */,
 				5B7B3A00205D6EBD00F178CF /* YUCIRGBToneCurve.cikernel in Resources */,
@@ -809,6 +851,7 @@
 				5B70F09B2078E5060028F1AB /* NVActivityIndicatorShape.swift in Sources */,
 				5B70F0B62078E5060028F1AB /* NVActivityIndicatorAnimationBallScaleRippleMultiple.swift in Sources */,
 				5B70F0992078E5060028F1AB /* NVActivityIndicatorPresenter.swift in Sources */,
+				5BC23A7420B99A1E00BAA7BF /* NavigationCustomSegue.swift in Sources */,
 				5B8C775B20A705480084DD0D /* UserData.swift in Sources */,
 				5B46292B203093AA001C6CBC /* FirebaseListener.swift in Sources */,
 				5BC39F1A20585BCE000E5CAF /* UIColor+.swift in Sources */,
@@ -817,6 +860,7 @@
 				5BF531C11FC45D470012960E /* GalleryVC.swift in Sources */,
 				5B70F0B72078E5060028F1AB /* NVActivityIndicatorAnimationPacman.swift in Sources */,
 				5B70F0A22078E5060028F1AB /* NVActivityIndicatorAnimationBallTrianglePath.swift in Sources */,
+				5BC23A7620B99D8700BAA7BF /* NavigationViewController.swift in Sources */,
 				5BABDA01204AF31800654E5F /* SearchUsersVC.swift in Sources */,
 				5B70F09E2078E5060028F1AB /* NVActivityIndicatorAnimationBallRotate.swift in Sources */,
 				5B70F0B12078E5060028F1AB /* NVActivityIndicatorAnimationAudioEqualizer.swift in Sources */,

@@ -9,18 +9,49 @@
 import Foundation
 import UIKit
 
-class AlbumCell:UICollectionViewCell
+class AlbumCell:NewAlbumCell
 {
     
-    @IBOutlet weak var albumImgView: UIImageView!
-    @IBOutlet weak var albumNameLbl:UILabel!
+    @IBOutlet weak var loaderView: NVActivityIndicatorView!
     @IBOutlet weak var photosCountLbl:UILabel!
     
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        
+
         albumImgView.contentMode = .scaleAspectFill
+        
+        photosCountLbl.font = Settings.sharedInstance.fontRegularSizeSmall()
+        photosCountLbl.textColor = Settings.sharedInstance.fontColorGrayLight()
+        
+        setupLoader()
+        
+        self.loaderView.addObserver(self, forKeyPath: "bounds", options: .new, context: nil)
+        self.albumImgView.addObserver(self, forKeyPath: "bounds", options: .new, context: nil)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
+    {
+        if let key = keyPath
+        {
+            if key == "bounds"
+            {
+                if let loader = object as? NVActivityIndicatorView
+                {
+                    if loader == loaderView
+                    {
+                        addLoaderMask()
+                    }
+                }
+                else if let imgView = object as? UIImageView
+                {
+                    if imgView == self.albumImgView
+                    {
+                        addMask()
+                    }
+                }
+            }
+        }
     }
     
     var album:PhotoAlbum?
@@ -36,9 +67,72 @@ class AlbumCell:UICollectionViewCell
     
     func setup(album: PhotoAlbum)
     {
-        albumImgView.image = album.albumImage ?? album.photos.first?.image
+        setAlbumImg()
         albumNameLbl.text = album.name
         photosCountLbl.text = String(album.photos.count) + " photos"
+    }
+    
+    func setAlbumImg()
+    {
+        addLoaderMask()
+        loaderView.startAnimating()
+        
+        albumImgView.image = album?.albumImage ?? album?.photos.first?.image
+        
+        if albumImgView.image == nil
+        {
+            if let firstPhoto = album?.photos.first
+            {
+                if let url = firstPhoto.url
+                {
+                    let firebaseStorage = FirebaseStorageController()
+                    
+                    firebaseStorage.downloadImage(withUrlPath: url.path.replaceUrl(url), completionHandler: { (image) in
+                        
+                        let img = FilterStore.filterImage(image: image, filterType: firstPhoto.filter, intensity: 0.5)
+                        
+                        self.albumImgView.image = img
+                        
+                        self.loaderView.stopAnimating()
+                        
+                        self.album?.albumImage = img
+                    })
+                }
+            }
+            else
+            {
+                //TODO: set img holder for album image
+                self.albumImgView.image = Settings.sharedInstance.emptyAlbumImage()
+                self.loaderView.stopAnimating()
+            }
+        }
+        else
+        {
+            self.loaderView.stopAnimating()
+        }
+    }
+    
+    func setupLoader()
+    {
+        loaderView.padding = self.albumImgView.frame.width / 5
+        loaderView.color = Settings.sharedInstance.activityIndicatorColor()
+        loaderView.backgroundColor = Settings.sharedInstance.activityIndicatorBgdColor()
+    }
+    
+    func addLoaderMask()
+    {
+        if loaderView.layer.mask == nil
+        {
+            let maskImg = UIImage(named: "photo_mask.png")!
+            let mask = CALayer()
+            mask.contents = maskImg.cgImage
+            mask.frame = CGRect.init(x: 0.0, y: 0.0, width: albumImgView.frame.width, height: albumImgView.frame.height)
+            loaderView.layer.mask = mask
+        }
+        else
+        {
+            loaderView.layer.mask?.frame = CGRect.init(x: 0.0, y: 0.0, width: albumImgView.frame.width, height: albumImgView.frame.height)
+        }
     }
     
     func addMask()
