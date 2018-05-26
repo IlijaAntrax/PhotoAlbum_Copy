@@ -14,7 +14,7 @@ enum AlbumType
     case sharedAlbums
 }
 
-class HomeVC: NavigationViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     
     private let cellsInRow:Int = 3
@@ -25,9 +25,9 @@ class HomeVC: NavigationViewController, UICollectionViewDelegate, UICollectionVi
     
     @IBOutlet weak var albumsCollection: UICollectionView!
     
-    @IBOutlet weak var searchBtn: UIButton!
-    @IBOutlet weak var notificationBtn: UIButton!
-    @IBOutlet weak var accountBtn: UIButton!
+    //@IBOutlet weak var searchBtn: UIButton!
+    var notificationBtn: UIButton!
+    var accountBtn: UIButton!
     
     @IBOutlet weak var searchHolder: UIView!
     @IBOutlet weak var notificationsHolder: UIView!
@@ -45,10 +45,8 @@ class HomeVC: NavigationViewController, UICollectionViewDelegate, UICollectionVi
         albumsCollection.delegate = self
         albumsCollection.dataSource = self
         
-        notificationBtn.setBackgroundImage(UIImage(named: "notification_inactive.png"), for: .normal)
-        notificationBtn.setBackgroundImage(UIImage(named: "notification_active.png"), for: .selected)
-        accountBtn.setBackgroundImage(UIImage(named: "profie_inactive.png"), for: .normal)
-        accountBtn.setBackgroundImage(UIImage(named: "profie_active.png"), for: .selected)
+        addNotificationBtn()
+        addAccountBtn()
         
         notificationsCollection.delegate = self
         notificationsCollection.dataSource = self
@@ -58,7 +56,6 @@ class HomeVC: NavigationViewController, UICollectionViewDelegate, UICollectionVi
         NotificationCenter.default.addObserver(self, selector: #selector(addUsersOnAlbum(_:)), name: NSNotification.Name.init(rawValue: NotificationPhotosAddedToAlbum), object: nil)
         
         setup()
-        
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -66,6 +63,43 @@ class HomeVC: NavigationViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidAppear(animated)
         
         albumsCollection.reloadData()
+    }
+    
+    //NavigationBarItems
+    func addNotificationBtn()
+    {
+        let btnWidth = (navigationController?.navigationBar.frame.height)!
+        notificationBtn = UIButton(type: .custom)
+        notificationBtn.frame = CGRect(x: 0.0, y: 0.0, width: btnWidth, height: btnWidth)
+        notificationBtn.setBackgroundImage(UIImage(named: "notification_inactive.png"), for: .normal)
+        notificationBtn.setBackgroundImage(UIImage(named: "notification_active.png"), for: .selected)
+        notificationBtn.addTarget(self, action: #selector(showNotificationsView), for: .touchUpInside)
+        
+        let notificationBarItem = UIBarButtonItem(customView: notificationBtn)
+        let currWidth = notificationBarItem.customView?.widthAnchor.constraint(equalToConstant: btnWidth)
+        currWidth?.isActive = true
+        let currHeight = notificationBarItem.customView?.heightAnchor.constraint(equalToConstant: btnWidth)
+        currHeight?.isActive = true
+        
+        self.navigationItem.leftBarButtonItem = notificationBarItem
+    }
+    
+    func addAccountBtn()
+    {
+        let btnWidth = (navigationController?.navigationBar.frame.height)!
+        accountBtn = UIButton(type: .custom)
+        accountBtn.frame = CGRect(x: 0.0, y: 0.0, width: btnWidth, height: btnWidth)
+        accountBtn.setBackgroundImage(UIImage(named: "profie_inactive.png"), for: .normal)
+        accountBtn.setBackgroundImage(UIImage(named: "profie_active.png"), for: .selected)
+        accountBtn.addTarget(self, action: #selector(showAccountView), for: .touchUpInside)
+        
+        let accountBarItem = UIBarButtonItem(customView: accountBtn)
+        let currWidth = accountBarItem.customView?.widthAnchor.constraint(equalToConstant: btnWidth)
+        currWidth?.isActive = true
+        let currHeight = accountBarItem.customView?.heightAnchor.constraint(equalToConstant: btnWidth)
+        currHeight?.isActive = true
+        
+        self.navigationItem.rightBarButtonItem = accountBarItem
     }
     
     func setup()
@@ -185,7 +219,7 @@ class HomeVC: NavigationViewController, UICollectionViewDelegate, UICollectionVi
     
     func showSearchView()
     {
-        searchBtn.isSelected = true
+        //searchBtn.isSelected = true
         notificationBtn.isSelected = false
         accountBtn.isSelected = false
         
@@ -194,9 +228,9 @@ class HomeVC: NavigationViewController, UICollectionViewDelegate, UICollectionVi
         searchHolder.isHidden = false
     }
     
-    func showNotificationsView()
+    @objc func showNotificationsView()
     {
-        searchBtn.isSelected = false
+        //searchBtn.isSelected = false
         notificationBtn.isSelected = true
         accountBtn.isSelected = false
         
@@ -205,9 +239,9 @@ class HomeVC: NavigationViewController, UICollectionViewDelegate, UICollectionVi
         searchHolder.isHidden = true
     }
     
-    func showAccountView()
+    @objc func showAccountView()
     {
-        searchBtn.isSelected = false
+        //searchBtn.isSelected = false
         notificationBtn.isSelected = false
         accountBtn.isSelected = true
         

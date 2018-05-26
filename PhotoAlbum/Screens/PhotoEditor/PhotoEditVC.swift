@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PhotoEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+class PhotoEditVC: CustomNavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     var photo:Photo?
     var selectedFilter = FilterType.NoFilter

@@ -119,6 +119,7 @@
 		5BC23A7120B98C4000BAA7BF /* add_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BC23A7020B98C4000BAA7BF /* add_user.png */; };
 		5BC23A7420B99A1E00BAA7BF /* NavigationCustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC23A7320B99A1E00BAA7BF /* NavigationCustomSegue.swift */; };
 		5BC23A7620B99D8700BAA7BF /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC23A7520B99D8700BAA7BF /* NavigationViewController.swift */; };
+		5BC23A7820B9CB9500BAA7BF /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC23A7720B9CB9500BAA7BF /* CustomNavigationController.swift */; };
 		5BC39F1420585117000E5CAF /* PhotoEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1320585117000E5CAF /* PhotoEditVC.swift */; };
 		5BC39F1720585B8F000E5CAF /* EditorImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1620585B8F000E5CAF /* EditorImageView.swift */; };
 		5BC39F1A20585BCE000E5CAF /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC39F1820585BCE000E5CAF /* UIColor+.swift */; };
@@ -254,6 +255,7 @@
 		5BC23A7020B98C4000BAA7BF /* add_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_user.png; path = Skin/add_user.png; sourceTree = "<group>"; };
 		5BC23A7320B99A1E00BAA7BF /* NavigationCustomSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCustomSegue.swift; sourceTree = "<group>"; };
 		5BC23A7520B99D8700BAA7BF /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		5BC23A7720B9CB9500BAA7BF /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		5BC39F1320585117000E5CAF /* PhotoEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditVC.swift; sourceTree = "<group>"; };
 		5BC39F1620585B8F000E5CAF /* EditorImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorImageView.swift; sourceTree = "<group>"; };
 		5BC39F1820585BCE000E5CAF /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -595,6 +597,7 @@
 		5BE9D1AC1FAE3F7700481384 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				5BC23A7720B9CB9500BAA7BF /* CustomNavigationController.swift */,
 				5BC23A7220B9990900BAA7BF /* TransitionSegues */,
 				5BC39F12205850D4000E5CAF /* PhotoEditor */,
 				5BABD9FF204AF2EF00654E5F /* AddUsers */,
@@ -843,6 +846,7 @@
 				5B70F09F2078E5060028F1AB /* NVActivityIndicatorAnimationBallGridPulse.swift in Sources */,
 				5B54C2BD1FD44DF40003F3CD /* PhotoAlbum.swift in Sources */,
 				5B70F0A02078E5060028F1AB /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */,
+				5BC23A7820B9CB9500BAA7BF /* CustomNavigationController.swift in Sources */,
 				5B70F0A72078E5060028F1AB /* NVActivityIndicatorAnimationBallZigZag.swift in Sources */,
 				5B70F0A92078E5060028F1AB /* NVActivityIndicatorAnimationSemiCircleSpin.swift in Sources */,
 				5B7B3A01205D6EBD00F178CF /* YUCIRGBToneCurve.m in Sources */,

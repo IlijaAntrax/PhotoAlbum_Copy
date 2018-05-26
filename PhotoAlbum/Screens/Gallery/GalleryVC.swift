@@ -11,7 +11,7 @@ import UIKit
 import Photos
 import FirebaseStorage
 
-class GalleryVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+class GalleryVC: CustomNavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     private let cellsInRow:Int = 4
     private let insetOffset:CGFloat = 2.0

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AlbumVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+class AlbumVC: CustomNavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     private let cellsInRow:Int = 2
     private let insetOffset:CGFloat = 10.0
