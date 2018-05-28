@@ -20,14 +20,22 @@ class AlbumVC: CustomNavigationController, UICollectionViewDelegate, UICollectio
     
     @IBOutlet weak var contentView:UIView!
     
+    @IBOutlet weak var usersCollection: UICollectionView!
     @IBOutlet weak var photosCollection: UICollectionView!
+    
+    var deleteBtn: UIButton!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        addDeleteBtn()
+        
         photosCollection.delegate = self
         photosCollection.dataSource = self
+        
+        usersCollection.delegate = self
+        usersCollection.dataSource = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadAlbum), name: NSNotification.Name.init(rawValue: NotificationPhotosAddedToAlbum), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showDeleteAlert(_:)), name: NSNotification.Name.init(rawValue: NotificationDeletePhotoFromAlbum), object: nil)
@@ -41,6 +49,23 @@ class AlbumVC: CustomNavigationController, UICollectionViewDelegate, UICollectio
         {
             print(album.name)
         }
+    }
+    
+    func addDeleteBtn()
+    {
+        let btnWidth = (navigationController?.navigationBar.frame.height)!
+        deleteBtn = UIButton(type: .custom)
+        deleteBtn.frame = CGRect(x: 0.0, y: 0.0, width: btnWidth, height: btnWidth)
+        deleteBtn.setBackgroundImage(UIImage(named: "done.png"), for: .normal)
+        deleteBtn.addTarget(self, action: #selector(deletePhotosAction), for: .touchUpInside)
+        
+        let deleteBarItem = UIBarButtonItem(customView: deleteBtn)
+        let currWidth = deleteBarItem.customView?.widthAnchor.constraint(equalToConstant: btnWidth)
+        currWidth?.isActive = true
+        let currHeight = deleteBarItem.customView?.heightAnchor.constraint(equalToConstant: btnWidth)
+        currHeight?.isActive = true
+        
+        self.navigationItem.rightBarButtonItem = deleteBarItem
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -73,6 +98,11 @@ class AlbumVC: CustomNavigationController, UICollectionViewDelegate, UICollectio
                 photoEditVC.photo = self.selectedPhoto
             }
         }
+    }
+    
+    @objc func deletePhotosAction()
+    {
+        
     }
     
     @objc func showDeleteAlert(_ notification: NSNotification)
@@ -110,22 +140,9 @@ class AlbumVC: CustomNavigationController, UICollectionViewDelegate, UICollectio
         })
     }
     
-    
-    
     @objc func reloadAlbum()
     {
         photosCollection.reloadData()
-    }
-    
-    //MARK: IBActions
-    @IBAction func deleteBtnPressed(_ sender: Any)
-    {
-        //TODO add deleting enable.
-    }
-    
-    @IBAction func backBtnAction()
-    {
-        dismiss(animated: true, completion: nil)
     }
     
     func addPhotos()
@@ -136,64 +153,121 @@ class AlbumVC: CustomNavigationController, UICollectionViewDelegate, UICollectio
     //MARK: Collection view delegate, data source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        let extraCells = 1
-        if let album = photoAlbum
+        if collectionView == usersCollection
         {
-            return album.photos.count + extraCells
+            return 6
         }
-        
-        return extraCells
+        else
+        {
+            let extraCells = 1
+            if let album = photoAlbum
+            {
+                return album.photos.count + extraCells
+            }
+            
+            return extraCells
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        if indexPath.item == 0
+        if collectionView == usersCollection
         {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "AddPhotosCell", for: indexPath) as! AddPhotosCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FirebaseUserCell", for: indexPath) as! FirebaseUserCell
+            
+            //cell.user = usersList[indexPath.item]
+            
+            return cell
         }
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
-        
-        cell.photo = photoAlbum?.photos[indexPath.row - 1]
-        
-        return cell
+        else
+        {
+            if indexPath.item == 0
+            {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: "AddPhotosCell", for: indexPath) as! AddPhotosCell
+            }
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
+            
+            cell.photo = photoAlbum?.photos[indexPath.row - 1]
+            
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        if indexPath.item == 0
+        if collectionView == usersCollection
         {
-            addPhotos()
+            print("User selected")
+            //TODO: show profile, feature, delete user from album on handle press long?
         }
         else
         {
-            self.selectedPhoto = photoAlbum?.photos[indexPath.item - 1]
-            
-            performSegue(withIdentifier: "photoEditorSegueIdentifier", sender: self)
+            if indexPath.item == 0
+            {
+                addPhotos()
+            }
+            else
+            {
+                self.selectedPhoto = photoAlbum?.photos[indexPath.item - 1]
+                
+                performSegue(withIdentifier: "photoEditorSegueIdentifier", sender: self)
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        let width = (collectionView.frame.width - (CGFloat(cellsInRow) + 1) * insetOffset) / CGFloat(cellsInRow)
-        let height = width
-        
-        return CGSize(width: width, height: height)
+        if collectionView == usersCollection
+        {
+            let width = collectionView.frame.height
+            let height = width
+            
+            return CGSize(width: width, height: height)
+        }
+        else
+        {
+            let width = (collectionView.frame.width - (CGFloat(cellsInRow) + 1) * insetOffset) / CGFloat(cellsInRow)
+            let height = width
+            
+            return CGSize(width: width, height: height)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
     {
-        return insetOffset
+        if collectionView == usersCollection
+        {
+            return 0.0
+        }
+        else
+        {
+            return insetOffset
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
     {
-        return insetOffset
+        if collectionView == usersCollection
+        {
+            return 0.0
+        }
+        else
+        {
+            return insetOffset
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
     {
-        return UIEdgeInsets.init(top: 0.0, left: insetOffset, bottom: 0.0, right: insetOffset)
+        if collectionView == usersCollection
+        {
+            return UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        }
+        else
+        {
+            return UIEdgeInsets.init(top: 0.0, left: insetOffset, bottom: 0.0, right: insetOffset)
+        }
     }
 
 }

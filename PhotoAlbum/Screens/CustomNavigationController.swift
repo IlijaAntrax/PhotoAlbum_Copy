@@ -15,8 +15,13 @@ class CustomNavigationController:UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+
         addBackBarBtn()
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
     }
     
     func addBackBarBtn()
@@ -36,8 +41,22 @@ class CustomNavigationController:UIViewController
         self.navigationItem.leftBarButtonItem = backBarItem
     }
     
+    func setNavigationBgdColorBlue()
+    {
+        self.navigationController?.navigationBar.barTintColor = Settings.sharedInstance.headerColorBlue()
+    }
+    
+    func setNavigationBgdColorWhite()
+    {
+        self.navigationController?.navigationBar.barTintColor = Settings.sharedInstance.headerColorWhite()
+    }
+    
     @objc func popSelf()
     {
+        if navigationController?.viewControllers.count == 2
+        {
+            setNavigationBgdColorWhite()
+        }
         navigationController?.popViewController(animated: true)
         // do your stuff if you needed
     }

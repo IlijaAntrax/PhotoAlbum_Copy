@@ -14,7 +14,7 @@ enum AlbumType
     case sharedAlbums
 }
 
-class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate
 {
     
     private let cellsInRow:Int = 3
@@ -44,6 +44,8 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         albumsCollection.delegate = self
         albumsCollection.dataSource = self
+        
+        navigationController?.delegate = self
         
         addNotificationBtn()
         addAccountBtn()
@@ -301,6 +303,20 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBAction func myAlbumsBtnPressed(_ sender: Any)
     {
         showMyAlbums()
+    }
+    
+    
+    //MARK: Navigation Controller delegate
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool)
+    {
+        if viewController is HomeVC
+        {
+            self.navigationController?.navigationBar.barTintColor = Settings.sharedInstance.headerColorBlue()
+        }
+        else
+        {
+            self.navigationController?.navigationBar.barTintColor = Settings.sharedInstance.headerColorWhite()
+        }
     }
     
     //MARK: CollectionView delegate, data source

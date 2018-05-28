@@ -142,4 +142,14 @@ class Settings
     {
         return UIColor.init(red: 241/255, green: 241/255, blue: 241/255, alpha: 1.0)
     }
+    
+    func headerColorBlue() -> UIColor
+    {
+        return UIColor.init(red: 80/255, green: 109/255, blue: 238/255, alpha: 1.0)
+    }
+    
+    func headerColorWhite() -> UIColor
+    {
+        return UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+    }
 }

@@ -19,9 +19,13 @@ class SearchUsersVC:CustomNavigationController, UITextFieldDelegate, UICollectio
     
     private var usersList = [FirebaseUser]()
     
+    var doneBtn: UIButton!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        addDoneBtn()
         
         usersCollection.delegate = self
         usersCollection.dataSource = self
@@ -30,6 +34,23 @@ class SearchUsersVC:CustomNavigationController, UITextFieldDelegate, UICollectio
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: Notification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func addDoneBtn()
+    {
+        let btnWidth = (navigationController?.navigationBar.frame.height)!
+        doneBtn = UIButton(type: .custom)
+        doneBtn.frame = CGRect(x: 0.0, y: 0.0, width: btnWidth, height: btnWidth)
+        doneBtn.setBackgroundImage(UIImage(named: "done.png"), for: .normal)
+        doneBtn.addTarget(self, action: #selector(addUsersOnAlbum), for: .touchUpInside)
+        
+        let doneBarItem = UIBarButtonItem(customView: doneBtn)
+        let currWidth = doneBarItem.customView?.widthAnchor.constraint(equalToConstant: btnWidth)
+        currWidth?.isActive = true
+        let currHeight = doneBarItem.customView?.heightAnchor.constraint(equalToConstant: btnWidth)
+        currHeight?.isActive = true
+        
+        self.navigationItem.rightBarButtonItem = doneBarItem
     }
     
     //MARK: Search engine
@@ -68,6 +89,24 @@ class SearchUsersVC:CustomNavigationController, UITextFieldDelegate, UICollectio
         }
     }
     
+    override func popSelf()
+    {
+        if hideKeyboardIfNeeded()
+        {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                super.popSelf()
+            })
+        }
+        else
+        {
+            super.popSelf()
+        }
+    }
+    
+    @objc func addUsersOnAlbum()
+    {
+        
+    }
     
     //MARK: IBActions
     @IBAction func backBtnAction()

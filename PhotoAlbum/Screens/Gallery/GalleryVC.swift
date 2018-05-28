@@ -27,10 +27,13 @@ class GalleryVC: CustomNavigationController, UICollectionViewDelegate, UICollect
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     
+    var doneBtn: UIButton!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        addDoneBtn()
         
         galleryCollectionView.delegate = self
         galleryCollectionView.dataSource = self
@@ -43,6 +46,23 @@ class GalleryVC: CustomNavigationController, UICollectionViewDelegate, UICollect
         super.viewDidAppear(animated)
         
         fetchPhotosFromAssetCollection()
+    }
+    
+    func addDoneBtn()
+    {
+        let btnWidth = (navigationController?.navigationBar.frame.height)!
+        doneBtn = UIButton(type: .custom)
+        doneBtn.frame = CGRect(x: 0.0, y: 0.0, width: btnWidth, height: btnWidth)
+        doneBtn.setBackgroundImage(UIImage(named: "done.png"), for: .normal)
+        doneBtn.addTarget(self, action: #selector(addPhotosAction), for: .touchUpInside)
+        
+        let doneBarItem = UIBarButtonItem(customView: doneBtn)
+        let currWidth = doneBarItem.customView?.widthAnchor.constraint(equalToConstant: btnWidth)
+        currWidth?.isActive = true
+        let currHeight = doneBarItem.customView?.heightAnchor.constraint(equalToConstant: btnWidth)
+        currHeight?.isActive = true
+        
+        self.navigationItem.rightBarButtonItem = doneBarItem
     }
     
     func setupAssetCollcetion()
@@ -101,7 +121,7 @@ class GalleryVC: CustomNavigationController, UICollectionViewDelegate, UICollect
             NotificationCenter.default.post(name: Notification.Name.init(rawValue: NotificationPhotosAddedToAlbum), object: nil)
         }
         
-        dismiss(animated: true, completion: nil)
+        super.popSelf()
     }
     
     //MARK: Activity loader
@@ -127,13 +147,7 @@ class GalleryVC: CustomNavigationController, UICollectionViewDelegate, UICollect
         activityIndicatorView?.removeFromSuperview()
     }
     
-    //IBActions
-    @IBAction func backBtnAction()
-    {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func addPhotosBtnAction()
+    @objc func addPhotosAction()
     {
         let dispacthGroup = DispatchGroup()
         
